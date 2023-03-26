@@ -1,0 +1,518 @@
+<%- include('../layout/userHeader.ejs') %>
+    <div id="page" class="site page-home">
+        <aside class="site-off desktop-hide">
+            <div class="off-canvas">
+                <div class="canvas-head flexitem">
+                    <div class="logo"><a href="/"><span class="circle"></span>.Store</a></div>
+                    <a href="#" class="t-close flexcenter"><i class="ri-close-line"></i></a>
+                </div>
+                <div class="departments"></div>
+                <nav></nav>
+                <div class="thetop-nav"></div>
+            </div>
+        </aside>
+        <header>
+            <div class="header-top mobile-hide">
+                <div class="container">
+                    <div class="wrapper flexitem">
+                        <div class="left">
+                            <ul class="flexitem main-links">
+                                <li><a href="#">Featured Products</a></li>
+                                <li><a href="#">Wishlist</a></li>
+                            </ul>
+                        </div>
+                        <div class="right">
+                            <ul class="flexitem main-links">
+                                <li><a href="/login">Sign In</a></li>
+                                <li><a href="#">Order Tracking</a></li>
+                                <li><a href="#">IND <span class="icon-small"><i
+                                                class="ri-arrow-down-s-line"></i></span></a>
+                                    <ul>
+                                        <li class="current"><a href="#">IND</a></li>
+                                        <li><a href="#">USD</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">English <span class="icon-small"><i
+                                                class="ri-arrow-down-s-line"></i></span></a>
+                                    <ul>
+                                        <li class="current"><a href="#">English</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- header-top -->
+            <div class="header-nav">
+                <div class="container">
+                    <div class="wrapper flexitem">
+                        <a href="#" class="trigger desktop-hide"><span class="i ri-menu-2-line"></span></a>
+                        <div class="left flexitem">
+                            <div class="logo"><a href="/"><span class="circle"></span>.Shopio</a></div>
+                            <nav class="mobile-hide">
+                                <ul class="flexitem second-links">
+                                    <li><a href="/home">Home</a></li>
+                                    <li><a href="/shop">Shop</a></li>
+                                    <li><a href="#">Men</a></li>
+                                    <li><a href="#">Women</a></li>
+                                    <li><a href="#">Sports</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="right">
+                            <ul class="flexitem second-links">
+                                <li class="mobile-hide"><a href="/wishlist">
+                                        <div class="icon-large"><i class="ri-heart-line"></i></div>
+                                    </a></li>
+                                <li class="iscart"><a href="/cart">
+                                        <div class="icon-large">
+                                            <i class="ri-shopping-cart-line"></i>
+                                        </div>
+
+
+                                    </a>
+                                </li>
+                                <li class="iscart"><a href="#">
+                                        <div class="icon-large">
+                                            <i class="ri-account-circle-line"></i>
+                                        </div>
+
+
+                                    </a>
+                                    <div class="mini-login">
+                                        <div class="content">
+                                            <div class="cart-head">
+                                                <a href="/login">Profile</a>
+                                                <a href="/login">Orders</a>
+                                                <a href="/login">Address</a>
+                                                <a href="/login">Logout</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- header-nav -->
+
+            <div class="header-main mobile-hide">
+                <div class="container">
+                    <div class="wrapper flexitem">
+                        <div class="left">
+                            <div class="dpt-cat">
+                                <div class="dpt-head">
+                                    <div class="main-text">All Departments</div>
+                                    <div class="mini-text mobile-hide">Total 1059 Products</div>
+                                    <a href="#" class="dpt-trigger mobile-hide">
+                                        <i class="ri-menu-3-line ri-xl"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="search-box">
+                                <form action="" class="search">
+                                    <span class="icon-large"><i class="ri-search-line"></i></span>
+                                    <input type="search" placeholder="Search for products">
+
+                                    <button type="submit">Search</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- header-main -->
+
+        </header>
+        <!-- Header -->
+        <main>
+            <% if(typeof userData !="undefined" ){ %>
+                <% if(products.length==0){ %>
+                    <div class="div" style="height: 38rem;text-align: center;padding-top: 6rem;">
+                        <img src="/userAssets/Images/cartEmpty.png" alt="" style="width: 17%;">
+                        <h3 style="font-size: 30px;">CART EMPTY</h3>
+                        <p style="margin-bottom: 1rem; font-size: smaller;">There's no items in your Cart</p>
+                        <a class="primary-button" style="border: none; margin-bottom:100px" href="/shop">CONTINUE
+                            SHOPPING</a>
+                    </div>
+                    <% }else{ %>
+                        <div class="single-cart">
+                            <div class="container">
+                                <div class="wrapper">
+                                    <div class="breadcrumb">
+                                        <ul class="flexitem">
+                                            <li><a href="#">Home</a></li>
+                                            <li>Cart</li>
+                                        </ul>
+                                    </div>
+                                    <div class="page-title">
+                                        <h1>Shopping Cart</h1>
+                                    </div>
+                                    <div class="products one cart">
+                                        <div class="flexwrap">
+                                            <div class="form-cart">
+                                                <div class="item">
+                                                    <table id="cart-table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Item</th>
+                                                                <th>Price</th>
+                                                                <th>Qty</th>
+                                                                <th>Subtotal</th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <% products.forEach((product)=>{ %>
+                                                                <tr>
+                                                                    <td class="flexitem">
+                                                                        <div class="thumbnail object-cover">
+                                                                            <a href="#"><img
+                                                                                    src="/productImage/<%= product.image[1] %>"
+                                                                                    alt=""></a>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <strong><a href="#">
+                                                                                    <%= product.productName %>
+                                                                                </a></strong>
+                                                                            <p>Size: L</p>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <%= product.salePrice %>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="qty-control flexitem">
+                                                                            <button class="minus"
+                                                                                onclick="changeqnty('<%= userCart.userId %>','<%= product.productId %>','<%= product.salePrice %>','<%= product.MRP %>','<%= product.id %>',-1)">-</button>
+                                                                            <input id="<%= product.productId %>"
+                                                                                type="text"
+                                                                                value="<%= product.quantity %>" min="1"
+                                                                                readonly>
+                                                                            <button class="plus"
+                                                                                onclick="changeqnty('<%= userCart.userId %>','<%= product.productId %>','<%= product.salePrice %>','<%= product.MRP %>','<%= product.id %>',1)">+</button>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>₹<span id="<%= product.id %>"
+                                                                            class="productTotalPrice">
+                                                                            <%= product.totalPrice %>
+                                                                        </span></td>
+                                                                    <td><a onclick="confirmation(event,'<%= product.productId %>')" id="<%= product.productId %>" href="/deleteCart?id=<%= product.productId %>"
+                                                                            class="item-remove"><i
+                                                                                class="ri-close-line"></i></a></td>
+                                                                </tr>
+                                                                <% }) %>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="cart-summary styled">
+                                                <div class="item">
+
+
+
+                                                    <div class="cart-total">
+                                                        <table>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th>Total MRP</th>
+                                                                    <td>₹<span id="totalMRP">
+                                                                            <%= totalMRP.toFixed(2) %>
+                                                                        </span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Discount on MRP <br> </th>
+                                                                    <td>-₹<span id="disMRP">
+                                                                            <%= (totalMRP - totalPrice).toFixed(2) %>
+                                                                        </span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Shipping</th>
+                                                                    <td>Free</td>
+                                                                </tr>
+                                                                <tr class="grand-total">
+                                                                    <th>TOTAL</th>
+                                                                    <td><strong>₹<span id="TotalCart">
+                                                                                <%= totalPrice.toFixed(2) %>
+                                                                            </span></strong></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <a href="/checkout" id="checkoutBtn" href="/checkout"
+                                                            class="secondary-button">Checkout</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% } %>
+                            <% }else{ %>
+                                <div class="div" style="height: 30rem;text-align: center;padding-top: 10rem;">
+                                    <h2>PLEASE LOG IN</h2>
+                                    <p style="margin-bottom: 1rem;">Login to view items in your Cart.</p>
+                                    <a class="primary-button" style="border: none;" href="/login">LOGIN</a>
+                                </div>
+                                <% } %>
+
+        </main>
+        <!-- Main -->
+
+        <footer>
+            <div class="newsletter">
+                <div class="container">
+                    <div class="wrapper">
+                        <div class="box">
+                            <div class="content">
+                                <h3>Join Our Newsletter</h3>
+                                <p>Get E-mail updates about our latest shop and <strong>special offers</strong></p>
+                            </div>
+                            <form action="" class="search">
+                                <span class="icon-large"><i class="ri-mail-line"></i></span>
+                                <input type="mail" placeholder="Your email address" required>
+                                <button type="submit">Sign Up</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- newsletter -->
+
+            <div class="widgets">
+                <div class="container">
+                    <div class="wrapper">
+                        <div class="flexwrap">
+                            <div class="row">
+                                <div class="item mini-links">
+                                    <h4>Help & Contact</h4>
+                                    <ul class="flexcol">
+                                        <li><a href="#">Your Account</a></li>
+                                        <li><a href="#">Your Orders</a></li>
+                                        <li><a href="#">Shipping Rates</a></li>
+                                        <li><a href="#">Returns</a></li>
+                                        <li><a href="#">Assistant</a></li>
+                                        <li><a href="#">Help</a></li>
+                                        <li><a href="#">Contact us</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="item mini-links">
+                                    <h4>Product Categories</h4>
+                                    <ul class="flexcol">
+                                        <li><a href="#">Beauty</a></li>
+                                        <li><a href="#">Electronic</a></li>
+                                        <li><a href="#">Women's Fashion</a></li>
+                                        <li><a href="#">Men's Fashion</a></li>
+                                        <li><a href="#">Girl's Fashion</a></li>
+                                        <li><a href="#">Boy's Fashion</a></li>
+                                        <li><a href="#">Health & Household</a></li>
+                                        <li><a href="#">Home & Kitchen</a></li>
+                                        <li><a href="#">Pet Supplies</a></li>
+                                        <li><a href="#">Sports</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="item mini-links">
+                                    <h4>Payment Info</h4>
+                                    <ul class="flexcol">
+                                        <li><a href="#">Bussiness Card</a></li>
+                                        <li><a href="#">Shop with Points</a></li>
+                                        <li><a href="#">Reload Your Balance</a></li>
+                                        <li><a href="#">Paypal</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="item mini-links">
+                                    <h4>About Us</h4>
+                                    <ul class="flexcol">
+                                        <li><a href="">Company Info</a></li>
+                                        <li><a href="">News</a></li>
+                                        <li><a href="">Investors</a></li>
+                                        <li><a href="">Careers</a></li>
+                                        <li><a href="">Policies</a></li>
+                                        <li><a href="">Customer reviews</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- widgets-->
+
+            <div class="footer-info">
+                <div class="container">
+                    <div class="wrapper">
+                        <div class="flexcol">
+                            <div class="logo">
+                                <a href=""><span class="circle"></span>.Store</a>
+                            </div>
+                            <div class="socials">
+                                <ul class="flexitem">
+                                    <li><a href="#"><i class="ri-twitter-line"></i></a></li>
+                                    <li><a href="#"><i class="ri-facebook-line"></i></a></li>
+                                    <li><a href="#"><i class="ri-instagram-line"></i></a></li>
+                                    <li><a href="#"><i class="ri-linkedin-line"></i></a></li>
+                                    <li><a href="#"><i class="ri-youtube-line"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="mini-text">Copyright 2022 © .Store. All right reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Footer -->
+
+        <div class="menu-bottom desktop-hide">
+            <div class="container">
+                <div class="wrapper">
+                    <nav>
+                        <ul class="flexitem">
+                            <li>
+                                <a href="#">
+                                    <i class="ri-bar-chart-line"></i>
+                                    <span>Trending</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="ri-user-6-line"></i>
+                                    <span>Account</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="ri-heart-line"></i>
+                                    <span>Wishlist</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#0" class="t-search">
+                                    <i class="ri-search-line"></i>
+                                    <span>Search</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#0">
+                                    <i class="ri-shopping-cart-line"></i>
+                                    <span>Cart</span>
+                                    <div class="fly-item">
+                                        <span class="item-number">0</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- menu bottom -->
+
+        <div class="search-bottom desktop-hide">
+            <div class="container">
+                <div class="wrapper">
+                    <form action="" class="search">
+                        <a href="#" class="t-close search-close flexcenter"><i class="ri-close-line"></i></a>
+                        <span class="icon-large"><i class="ri-search-line"></i></span>
+                        <input type="search" placeholder="Search" required>
+                        <button type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- search bottom -->
+
+        <div class="overlay"></div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.js"></script>
+    <script>
+        function changeqnty(userCart, productId, salePrice, MRP, id, quantity) {
+            $.ajax({
+                type: "POST",
+                url: '/changeQuantity',
+                data: {
+                    userData: userCart,
+                    productId: productId,
+                    quantity: quantity,
+                    salePrice: salePrice,
+                    id: id
+                },
+                success: (response) => {
+                    if (response.success) {
+                        let value = document.getElementById(productId).value
+                        document.getElementById(productId).value = Number(value) + 1
+                        let total = document.getElementById(id).innerHTML
+                        document.getElementById(id).innerHTML = Number(total) + Number(salePrice)
+                        let totalMRP = document.getElementById("totalMRP").innerHTML;
+                        document.getElementById("totalMRP").innerHTML = (Number(totalMRP) + Number(MRP)).toFixed(2);
+                        let TotalPrice = document.getElementById("TotalCart").innerHTML
+                        document.getElementById("TotalCart").innerHTML = (Number(TotalPrice) + Number(salePrice)).toFixed(2);
+                        let atotalMRP = document.getElementById("totalMRP").innerHTML;
+                        let aTotalPrice = document.getElementById("TotalCart").innerHTML
+                        document.getElementById("disMRP").innerHTML = (Number(atotalMRP) - Number(aTotalPrice)).toFixed(2)
+                    } else if (response.success == false) {
+                        let value = document.getElementById(productId).value
+                        document.getElementById(productId).value = Number(value) - 1
+                        let total = document.getElementById(id).innerHTML
+                        document.getElementById(id).innerHTML = Number(total) - Number(salePrice)
+                        let totalMRP = document.getElementById("totalMRP").innerHTML;
+                        document.getElementById("totalMRP").innerHTML = (Number(totalMRP) - Number(MRP)).toFixed(2)
+                        let TotalPrice = document.getElementById("TotalCart").innerHTML
+                        document.getElementById("TotalCart").innerHTML = (Number(TotalPrice) - Number(salePrice)).toFixed(2);
+                        let atotalMRP = document.getElementById("totalMRP").innerHTML;
+                        let aTotalPrice = document.getElementById("TotalCart").innerHTML
+                        document.getElementById("disMRP").innerHTML = (Number(atotalMRP) - Number(aTotalPrice)).toFixed(2)
+
+                    } else {
+                        if (response.negative) {
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 3000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            })
+                            Toast.fire({
+                                icon: 'error',
+                                title: 'Quantity cannot be decreased below 1.'
+                            })
+                        }
+                    }
+                },
+            })
+        }
+        function confirmation(e,id){
+            e.preventDefault();
+            Swal.fire({
+              title: 'Remove Product?',
+              text: "Product will be removed from Cart",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Yes, Remove it!'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                window.location.href = `/deleteCart?id=${id}`
+              }
+            })
+        }
+
+
+    </script>
+    <%- include('../layout/userFooter.ejs') %>

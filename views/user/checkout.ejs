@@ -1,0 +1,629 @@
+<%- include('../layout/userHeader.ejs') %>
+    <style>
+        /* Reset styles for form elements */
+        form {
+            margin: 0;
+            padding: 0;
+        }
+
+
+        form label {
+            display: inline-block;
+            margin: 0;
+            padding: 0;
+            font-size: inherit;
+            font-weight: 400;
+            font-family: inherit;
+            color: inherit;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        form p {
+            margin-bottom: 0;
+        }
+    </style>
+    <div id="page" class="site page-home">
+        <aside class="site-off desktop-hide">
+            <div class="off-canvas">
+                <div class="canvas-head flexitem">
+                    <div class="logo"><a href="/"><span class="circle"></span>.Store</a></div>
+                    <a href="#" class="t-close flexcenter"><i class="ri-close-line"></i></a>
+                </div>
+                <div class="departments"></div>
+                <nav></nav>
+                <div class="thetop-nav"></div>
+            </div>
+        </aside>
+        <header>
+            <div class="header-top mobile-hide">
+                <div class="container">
+                    <div class="wrapper flexitem">
+                        <div class="left">
+                            <ul class="flexitem main-links">
+                                <li><a href="#">Featured Products</a></li>
+                                <li><a href="#">Wishlist</a></li>
+                            </ul>
+                        </div>
+                        <div class="right">
+                            <ul class="flexitem main-links">
+                                <li><a href="/login">Sign In</a></li>
+                                <li><a href="#">Order Tracking</a></li>
+                                <li><a href="#">IND <span class="icon-small"><i
+                                                class="ri-arrow-down-s-line"></i></span></a>
+                                    <ul>
+                                        <li class="current"><a href="#">IND</a></li>
+                                        <li><a href="#">USD</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">English <span class="icon-small"><i
+                                                class="ri-arrow-down-s-line"></i></span></a>
+                                    <ul>
+                                        <li class="current"><a href="#">English</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- header-top -->
+            <div class="header-nav">
+                <div class="container">
+                    <div class="wrapper flexitem">
+                        <a href="#" class="trigger desktop-hide"><span class="i ri-menu-2-line"></span></a>
+                        <div class="left flexitem">
+                            <div class="logo"><a href="/"><span class="circle"></span>.Shopio</a></div>
+                            <nav class="mobile-hide">
+                                <ul class="flexitem second-links">
+                                    <li><a href="/home">Home</a></li>
+                                    <li><a href="/shop">Shop</a></li>
+                                    <li><a href="#">Men</a></li>
+                                    <li><a href="#">Women</a></li>
+                                    <li><a href="#">Sports</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="right">
+                            <ul class="flexitem second-links">
+                                <li class="mobile-hide"><a href="/wishlist">
+                                        <div class="icon-large"><i class="ri-heart-line"></i></div>
+                                    </a></li>
+                                <li class="iscart"><a href="/cart">
+                                        <div class="icon-large">
+                                            <i class="ri-shopping-cart-line"></i>
+                                        </div>
+
+
+                                    </a>
+                                </li>
+                                <li class="iscart"><a href="#">
+                                        <div class="icon-large">
+                                            <i class="ri-account-circle-line"></i>
+                                        </div>
+
+
+                                    </a>
+                                    <% if(typeof userData!='undefined' ){ %>
+                                        <div class="mini-login">
+                                            <div class="content">
+                                                <div class="cart-head">
+                                                    <p>Hello <span style="color: #ff6b6b;">
+                                                            <%= userData.name %>
+                                                        </span></p>
+                                                    <p style="font-size: .8rem; font-weight: 400 ;">
+                                                        <%= userData.mobile %>
+                                                    </p>
+                                                    <hr style="margin-top: 10px; margin-bottom: 10px; height: 1px; ">
+                                                    <a href="/login">Orders</a><br>
+                                                    <a href="/cart">Cart</a><br>
+                                                    <a href="/login">Wishlist</a><br>
+                                                    <hr style="margin-top: 10px; margin-bottom: 10px; height: .1px;">
+                                                    <a href="/login">Address</a><br>
+                                                    <a href="/logout">Logout</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% }else{ %>
+                                            <div class="mini-login">
+                                                <div class="content">
+                                                    <div class="cart-head">
+                                                        <p>Welcome</p>
+                                                        <p style="font-size: .8rem; font-weight: 400 ;">To access
+                                                            account and orders</p>
+                                                        <a href="/login"><button>LOGIN/SIGN UP</button></a>
+                                                        <hr
+                                                            style="margin-top: 10px; margin-bottom: 10px; height: 1px; ">
+                                                        <a href="/login">Orders</a><br>
+                                                        <a href="/cart">Cart</a><br>
+                                                        <a href="/cart">Wishlist</a><br>
+                                                        <hr
+                                                            style="margin-top: 10px; margin-bottom: 10px; height: .1px;">
+                                                        <a href="/login">Address</a><br>
+                                                        <a href="/login">Wallet</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <% } %>
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- header-nav -->
+
+            <div class="header-main mobile-hide">
+                <div class="container">
+                    <div class="wrapper flexitem">
+                        <div class="left">
+                            <div class="dpt-cat">
+                                <div class="dpt-head">
+                                    <div class="main-text">All Departments</div>
+                                    <div class="mini-text mobile-hide">Total 1059 Products</div>
+                                    <a href="#" class="dpt-trigger mobile-hide">
+                                        <i class="ri-menu-3-line ri-xl"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="search-box">
+                                <form action="" class="search">
+                                    <span class="icon-large"><i class="ri-search-line"></i></span>
+                                    <input type="search" placeholder="Search for products">
+                                    <button type="submit">Search</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- header-main -->
+
+        </header>
+        <!-- Header -->
+        <main>
+            <div class="single-checkout">
+                <div class="container">
+                    <div class="wrapper">
+
+                        <div class="checkout flexwrap">
+                            <div class="item left styled">
+                                <form action="" method="post" id="checkout-form">
+                                    <h1 style="font-weight: 600;">Shipping Address</h1>
+                                    <% addressData.forEach((address)=>{ %>
+                                        <p class="checkset flexitem">
+                                            <input style="margin-top: -112px;" type="radio" id="<%= address._id %>"
+                                                value="<%= address._id %>" name="address">
+                                            <label for="<%= address._id %>" style="font-size: 16px;">
+                                                <%= address.name %><br>
+                                                    <%= address.address %><br>
+                                                        <%= address.locality %><br>
+                                                            <%= address.city %> - <%= address.pincode %><br>
+                                                                    <%= address.district %>,<%= address.state %><br>
+                                                                            Mobile: <%= address.mobile %>
+                                                                                <div
+                                                                                    style="display: flex; margin-left: 28px; margin-bottom: 25px;">
+                                                                                    <a href="/editAddress?id=<%= address._id %>"
+                                                                                        style="margin-right: 10px;"
+                                                                                        class="btn btn-edit">Edit</a>
+                                                                                    <a href="/deleteAddress?id=<%= address._id %>"
+                                                                                        class="btn btn-danger">Delete</a>
+                                                                                </div>
+                                            </label>
+                                        </p>
+                                        <hr style="margin-bottom: 15px;">
+                                        <% }) %>
+                                            <a href="/addAddress" class="btn btn-primary">+ Add New
+                                                Address</a>
+                                            <p class="perrMsg" id="addressErrMsg"></p>
+                                            <h1 style="margin-top: 60px; font-weight: 600;">Payment Method</h1>
+                                            <p class="checkset" style="margin-top: -10px;">
+                                                <input type="radio" id="codPayment" name="payment" value="COD">
+                                                <label for="codPayment" style="font-size: 17px;" for="">Cash On
+                                                    Delivery</label>
+                                            </p>
+                                            <p class="checkset" style="margin-top: 5px;">
+                                                <input type="radio" id="razPayment" name="payment" value="RazorPay">
+                                                <label for="razPayment" style="font-size: 17px;" for="">Razor
+                                                    Pay</label>
+                                            </p>
+                                            <p>
+                                            <div class="coupon">
+                                                <input id="couponCode" type="text" placeholder="Enter coupon">
+                                                <button id="applyBtn" form="sd" onclick="applyCoupon()">Apply</button>
+                                                <p id="couponErr" style="margin-top: 5px; color:red"></p>
+                                            </div>
+                                            </p>
+                                            <p class="perrMsg" id="payErrMsg"></p>
+                                            <div class="primary-checkout">
+                                                <button form="checkout-form" type="submit" class="primary-button"
+                                                    id="checkout-btn">Place Order</button>
+                                            </div>
+                                </form>
+                            </div>
+
+                            <div class="item right">
+
+                                <div class="summary-order is_sticky">
+                                    <h2>Order Summary</h2>
+                                    <div class="summary-totals">
+                                        <ul>
+                                            <li>
+                                                <span>Subtotal</span>
+                                                <span>₹<%= subTotal.toFixed(2) %></span>
+                                            </li>
+                                            <li>
+                                                <span>Coupon Discount <br></span>
+                                                <span>-₹<span id="couponDis">00.00</span></span>
+                                            </li>
+                                            <li>
+                                                <span>Shipping</span>
+                                                <span>Free</span>
+                                            </li>
+                                            <li>
+                                                <span>Total</span>
+                                                <strong>₹<span id="totalPrice">
+                                                        <%= subTotal.toFixed(2) %>
+                                                    </span></strong>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+                                    <ul class="products mini">
+                                        <% products.forEach((product)=>{ %>
+                                            <li class="item">
+                                                <div class="thumbnail object-cover">
+                                                    <img src="/productImage/<%= product.image[0] %>" alt="">
+                                                </div>
+                                                <div class="item-content">
+                                                    <p style="font-size: 15px;">
+                                                        <%= product.productName %>
+                                                    </p>
+                                                    <span class="price">
+                                                        <span>₹<%= product.salePrice %></span>
+                                                        <span>x <%= product.quantity %></span>
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <% }) %>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- Main -->
+
+        <footer>
+            <div class="newsletter">
+                <div class="container">
+                    <div class="wrapper">
+                        <div class="box">
+                            <div class="content">
+                                <h3>Join Our Newsletter</h3>
+                                <p>Get E-mail updates about our latest shop and <strong>special offers</strong></p>
+                            </div>
+                            <form action="" class="search">
+                                <span class="icon-large"><i class="ri-mail-line"></i></span>
+                                <input type="mail" placeholder="Your email address" required>
+                                <button type="submit">Sign Up</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- newsletter -->
+
+            <div class="widgets">
+                <div class="container">
+                    <div class="wrapper">
+                        <div class="flexwrap">
+                            <div class="row">
+                                <div class="item mini-links">
+                                    <h4>Help & Contact</h4>
+                                    <ul class="flexcol">
+                                        <li><a href="#">Your Account</a></li>
+                                        <li><a href="#">Your Orders</a></li>
+                                        <li><a href="#">Shipping Rates</a></li>
+                                        <li><a href="#">Returns</a></li>
+                                        <li><a href="#">Assistant</a></li>
+                                        <li><a href="#">Help</a></li>
+                                        <li><a href="#">Contact us</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="item mini-links">
+                                    <h4>Product Categories</h4>
+                                    <ul class="flexcol">
+                                        <li><a href="#">Beauty</a></li>
+                                        <li><a href="#">Electronic</a></li>
+                                        <li><a href="#">Women's Fashion</a></li>
+                                        <li><a href="#">Men's Fashion</a></li>
+                                        <li><a href="#">Girl's Fashion</a></li>
+                                        <li><a href="#">Boy's Fashion</a></li>
+                                        <li><a href="#">Health & Household</a></li>
+                                        <li><a href="#">Home & Kitchen</a></li>
+                                        <li><a href="#">Pet Supplies</a></li>
+                                        <li><a href="#">Sports</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="item mini-links">
+                                    <h4>Payment Info</h4>
+                                    <ul class="flexcol">
+                                        <li><a href="#">Bussiness Card</a></li>
+                                        <li><a href="#">Shop with Points</a></li>
+                                        <li><a href="#">Reload Your Balance</a></li>
+                                        <li><a href="#">Paypal</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="item mini-links">
+                                    <h4>About Us</h4>
+                                    <ul class="flexcol">
+                                        <li><a href="">Company Info</a></li>
+                                        <li><a href="">News</a></li>
+                                        <li><a href="">Investors</a></li>
+                                        <li><a href="">Careers</a></li>
+                                        <li><a href="">Policies</a></li>
+                                        <li><a href="">Customer reviews</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- widgets-->
+
+            <div class="footer-info">
+                <div class="container">
+                    <div class="wrapper">
+                        <div class="flexcol">
+                            <div class="logo">
+                                <a href=""><span class="circle"></span>.Store</a>
+                            </div>
+                            <div class="socials">
+                                <ul class="flexitem">
+                                    <li><a href="#"><i class="ri-twitter-line"></i></a></li>
+                                    <li><a href="#"><i class="ri-facebook-line"></i></a></li>
+                                    <li><a href="#"><i class="ri-instagram-line"></i></a></li>
+                                    <li><a href="#"><i class="ri-linkedin-line"></i></a></li>
+                                    <li><a href="#"><i class="ri-youtube-line"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="mini-text">Copyright 2022 © .Store. All right reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Footer -->
+
+        <div class="menu-bottom desktop-hide">
+            <div class="container">
+                <div class="wrapper">
+                    <nav>
+                        <ul class="flexitem">
+                            <li>
+                                <a href="#">
+                                    <i class="ri-bar-chart-line"></i>
+                                    <span>Trending</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="ri-user-6-line"></i>
+                                    <span>Account</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="ri-heart-line"></i>
+                                    <span>Wishlist</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#0" class="t-search">
+                                    <i class="ri-search-line"></i>
+                                    <span>Search</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#0">
+                                    <i class="ri-shopping-cart-line"></i>
+                                    <span>Cart</span>
+                                    <div class="fly-item">
+                                        <span class="item-number">0</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- menu bottom -->
+
+        <div class="search-bottom desktop-hide">
+            <div class="container">
+                <div class="wrapper">
+                    <form action="" class="search">
+                        <a href="#" class="t-close search-close flexcenter"><i class="ri-close-line"></i></a>
+                        <span class="icon-large"><i class="ri-search-line"></i></span>
+                        <input type="search" placeholder="Search" required>
+                        <button type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- search bottom -->
+
+        <div class="overlay"></div>
+    </div>
+    <script>
+        //Apply Coupon
+        function applyCoupon(e) {
+            e.preventDefault()
+            $.ajax({
+                type: "POST",
+                url: '/applyCoupon',
+                data: { couponCode: couponCode },
+                success: (response) => {
+                    if (response.success) {
+                        document.getElementById("couponErr").innerHTML = ""
+                        const coupon = response.CouponDetails;
+                        const expiryDate = new Date(coupon.expiryDate);
+                        var currentDate = new Date();
+                        if (expiryDate.getTime() < currentDate.getTime()) {
+                            document.getElementById("couponErr").innerHTML = "The Coupon code you entered expired"
+                        }
+                        console.log(response.CouponDetails)
+                    } else {
+                        document.getElementById("couponErr").innerHTML = "The Coupon code you entered is not valid."
+                    }
+                },
+            })
+        }
+        // Razor Payment
+        $("#checkout-form").submit((e) => {
+            let payment = $('input[name=payment]:checked').val();
+            let address = $('input[name=address]:checked').val();
+            e.preventDefault();
+            if (!payment) {
+                document.getElementById("payErrMsg").innerHTML = "Please select a a payment option to proceed."
+            } else if (!address) {
+                document.getElementById("addressErrMsg").innerHTML = "Please select a delivery address to proceed."
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: '/checkout',
+                    data: {
+                        address: address,
+                        payment: payment
+                    },
+                    success: (response) => {
+                        if (response.success) {
+                            location.href = '/orderConfirm'
+                            console.log(response)
+                        } else {
+                            razorPayment(response.order)
+                            console.log(response)
+                        }
+                    },
+                })
+            }
+        })
+        function razorPayment(order) {
+            var options = {
+                "key": "rzp_test_XumGzokz47HwT5", // Enter the Key ID generated from the Dashboard
+                "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "currency": "INR",
+                "name": ".Shopio", //your business name
+                "description": "Test Transaction",
+                "image": "https://example.com/your_logo",
+                "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                "handler": function (response) {
+                    verifyPayment(response, order)
+                },
+                "prefill": {
+                    "name": "userData.name", //your customer's name
+                    "email": "userData.email",
+                    "contact": "userData.mobile"
+                },
+                "notes": {
+                    "address": "Razorpay Corporate Office"
+                },
+                "theme": {
+                    "color": "#ff6b6b"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+        }
+        function verifyPayment(order, payment) {
+            $.ajax({
+                type: "POST",
+                url: "/verifyPayment",
+                data: {
+                    order,
+                    payment
+                },
+                success: function (response) {
+                    if (response.success) {
+                        location.href = '/orderConfirm'
+                    } else {
+                        console.log('Order Failed')
+                    }
+                }
+            })
+        }
+        function applyCoupon() {
+            const couponCode = document.getElementById("couponCode").value;
+            $.ajax({
+                type: "POST",
+                url: '/applyCoupon',
+                data: { couponCode: couponCode },
+                success: (response) => {
+                    if (response.success) {
+                        let coupon = response.couponDetails
+                        document.getElementById("couponErr").innerHTML = ""
+                        if(response.userUsed){
+                            document.getElementById("couponErr").innerHTML = "This Coupon code already used"
+                        }
+                        else if (response.totalUsageErr) {
+                            document.getElementById("couponErr").innerHTML = "The Coupon code you entered is fully claimed"
+                        }
+                        else if (response.expiryDateErr) {
+                            document.getElementById("couponErr").innerHTML = "The Coupon code you entered expired"
+                        } else if (response.minOrderErr) {
+                            document.getElementById("couponErr").innerHTML = "This Coupon is only valid for above " + coupon.minOrder
+                        } else {
+                            if (coupon.type == "Percentage") {
+                                let totalPrice = document.getElementById("totalPrice").innerHTML;
+                                let couponPercentage = coupon.value
+                                let couponDiscount = couponPercentage/100;
+                                let maxDiscount = coupon.maxDiscount;
+                                let discount = Number(totalPrice) * couponDiscount;
+                                if (discount > maxDiscount) {
+                                    discount = maxDiscount;
+                                }
+                                document.getElementById("couponDis").innerHTML = (discount).toFixed(2);
+                                document.getElementById("totalPrice").innerHTML = (Number(totalPrice) - discount).toFixed(2);
+                                document.getElementById("applyBtn").innerHTML = "Remove";
+                                document.getElementById("couponCode").disabled = true;
+                            } else {
+                                document.getElementById("couponDis").innerHTML = (coupon.value).toFixed(2);
+                                let totalPrice = document.getElementById("totalPrice").innerHTML;
+                                document.getElementById("totalPrice").innerHTML = (Number(totalPrice) - coupon.value).toFixed(2);
+                                document.getElementById("applyBtn").innerHTML = "Remove";
+                                document.getElementById("couponCode").disabled = true;
+                            }
+                        }
+                        console.log(response.CouponDetails)
+                    } else {
+                        if (response.applied) {
+                            let couponDis = document.getElementById("couponDis").innerHTML;
+                            let totalPrice = document.getElementById("totalPrice").innerHTML;
+                            document.getElementById("totalPrice").innerHTML = (Number(totalPrice) + Number(couponDis)).toFixed(2)
+                            document.getElementById("couponDis").innerHTML = "00.00";
+                            document.getElementById("applyBtn").innerHTML = "Apply";
+                            document.getElementById("couponCode").value = "";
+                            document.getElementById("couponCode").disabled = false;
+                        } else {
+                            document.getElementById("couponErr").innerHTML = "The Coupon code you entered is not valid."
+                        }
+                    }
+                },
+            })
+        }
+    </script>
+    <%- include('../layout/userFooter.ejs') %>

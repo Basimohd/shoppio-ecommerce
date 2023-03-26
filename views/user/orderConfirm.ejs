@@ -1,0 +1,419 @@
+<%- include('../layout/userHeader.ejs') %>
+<style>
+    .ordr-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin: 85px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+        max-width: 600px;
+    }
+    .ordr-container .order-btn{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+    .ordr-container .order-btn a{
+        margin:15px auto ;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+    }
+    .ordr-container h1 {
+        margin-top: 25px;
+        font-size: 36px;
+        color: #0d8100;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    .ordr-container img{
+        text-align: center;
+        justify-self: center;
+    }
+    .ordr-container table {
+        margin-top: 10px;
+        border-collapse: collapse;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    
+    .ordr-container td {
+        padding: 10px;
+        border: 1px solid #ccc;
+    }
+    
+    .ordr-container td:first-child {
+        width: 150px;
+        font-weight: bold;
+    }
+    
+    .ordr-container  p {
+        text-align: center;
+    }
+    
+</style>
+    <div id="page" class="site page-home">
+        <aside class="site-off desktop-hide">
+            <div class="off-canvas">
+                <div class="canvas-head flexitem">
+                    <div class="logo"><a href="/"><span class="circle"></span>.Store</a></div>
+                    <a href="#" class="t-close flexcenter"><i class="ri-close-line"></i></a>
+                </div>
+                <div class="departments"></div>
+                <nav></nav>
+                <div class="thetop-nav"></div>
+            </div>
+        </aside>
+        <header>
+            <div class="header-top mobile-hide">
+                <div class="container">
+                    <div class="wrapper flexitem">
+                        <div class="left">
+                            <ul class="flexitem main-links">
+                                <li><a href="#">Featured Products</a></li>
+                                <li><a href="#">Wishlist</a></li>
+                            </ul>
+                        </div>
+                        <div class="right">
+                            <ul class="flexitem main-links">
+                                <li><a href="/login">Sign In</a></li>
+                                <li><a href="#">Order Tracking</a></li>
+                                <li><a href="#">IND <span class="icon-small"><i
+                                                class="ri-arrow-down-s-line"></i></span></a>
+                                    <ul>
+                                        <li class="current"><a href="#">IND</a></li>
+                                        <li><a href="#">USD</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">English <span class="icon-small"><i
+                                                class="ri-arrow-down-s-line"></i></span></a>
+                                    <ul>
+                                        <li class="current"><a href="#">English</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- header-top -->
+            <div class="header-nav">
+                <div class="container">
+                    <div class="wrapper flexitem">
+                        <a href="#" class="trigger desktop-hide"><span class="i ri-menu-2-line"></span></a>
+                        <div class="left flexitem">
+                            <div class="logo"><a href="/"><span class="circle"></span>.Shopio</a></div>
+                            <nav class="mobile-hide">
+                                <ul class="flexitem second-links">
+                                    <li><a href="/home">Home</a></li>
+                                    <li><a href="/shop">Shop</a></li>
+                                    <li><a href="#">Men</a></li>
+                                    <li><a href="#">Women</a></li>
+                                    <li><a href="#">Sports</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="right">
+                            <ul class="flexitem second-links">
+                                <li class="mobile-hide"><a href="/wishlist">
+                                    <div class="icon-large"><i class="ri-heart-line"></i></div>
+                                </a></li>
+                            <li class="iscart"><a href="/cart">
+                                    <div class="icon-large">
+                                        <i class="ri-shopping-cart-line"></i>
+                                    </div>
+
+                                    
+                                </a>
+                            </li>
+                                <li class="iscart"><a href="#">
+                                    <div class="icon-large">
+                                        <i class="ri-account-circle-line"></i>
+                                    </div>
+
+                                    
+                                </a>
+                                <% if(typeof userData!='undefined'){ %>
+                                    <div class="mini-login">
+                                        <div class="content">
+                                            <div class="cart-head">
+                                                <p>Hello <span style="color: #ff6b6b;"><%= userData.name %></span></p>
+                                                <p style="font-size: .8rem; font-weight: 400 ;"><%= userData.mobile %></p>
+                                                <hr style="margin-top: 10px; margin-bottom: 10px; height: 1px; ">
+                                                <a href="/login">Orders</a><br>
+                                                <a href="/cart">Cart</a><br>
+                                                <a href="/login">Wishlist</a><br>
+                                                <hr style="margin-top: 10px; margin-bottom: 10px; height: .1px;">
+                                                <a href="/login">Address</a><br>
+                                                <a href="/logout">Logout</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <% }else{ %>
+                                        <div class="mini-login">
+                                            <div class="content">
+                                                <div class="cart-head">
+                                                    <p>Welcome</p>
+                                                    <p style="font-size: .8rem; font-weight: 400 ;">To access account and orders</p>
+                                                    <a href="/login"><button>LOGIN/SIGN UP</button></a>
+                                                    <hr style="margin-top: 10px; margin-bottom: 10px; height: 1px; ">
+                                                    <a href="/login">Orders</a><br>
+                                                    <a href="/cart">Cart</a><br>
+                                                    <a href="/cart">Wishlist</a><br>
+                                                    <hr style="margin-top: 10px; margin-bottom: 10px; height: .1px;">
+                                                    <a href="/login">Address</a><br>
+                                                    <a href="/login">Wallet</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                      <% } %>
+                                
+                            </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- header-nav -->
+
+            <div class="header-main mobile-hide">
+                <div class="container">
+                    <div class="wrapper flexitem">
+                        <div class="left">
+                            <div class="dpt-cat">
+                                <div class="dpt-head">
+                                    <div class="main-text">All Departments</div>
+                                    <div class="mini-text mobile-hide">Total 1059 Products</div>
+                                    <a href="#" class="dpt-trigger mobile-hide">
+                                        <i class="ri-menu-3-line ri-xl"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="search-box">
+                                <form action="" class="search">
+                                    <span class="icon-large"><i class="ri-search-line"></i></span>
+                                    <input type="search" placeholder="Search for products">
+                                    <button type="submit">Search</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- header-main -->
+
+        </header>
+        <!-- Header -->
+        <main>
+            <div class="ordr-container ">
+                <img src="/userAssets/Images/Tick Image.png" alt="" width="80">
+                <h1>Order Confirmed</h1>
+                <p>Your order has been confirmed and will be shipped soon</p>
+                <table>
+                    <tr>
+                        <td>Order ID:</td>
+                        <td>#<%= orderDetails._id %></td>
+                    </tr>
+                    <tr>
+                        <td>Order date:</td>
+                        <td><%= orderDate %></td>
+                    </tr>
+                    <tr>
+                        <td>Shipping address:</td>
+                        <td><%= addressData.address %></td>
+                    </tr>
+                    <tr>
+                        <td>Payment method:</td>
+                        <td><%= orderDetails.paymentMethod %></td>
+                    </tr>
+                    <tr>
+                        <td>Order total:</td>
+                        <td>₹<%= orderDetails.cartTotal %></td>
+                    </tr>
+                </table>
+                <div class="order-btn">
+                    <a href="/shop" class="primary-button">Continue Shopping</a>
+                    <a href="/orders" class="primary-button">Track Order</a>     
+                </div>
+                <p>Thank you for shopping with us!</p>
+        </main>
+        <!-- Main -->
+
+        <footer>
+            <div class="newsletter">
+                <div class="container">
+                    <div class="wrapper">
+                        <div class="box">
+                            <div class="content">
+                                <h3>Join Our Newsletter</h3>
+                                <p>Get E-mail updates about our latest shop and <strong>special offers</strong></p>
+                            </div>
+                            <form action="" class="search">
+                                <span class="icon-large"><i class="ri-mail-line"></i></span>
+                                <input type="mail" placeholder="Your email address" required>
+                                <button type="submit">Sign Up</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- newsletter -->
+
+            <div class="widgets">
+                <div class="container">
+                    <div class="wrapper">
+                        <div class="flexwrap">
+                            <div class="row">
+                                <div class="item mini-links">
+                                    <h4>Help & Contact</h4>
+                                    <ul class="flexcol">
+                                        <li><a href="#">Your Account</a></li>
+                                        <li><a href="#">Your Orders</a></li>
+                                        <li><a href="#">Shipping Rates</a></li>
+                                        <li><a href="#">Returns</a></li>
+                                        <li><a href="#">Assistant</a></li>
+                                        <li><a href="#">Help</a></li>
+                                        <li><a href="#">Contact us</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="item mini-links">
+                                    <h4>Product Categories</h4>
+                                    <ul class="flexcol">
+                                        <li><a href="#">Beauty</a></li>
+                                        <li><a href="#">Electronic</a></li>
+                                        <li><a href="#">Women's Fashion</a></li>
+                                        <li><a href="#">Men's Fashion</a></li>
+                                        <li><a href="#">Girl's Fashion</a></li>
+                                        <li><a href="#">Boy's Fashion</a></li>
+                                        <li><a href="#">Health & Household</a></li>
+                                        <li><a href="#">Home & Kitchen</a></li>
+                                        <li><a href="#">Pet Supplies</a></li>
+                                        <li><a href="#">Sports</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="item mini-links">
+                                    <h4>Payment Info</h4>
+                                    <ul class="flexcol">
+                                        <li><a href="#">Bussiness Card</a></li>
+                                        <li><a href="#">Shop with Points</a></li>
+                                        <li><a href="#">Reload Your Balance</a></li>
+                                        <li><a href="#">Paypal</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="item mini-links">
+                                    <h4>About Us</h4>
+                                    <ul class="flexcol">
+                                        <li><a href="">Company Info</a></li>
+                                        <li><a href="">News</a></li>
+                                        <li><a href="">Investors</a></li>
+                                        <li><a href="">Careers</a></li>
+                                        <li><a href="">Policies</a></li>
+                                        <li><a href="">Customer reviews</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- widgets-->
+
+            <div class="footer-info">
+                <div class="container">
+                    <div class="wrapper">
+                        <div class="flexcol">
+                            <div class="logo">
+                                <a href=""><span class="circle"></span>.Store</a>
+                            </div>
+                            <div class="socials">
+                                <ul class="flexitem">
+                                    <li><a href="#"><i class="ri-twitter-line"></i></a></li>
+                                    <li><a href="#"><i class="ri-facebook-line"></i></a></li>
+                                    <li><a href="#"><i class="ri-instagram-line"></i></a></li>
+                                    <li><a href="#"><i class="ri-linkedin-line"></i></a></li>
+                                    <li><a href="#"><i class="ri-youtube-line"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="mini-text">Copyright 2022 © .Store. All right reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Footer -->
+
+        <div class="menu-bottom desktop-hide">
+            <div class="container">
+                <div class="wrapper">
+                    <nav>
+                        <ul class="flexitem">
+                            <li>
+                                <a href="#">
+                                    <i class="ri-bar-chart-line"></i>
+                                    <span>Trending</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="ri-user-6-line"></i>
+                                    <span>Account</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="ri-heart-line"></i>
+                                    <span>Wishlist</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#0" class="t-search">
+                                    <i class="ri-search-line"></i>
+                                    <span>Search</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#0">
+                                    <i class="ri-shopping-cart-line"></i>
+                                    <span>Cart</span>
+                                    <div class="fly-item">
+                                        <span class="item-number">0</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- menu bottom -->
+
+        <div class="search-bottom desktop-hide">
+            <div class="container">
+                <div class="wrapper">
+                    <form action="" class="search">
+                        <a href="#" class="t-close search-close flexcenter"><i class="ri-close-line"></i></a>
+                        <span class="icon-large"><i class="ri-search-line"></i></span>
+                        <input type="search" placeholder="Search" required>
+                        <button type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- search bottom -->
+
+        <div class="overlay"></div>
+    </div>
+    <%- include('../layout/userFooter.ejs') %>

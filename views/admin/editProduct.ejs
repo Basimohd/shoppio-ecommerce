@@ -1,0 +1,248 @@
+<%- include('../layout/adminHeader.ejs') %>
+<div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        <a class="navbar-brand brand-logo mr-5" href="index.html"><img src="/adminAssets/images/logo.png" class="mr-2" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="/adminAssets/images/logo-mini.png" alt="logo"/></a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <span class="icon-menu"></span>
+        </button>
+        <ul class="navbar-nav navbar-nav-right">
+          <li class="nav-item nav-profile dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+              <img src="/adminAssets/images/faces/face28.jpg" alt="profile"/>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+              <a class="dropdown-item">
+                <i class="ti-settings text-primary"></i>
+                Settings
+              </a>
+              <a href="/admin/logout" class="dropdown-item">
+                <i class="ti-power-off text-primary"></i>
+                Logout
+              </a>
+            </div>
+          </li>
+          <li class="nav-item nav-settings d-none d-lg-flex">
+            <a class="nav-link" href="#">
+              <i class="icon-ellipsis"></i>
+            </a>
+          </li>
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+          <span class="icon-menu"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_settings-panel.html -->
+      <div id="right-sidebar" class="settings-panel">
+        <i class="settings-close ti-close"></i>
+        <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="todo-tab" data-toggle="tab" href="#todo-section" role="tab" aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="setting-content">
+          <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel" aria-labelledby="todo-section">
+            <div class="add-items d-flex px-3 mb-0">
+              <form class="form w-100">
+                <div class="form-group d-flex">
+                  <input type="text" class="form-control todo-list-input" placeholder="Add To-do">
+                  <button type="submit" class="add btn btn-primary todo-list-add-btn" id="add-task">Add</button>
+                </div>
+              </form>
+            </div>
+            <div class="list-wrapper px-3">
+              <ul class="d-flex flex-column-reverse todo-list">
+
+              </ul>
+            </div>
+          </div>
+          <!-- To do section tab ends -->
+        </div>
+      </div>
+      <!-- partial -->
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/home">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/users">
+              <i class="icon-head menu-icon"></i>
+              <span class="menu-title">Users</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/categories">
+              <i class="icon-stack menu-icon"></i>
+              <span class="menu-title">Categories</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/products">
+              <i class="icon-box menu-icon"></i>
+              <span class="menu-title">Products</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/orders">
+              <i class="icon-paper menu-icon"></i>
+              <span class="menu-title">Orders</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/sales">
+              <i class="ti-bar-chart menu-icon"></i>
+              <span class="menu-title">Sales Report</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/coupons">
+              <i class="icon-ribbon menu-icon"></i>
+              <span class="menu-title">Coupons</span>
+            </a>
+          </li>
+           
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/banners">
+              <i class="icon-layout menu-icon"></i>
+              <span class="menu-title">Banner</span>
+            </a>
+          </li>
+          
+        </ul>
+      </nav>
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="col-12 grid-margin">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Add Product Details</h4>
+                <form id="productForm" method="post" class="form-sample" enctype="multipart/form-data">
+                  <input type="text" hidden value="<%= productData._id %>" name="id">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">SKU</label>
+                        <div class="col-sm-9">
+                          <input disabled name="SKU" value="<%= productData.SKU %>" type="text" class="form-control"/>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Product Name</label>
+                        <div class="col-sm-9">
+                          <input value="<%= productData.productName %>" name="productName" type="text" class="form-control" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">MRP</label>
+                        <div class="col-sm-9">
+                          <input  value="<%= productData.MRP %>" name="MRP" type="text" class="form-control" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Sale Price</label>
+                        <div class="col-sm-9">
+                          <input value="<%= productData.salePrice %>" name="salePrice" type="text" class="form-control" />
+                        </div>
+                      </div>
+                    </div>
+                      
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label name="category" class="col-sm-3 col-form-label">Category</label>
+                        <div class="col-sm-9">
+                          <select class="form-control" name="category">
+                            <% categoryData.forEach((category)=>{ %>
+                              <option value="<%= productData.category._id %>" selected hidden><%= productData.category.categoryName %></option>
+                            <option value="<%= category._id %>"><%= category.categoryName %></option>
+                            <% }) %>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Stock</label>
+                        <div class="col-sm-9">
+                          <input value="<%= productData.stock %>" name="stock" type="text" class="form-control" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleTextarea1">Description</label>
+                    <textarea name="description" class="form-control" id="exampleTextarea1" rows="5"><%= productData.description %></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label>Upload Images</label>
+                    <div class="container">
+                      <div class="row">
+                        <% productData.image.forEach((image)=>{ %>
+                        <div class="col-md-2">
+                          <div class="del-image-container">
+                            <img src="/productImage/<%= image %>" alt="Image 1" class="img-fluid">
+                            <a href="/admin/deleteImg?img=<%= image %>" class="delete-img-icon"><i class="h4 text-danger mdi mdi-delete"></i></a>
+                          </div>
+                        </div>
+                        <% }) %>
+                      </div>
+                    </div>
+                    <div class="input-group col-xs-12">
+                      <input type="file" name="image" class="form-control file-upload-info" placeholder="Upload Image" multiple>
+                      <span class="input-group-append">
+                        <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+                      </span>
+                    </div>
+                  </div>
+                 
+                  
+                  <% 
+                  if(typeof errMsg !== 'undefined'){
+                    %>
+                      <p class="mt-2" style="color:rgb(202, 0, 0)"><%= errMsg %> </p>
+                    <% } %>
+                  <a><button type="submit" class="btn btn-primary mr-2">Submit</button></a>
+                  <a href="productsDetails.html"><button class="btn btn-light">Back</button></a>
+                </form>
+              </div>
+            </div>
+          </div>
+          </div> 
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>   
+    <!-- page-body-wrapper ends -->
+  </div>
+  <script>
+    const form = document.getElementById('productForm');
+    const input = form.querySelector('[name="SKU"]');
+    
+    // Remove the "disabled" attribute before submitting the form
+    form.addEventListener('submit', async(event) => {
+      input.disabled = false;
+    });  
+  </script>
+  <%- include('../layout/adminFooter.ejs') %>

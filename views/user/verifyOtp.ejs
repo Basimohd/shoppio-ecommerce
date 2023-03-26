@@ -1,0 +1,32 @@
+<%- include('../layout/userHeader.ejs') %>
+<body style="background: #dfe9f5;">
+    <div class="logincontainer">
+  <div class="loginwrapper">
+    <h1 class="login-heading">Verification</h1>
+    <p style="font-size: 14px; padding-bottom: 15px;">Enter 6-Digit Verification code send <br>to +91 - <% if(typeof mobileNo !== 'undefined'){%><%= mobileNo %> <% } %></p>
+    <form method="post" >
+      <input class="login-input" type="text" placeholder="" style="text-align:center;" maxlength="6" name="otp">
+      <button type="submit" class="login-btn">Validate OTP</button>
+      <% 
+      if(typeof errMsg !== 'undefined'){
+      %>
+      <p class="errMsg"><%= errMsg %> </p>
+      <% } %>
+    </form>
+    <div class="loginbottom">
+      <% if(typeof hrefLink !== 'undefined'){ %>
+        <% if(hrefLink=="regHref"){ %>
+      <a href="/register/getOtp" id="resend-link">Resend OTP </a><span id="timer"></span>
+      <% }else{ %>
+         <a href="/getOtp" id="resend-link">Resend OTP </a><span id="timer"></span>
+         <% }}else{ %>
+          <a href="/getOtp" id="resend-link">Resend OTP </a><span id="timer"></span>
+          <% } %>
+    </div>
+    <div class="loginbottom">
+      <a href="#">Change Phone Number</a>
+    </div>
+  </div>
+</div>
+
+<%- include('../layout/userFooter.ejs') %>

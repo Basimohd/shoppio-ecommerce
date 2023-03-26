@@ -1,0 +1,30 @@
+<%- include('../layout/userHeader.ejs') %>
+<body style="background: #fafcff;">
+    <div class="logincontainer">
+  <div class="loginwrapper">
+    <h1 class="login-heading">Login</h1>
+    <form method="post">
+      <p class="input-name">Email Or Mobile Number</p>
+      <input class="login-input" type="text" placeholder="Enter username" name="emailMobile">
+      <p class="input-name">Password</p>
+      <input class="login-input" type="password" placeholder="Password" name="password">
+      
+      <p class="login-recover">
+        <a href="#">Recover Password</a>
+      </p>
+      <% 
+      if(typeof errMsg !== 'undefined'){
+      %>
+      <p class="errMsg" id="error-message" style="margin-bottom: 0px;"><%= errMsg %> </p>
+      <% } %>
+      <button type="submit" class="login-btn">Sign in</button>
+    </form>
+    <div class="loginbottom">
+      Login with <a href="/getOtp">OTP</a>
+    </div>
+    <div class="loginbottom">
+      Not a member? <a href="/register/getOtp">Register Now</a>
+    </div>
+  </div>
+</div>
+<%- include('../layout/userFooter.ejs') %>

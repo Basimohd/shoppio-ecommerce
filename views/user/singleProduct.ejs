@@ -1,0 +1,894 @@
+<%- include('../layout/userHeader.ejs') %>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .img-zoom-container-img {
+            position: relative;
+        }
+
+        .img-zoom-container-div {
+            position: relative;
+
+            top: 0;
+            left: 10;
+            z-index: 9999;
+        }
+
+
+        .img-zoom-lens:hover {
+            position: absolute;
+            border: 1px solid #d4d4d4;
+            /*set the size of the lens:*/
+            width: 200px;
+            height: 200px;
+        }
+
+        .img-zoom-lens {
+            position: absolute;
+            border: 1px solid #d4d4d4;
+            /*set the size of the lens:*/
+            width: 200px;
+            height: 200px;
+        }
+
+
+        .img-zoom-result {
+            position: absolute;
+            top: 0;
+            left: 10;
+            z-index: 9999;
+            border: 1px solid #d4d4d4;
+            /*set the size of the result div:*/
+            width: 400px;
+            height: 500px;
+        }
+    </style>
+
+    <div id="page" class="site page-home">
+        <aside class="site-off desktop-hide">
+            <div class="off-canvas">
+                <div class="canvas-head flexitem">
+                    <div class="logo"><a href="/"><span class="circle"></span>.Shopio</a></div>
+                    <a href="#" class="t-close flexcenter"><i class="ri-close-line"></i></a>
+                </div>
+                <div class="departments"></div>
+                <nav></nav>
+                <div class="thetop-nav"></div>
+            </div>
+        </aside>
+        <header>
+            <div class="header-top mobile-hide">
+                <div class="container">
+                    <div class="wrapper flexitem">
+                        <div class="left">
+                            <ul class="flexitem main-links">
+                                <li><a href="#">Featured Products</a></li>
+                                <li><a href="#">Wishlist</a></li>
+                            </ul>
+                        </div>
+                        <div class="right">
+                            <ul class="flexitem main-links">
+                                <li><a href="/login">Sign In</a></li>
+                                <li><a href="#">Order Tracking</a></li>
+                                <li><a href="#">IND <span class="icon-small"><i
+                                                class="ri-arrow-down-s-line"></i></span></a>
+                                    <ul>
+                                        <li class="current"><a href="#">IND</a></li>
+                                        <li><a href="#">USD</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">English <span class="icon-small"><i
+                                                class="ri-arrow-down-s-line"></i></span></a>
+                                    <ul>
+                                        <li class="current"><a href="#">English</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- header-top -->
+            <div class="header-nav">
+                <div class="container">
+                    <div class="wrapper flexitem">
+                        <a href="#" class="trigger desktop-hide"><span class="i ri-menu-2-line"></span></a>
+                        <div class="left flexitem">
+                            <div class="logo"><a href="/"><span class="circle"></span>.Shopio</a></div>
+                            <nav class="mobile-hide">
+                                <ul class="flexitem second-links">
+                                    <li><a href="/home">Home</a></li>
+                                    <li><a href="/shop">Shop</a></li>
+                                    <li><a href="#">Men</a></li>
+                                    <li><a href="#">Women</a></li>
+                                    <li><a href="#">Sports</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="right">
+                            <ul class="flexitem second-links">
+                                <li class="mobile-hide"><a href="#">
+                                        <div class="icon-large"><i class="ri-heart-line"></i></div>
+                                    </a></li>
+                                <li class="iscart"><a href="#">
+                                        <div class="icon-large">
+                                            <i class="ri-shopping-cart-line"></i>
+                                        </div>
+
+
+                                    </a>
+                                </li>
+                                <li class="iscart"><a href="#">
+                                        <div class="icon-large">
+                                            <i class="ri-account-circle-line"></i>
+                                        </div>
+
+
+                                    </a>
+                                    <div class="mini-login">
+                                        <div class="content">
+                                            <div class="cart-head">
+                                                <a href="/login">Login/Sign Up</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- header-nav -->
+
+            <div class="header-main mobile-hide">
+                <div class="container">
+                    <div class="wrapper flexitem">
+                        <div class="left">
+                            <div class="dpt-cat">
+                                <div class="dpt-head">
+                                    <div class="main-text">All Departments</div>
+                                    <div class="mini-text mobile-hide">Total 1059 Products</div>
+                                    <a href="#" class="dpt-trigger mobile-hide">
+                                        <i class="ri-menu-3-line ri-xl"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="search-box">
+                                <form action="" class="search">
+                                    <span class="icon-large"><i class="ri-search-line"></i></span>
+                                    <input type="search" placeholder="Search for products">
+                                    <button type="submit">Search</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- header-main -->
+
+        </header>
+        <!-- Header -->
+        <main>
+
+            <div class="single-product">
+                <div class="container">
+                    <div class="wrapper">
+                        <div class="breadcrumb">
+                            <ul class="flexitem">
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">
+                                        <%= product.category.categoryName %>
+                                    </a></li>
+                                <li>
+                                    <%= product.productName %>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- breadcrumb -->
+
+                        <div class="column">
+                            <div class="products one">
+                                <div class="flexwrap">
+                                    <div class="row">
+                                        <div class="item is_sticky">
+                                            <div class="price">
+                                                <span class="discount">
+                                                    <%= offerPercentage.toFixed(0) %>%<br>OFF
+                                                </span>
+                                            </div>
+                                            <div class="big-image">
+
+                                                <div class="big-image-wrapper swiper-wrapper">
+                                                    <% product.image.forEach((image,index)=>{ %>
+                                                        <div class="image-show swiper-slide">
+
+                                                            <a data-fslightbox href="/productImage/<%= image %>">
+                                                                <div class="img-zoom-container-img">
+                                                                    <img id="<%= index %>"
+                                                                        src="/productImage/<%= image %>" alt="">
+                                                            </a>
+                                                        </div></a>
+
+                                                </div>
+                                                <% }) %>
+                                            </div>
+                                            <div class="swiper-button-next"></div>
+                                            <div class="swiper-button-prev"></div>
+                                        </div>
+
+                                        <div thumbSlider="" class="small-image">
+
+                                            <ul class="small-image-wrapper flexitem swiper-wrapper">
+                                                <% product.image.forEach((image)=>{ %>
+                                                    <li class="thumbnail-show swiper-slide">
+                                                        <img src="/productImage/<%= image %>" alt="">
+                                                    </li>
+                                                    <% }) %>
+                                            </ul>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="img-zoom-container-div is_sticky">
+                                        <div id="myresult" class="img-zoom-result"></div>
+                                    </div>
+                                    <div class="item">
+
+                                        <h1>
+                                            <%= product.productName %>
+                                        </h1>
+                                        <div class="content">
+                                            <div class="rating">
+                                                <div class="shop-stars">
+                                                    <span class="fa fa-star <% if (reviewPercentage >= 1) { %>checked<% } %>"></span>
+                                                    <span class="fa fa-star <% if (reviewPercentage >= 2) { %>checked<% } %>"></span>
+                                                    <span class="fa fa-star <% if (reviewPercentage >= 3) { %>checked<% } %>"></span>
+                                                    <span class="fa fa-star <% if (reviewPercentage >= 4) { %>checked<% } %>"></span>
+                                                    <span class="fa fa-star <% if (reviewPercentage >= 5) { %>checked<% } %>"></span>
+                                                                                
+                                                </div>
+                                                <a href="#reviews" class="mini-text"><%= product.reviews.length %> reviews</a>
+                                                <a href="#review-form" class="add-review mini-text">Add Your Review</a>
+                                            </div>
+                                            <div class="stock-sku">
+                                                <% if(product.stock==0){ %>
+                                                    <span class="available" style="color: red;">Out of Stock</span>
+                                                    <% }else{ %>
+                                                        <span class="available">In Stock</span>
+                                                        <% } %>
+                                                            <span class="sku mini-text">SKU-<%= product.SKU %></span>
+                                            </div>
+                                            <div class="price">
+                                                <span class="current">₹<%= product.salePrice %></span>
+                                                <span class="normal">₹<%= product.MRP %></span>
+                                            </div>
+                                            <div class="colors">
+                                                <p>Color</p>
+                                                <div class="variant">
+                                                    <form action="">
+                                                        <p>
+                                                            <input type="radio" name="color" id="cogrey">
+                                                            <label for="cogrey" class="circle"></label>
+                                                        </p>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="sizes">
+                                                <p>Size</p>
+                                                <div class="variant">
+                                                    <form action="">
+                                                        <p>
+                                                            <input type="radio" name="size" id="size-40">
+                                                            <label for="size-40" class="circle"><span>40</span></label>
+                                                        </p>
+                                                        <p>
+                                                            <input type="radio" name="size" id="size-41">
+                                                            <label for="size-41" class="circle"><span>41</span></label>
+                                                        </p>
+                                                        <p>
+                                                            <input type="radio" name="size" id="size-42">
+                                                            <label for="size-42" class="circle"><span>42</span></label>
+                                                        </p>
+                                                        <p>
+                                                            <input type="radio" name="size" id="size-43">
+                                                            <label for="size-43" class="circle"><span>43</span></label>
+                                                        </p>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="actions">
+                                                <div class="button-cart"><a
+                                                        href="/addCart?id=<%= product._id %>"><button
+                                                            class="primary-button">Add to cart</button></a></div>
+                                                <div class="wish-share">
+                                                    <ul class="flexitem second-links">
+                                                        <li><a href="/addWishlist?id=<%= product._id %>"
+                                                                onclick="addWishlist(event)" id="addWishlist">
+                                                                <% if(typeof wishlistProduct !="undefined" ){ %>
+                                                                    <% if(wishlistProduct !=null){ %>
+                                                                        <span class="icon-large"><i id="wishlistIcon"
+                                                                                style="color:#ff6b6b"
+                                                                                class="ri-heart-fill"></i></span>
+                                                                        <span id="wishlistText">Wishlisted</span>
+                                                                        <% }else{ %>
+                                                                            <span class="icon-large"><i
+                                                                                    id="wishlistIcon"
+                                                                                    class="ri-heart-line"></i></span>
+                                                                            <span id="wishlistText">Wishlist</span>
+                                                                            <% } %>
+                                                                                <% }else{ %>
+                                                                                    <span class="icon-large"><i
+                                                                                            id="wishlistIcon"
+                                                                                            class="ri-heart-line"></i></span>
+                                                                                    <span
+                                                                                        id="wishlistText">Wishlist</span>
+                                                                                    <% } %>
+                                                            </a></li>
+                                                        <li><a href="#">
+                                                                <span class="icon-large"><i
+                                                                        class="ri-share-line"></i></span>
+                                                                <span>Share</span>
+                                                            </a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="description collapse">
+                                                <ul>
+                                                    <li class="has-child ">
+                                                        <a href="#0" class="icon-small">Information</a>
+                                                        <ul class="content">
+                                                            <li><span>Category : </span><span>
+                                                                    <%= product.category.categoryName %>
+                                                                </span></li>
+                                                            <li><span>Gender :</span><span> <%= product.gender %></span></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="has-child">
+                                                        <a href="#0" class="icon-small">Details</a>
+                                                        <div class="content">
+                                                            <p>
+                                                                <%= product.description %>
+                                                            </p>
+
+                                                        </div>
+                                                    </li>
+                                                    <li class="has-child">
+                                                        <a href="#0" class="icon-small">Custom</a>
+                                                        <div class="content">
+                                                            <table>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Size</th>
+                                                                        <th>Bust <span class="mini-text">(cm)</span>
+                                                                        </th>
+                                                                        <th>Waist <span class="mini-text">(cm)</span>
+                                                                        </th>
+                                                                        <th>Hip <span class="mini-text">(cm)</span></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>XS</td>
+                                                                        <td>82,5</td>
+                                                                        <td>62</td>
+                                                                        <td>87,5</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>S</td>
+                                                                        <td>85</td>
+                                                                        <td>63,5</td>
+                                                                        <td>89</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>M</td>
+                                                                        <td>87,5</td>
+                                                                        <td>67,5</td>
+                                                                        <td>93</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>L</td>
+                                                                        <td>90</td>
+                                                                        <td>72,5</td>
+                                                                        <td>98</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>XL</td>
+                                                                        <td>93</td>
+                                                                        <td>77,5</td>
+                                                                        <td>103</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </li>
+                                                    <li class="has-child expand">
+                                                        <a href="#" class="icon-small">Reviews<span
+                                                                class="mini-text"><%= product.reviews.length %></span></a>
+                                                        <div class="content">
+                                                           
+                                                            <div class="reviews" id="reviews">
+                                                                <h4>Customers Reviews</h4>
+                                                                <div class="review-block">
+                                                                    <div class="review-block-head">
+                                                                        <div class="flexitem">
+                                                                            <span class="rate-sum"><%= reviewPercentage.toFixed(1) %></span>
+                                                                            <span><%= product.reviews.length %> Reviews</span>
+                                                                        </div>
+                                                                        <a href="#review-form"
+                                                                            class="secondary-button">Write review</a>
+                                                                    </div>
+                                                                    <div class="review-block-body">
+                                                                        <ul>
+                                                                            <% product.reviews.forEach((review,index)=>{ %>
+                                                                                <li class="item">
+                                                                                    <div class="review-form">
+                                                                                        <p class="person">
+                                                                                            <%= review.name %>
+                                                                                        </p>
+                                                                                        <% let timestamp = new Date(review.postedOn) %>
+                                                                                        <p class="mini-text">On <%= timestamp.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }) %>
+                                                                                        </p>
+                                                                                    </div>
+                                                                                    <div class="review-rating rating">
+                                                                                        <div class="stars">
+                                                                                            <span class="fa fa-star <% if (review.starCount >= 1) { %>checked<% } %>"></span>
+                                                                                            <span class="fa fa-star <% if (review.starCount >= 2) { %>checked<% } %>"></span>
+                                                                                            <span class="fa fa-star <% if (review.starCount >= 3) { %>checked<% } %>"></span>
+                                                                                            <span class="fa fa-star <% if (review.starCount >= 4) { %>checked<% } %>"></span>
+                                                                                            <span class="fa fa-star <% if (review.starCount >= 5) { %>checked<% } %>"></span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="review-title">
+                                                                                        <p>
+                                                                                            <%= review.title %>
+                                                                                        </p>
+                                                                                    </div>
+                                                                                    <div class="review-text">
+                                                                                        <p>
+                                                                                            <%= review.review %>
+                                                                                        </p>
+                                                                                    </div>
+                                                                                </li>
+                                                                                <% }) %>
+
+                                                                        </ul>
+                                                                        <div class="second-links" style="margin-top: 15px;">
+                                                                            <a href="#" class="view-all">View all
+                                                                                reviews <i
+                                                                                    class="ri-arrow-right-line"></i></a>
+                                                                        </div>
+                                                                    </div>
+                                                                     
+                                                                    <div class="review-form" id="review-form">
+                                                                        <h4>Write a review</h4>
+                                                                        <form id="reviewForm">
+                                                                            <div class="rating">
+
+                                                                                <p>Are you satisfied enough?</p>
+                                                                                <div style="margin-top: -15px;"
+                                                                                    class="rate-this">
+                                                                                    <input type="radio" name="rating"
+                                                                                        value="5" id="star5">
+                                                                                    <label for="star5"><i
+                                                                                            class="ri-star-fill"></i></label>
+
+                                                                                    <input type="radio" name="rating"
+                                                                                        value="4" id="star4">
+                                                                                    <label for="star4"><i
+                                                                                            class="ri-star-fill"></i></label>
+
+                                                                                    <input type="radio" name="rating"
+                                                                                        value="3" id="star3">
+                                                                                    <label for="star3"><i
+                                                                                            class="ri-star-fill"></i></label>
+
+                                                                                    <input type="radio" name="rating"
+                                                                                        value="2" id="star2">
+                                                                                    <label for="star2"><i
+                                                                                            class="ri-star-fill"></i></label>
+
+                                                                                    <input type="radio" name="rating"
+                                                                                        value="1" id="star1">
+                                                                                    <label for="star1"><i
+                                                                                            class="ri-star-fill"></i></label>
+
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <input type="text" hidden
+                                                                                value="<%= product._id %>"
+                                                                                name="productId" id="productId">
+
+                                                                            <p>
+                                                                                <label>Title</label>
+                                                                                <input type="text" name="title"
+                                                                                    id="reviewTitle">
+                                                                            </p>
+                                                                            <p>
+                                                                                <label>Review</label>
+                                                                                <textarea cols="30" rows="10"
+                                                                                    name="review"
+                                                                                    id="reviewDes"></textarea>
+                                                                            </p>
+                                                                            <p><button onclick="addReview(event)"
+                                                                                    class="primary-button"
+                                                                                    style="border: none; cursor: pointer;">Submit
+                                                                                    Review</button></p>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <div class="features">
+        <div class="container">
+            <div class="wrapper">
+                <div class="column">
+                    <div class="sectop flexitem">
+                        <h2><span class="circle"></span><span>Related products</span></h2>
+                        <div class="second-links">
+                            <a href="#" class="view-all">View all<i class="ri-arrow-right-line"></i></a>
+                        </div>
+                    </div>
+                    <div class="products main flexwrap">
+                        <% relatedProduct.forEach((product)=>{ %>
+                            <div class="item">
+                                <div class="media">
+                                    <div class="thumbnail object-cover">
+                                        <a href="/product?id=<%= product._id %>">
+                                            <img src="/productImage/<%= product.image[0] %>" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="hoverable">
+                                        <ul>
+                                            <% if(typeof wishlistProduct !="undefined" ){ %>
+                                                <% if(wishlistProduct !=null){ %>
+                                                    <li
+                                                        class="active  <% if (wishlistProduct.products.some(item => item.productId.toString() == product._id.toString())) { %>actived<% }%>">
+                                                        <a href="#"><i class="ri-heart-line"></i></a>
+                                                    </li>
+                                                    <% }else{ %>
+                                                        <li class="active"><a href="#"><i class="ri-heart-line"></i></a>
+                                                        </li>
+                                                        <% } %>
+                                                            <% }else{ %>
+                                                                <li class="active"><a href="#"><i
+                                                                            class="ri-heart-line"></i></a></li>
+                                                                <% } %>
+
+                                                                    <li><a href="/product?id=<%= product._id %>"><i
+                                                                                class="ri-eye-line"></i></a></li>
+                                                                    <li><a href="#"><i class="ri-shuffle-line"></i></a>
+                                                                    </li>
+                                        </ul>
+                                    </div>
+                                    <div class="discount circle flexcenter">
+                                        <% const offerPercentage=((product.MRP - product.salePrice) / product.MRP) *
+                                            100; %>
+                                            <span>
+                                                <%= offerPercentage.toFixed(0) %>%
+                                            </span>
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <div class="rating">
+                                        <div class="stars"></div>
+                                        <span class="mini-text">(0)</span>
+                                    </div>
+                                    <h3><a href="/product?id=<%= product._id %>">
+                                            <%= product.productName %>
+                                        </a></h3>
+                                    <div class="price">
+                                        <span class="current">₹<%= product.salePrice %></span>
+                                        <span class="normal mini-text">₹<%= product.MRP %></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <% }) %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- featured products -->
+
+
+    </main>
+    <!-- Main -->
+
+    <footer>
+        <div class="newsletter">
+            <div class="container">
+                <div class="wrapper">
+                    <div class="box">
+                        <div class="content">
+                            <h3>Join Our Newsletter</h3>
+                            <p>Get E-mail updates about our latest shop and <strong>special offers</strong></p>
+                        </div>
+                        <form action="" class="search">
+                            <span class="icon-large"><i class="ri-mail-line"></i></span>
+                            <input type="mail" placeholder="Your email address" required>
+                            <button type="submit">Sign Up</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- newsletter -->
+
+        <div class="widgets">
+            <div class="container">
+                <div class="wrapper">
+                    <div class="flexwrap">
+                        <div class="row">
+                            <div class="item mini-links">
+                                <h4>Help & Contact</h4>
+                                <ul class="flexcol">
+                                    <li><a href="#">Your Account</a></li>
+                                    <li><a href="#">Your Orders</a></li>
+                                    <li><a href="#">Shipping Rates</a></li>
+                                    <li><a href="#">Returns</a></li>
+                                    <li><a href="#">Assistant</a></li>
+                                    <li><a href="#">Help</a></li>
+                                    <li><a href="#">Contact us</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="item mini-links">
+                                <h4>Product Categories</h4>
+                                <ul class="flexcol">
+                                    <li><a href="#">Beauty</a></li>
+                                    <li><a href="#">Electronic</a></li>
+                                    <li><a href="#">Women's Fashion</a></li>
+                                    <li><a href="#">Men's Fashion</a></li>
+                                    <li><a href="#">Girl's Fashion</a></li>
+                                    <li><a href="#">Boy's Fashion</a></li>
+                                    <li><a href="#">Health & Household</a></li>
+                                    <li><a href="#">Home & Kitchen</a></li>
+                                    <li><a href="#">Pet Supplies</a></li>
+                                    <li><a href="#">Sports</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="item mini-links">
+                                <h4>Payment Info</h4>
+                                <ul class="flexcol">
+                                    <li><a href="#">Bussiness Card</a></li>
+                                    <li><a href="#">Shop with Points</a></li>
+                                    <li><a href="#">Reload Your Balance</a></li>
+                                    <li><a href="#">Paypal</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="item mini-links">
+                                <h4>About Us</h4>
+                                <ul class="flexcol">
+                                    <li><a href="">Company Info</a></li>
+                                    <li><a href="">News</a></li>
+                                    <li><a href="">Investors</a></li>
+                                    <li><a href="">Careers</a></li>
+                                    <li><a href="">Policies</a></li>
+                                    <li><a href="">Customer reviews</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- widgets-->
+
+        <div class="footer-info">
+            <div class="container">
+                <div class="wrapper">
+                    <div class="flexcol">
+                        <div class="logo">
+                            <a href=""><span class="circle"></span>.Store</a>
+                        </div>
+                        <div class="socials">
+                            <ul class="flexitem">
+                                <li><a href="#"><i class="ri-twitter-line"></i></a></li>
+                                <li><a href="#"><i class="ri-facebook-line"></i></a></li>
+                                <li><a href="#"><i class="ri-instagram-line"></i></a></li>
+                                <li><a href="#"><i class="ri-linkedin-line"></i></a></li>
+                                <li><a href="#"><i class="ri-youtube-line"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p class="mini-text">Copyright 2022 © .Store. All right reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer -->
+
+    <div class="menu-bottom desktop-hide">
+        <div class="container">
+            <div class="wrapper">
+                <nav>
+                    <ul class="flexitem">
+                        <li>
+                            <a href="#">
+                                <i class="ri-bar-chart-line"></i>
+                                <span>Trending</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="ri-user-6-line"></i>
+                                <span>Account</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="ri-heart-line"></i>
+                                <span>Wishlist</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#0" class="t-search">
+                                <i class="ri-search-line"></i>
+                                <span>Search</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#0">
+                                <i class="ri-shopping-cart-line"></i>
+                                <span>Cart</span>
+                                <div class="fly-item">
+                                    <span class="item-number">0</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- menu bottom -->
+
+    <div class="search-bottom desktop-hide">
+        <div class="container">
+            <div class="wrapper">
+                <form action="" class="search">
+                    <a href="#" class="t-close search-close flexcenter"><i class="ri-close-line"></i></a>
+                    <span class="icon-large"><i class="ri-search-line"></i></span>
+                    <input type="search" placeholder="Search" required>
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Initiate zoom effect:
+        imageZoom("0", "myresult");
+
+        function addWishlist(e) {
+            e.preventDefault();
+            var link = $('#addWishlist').attr('href');
+            $.ajax({
+                type: "GET",
+                url: link,
+                success: function (response) {
+                    if (response.success) {
+                        const icon = document.getElementById("wishlistIcon");
+                        icon.classList.remove("ri-heart-line");
+                        icon.classList.add("ri-heart-fill");
+                        icon.style.color = "#ff6b6b";
+                        document.getElementById("wishlistText").innerHTML = "wishlisted"
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 2200,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Added to Wishlist'
+                        })
+                    } else {
+                        const icon = document.getElementById("wishlistIcon");
+                        icon.classList.remove("ri-heart-fill");
+                        icon.classList.add("ri-heart-line");
+                        icon.style.color = "black";
+                        document.getElementById("wishlistText").innerHTML = "wishlist"
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 2200,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
+                        Toast.fire({
+                            icon: 'error',
+                            title: 'Removed from Wishlist'
+                        })
+                    }
+                }
+            })
+        }
+
+    </script>
+    <script>
+        function addReview(event) {
+            console.log("reviewForm")
+            event.preventDefault();
+            const rating = document.querySelector('input[name="rating"]:checked').value;
+            const review = document.getElementById("reviewDes").value;
+            const title = document.getElementById("reviewTitle").value;
+            const productId = document.getElementById("productId").value;
+            $.ajax({
+                type: "POST",
+                url: '/product?id=' + productId,
+                data: {
+                    rating: rating,
+                    productId: productId,
+                    review: review,
+                    title: title
+                },
+                success: function (res) {
+                    if (res.success) {
+                        location.reload();
+                    } else {
+                        if (res.userLoggedIn) {
+                            location.href = '/login'
+                        } else {
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 2200,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            })
+                            Toast.fire({
+                                icon: 'error',
+                                title: 'You can only add review after Purchase'
+                            })
+                        }
+                    }
+                }
+            })
+        }
+
+    </script>
+
+    <%- include('../layout/userFooter.ejs') %>

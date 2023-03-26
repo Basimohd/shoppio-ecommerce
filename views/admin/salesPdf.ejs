@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    h4{
+        font-size: 1.6em;
+        font-family: sans-serif;
+        text-align: center;
+    }
+    h3{
+        font-family: sans-serif;
+        text-align: end;
+    }
+    .styled-table {
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.8em;
+        font-family: sans-serif;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        width: 100%;
+    }
+    .styled-table thead tr {
+        background-color: #4b49ac;
+        color: #ffffff;
+        text-align: left;
+    }
+    .styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #4b49ac;;
+}
+</style>
+</head>
+<body>
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Sales Report</h4>
+
+            <div class="table-responsive">
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Customer Name</th>
+                            <th>Date</th>
+                            <th>Price</th>
+                            <th>Products</th>
+                            <th>Payment</th>
+                        </tr>
+                    </thead>
+                    <% let total=0; %>
+                    <tbody id="tableDatas">
+                        <% orderDetails.forEach((order)=>{ %>
+                            <tr>
+                                <td>
+                                    <%= order.userId.name %>
+                                </td>
+                                <td>
+                                    <%= order.date.toISOString().slice(0, 10) %>
+                                </td>
+                                <td class="cartTotal">
+                                    <%= order.cartTotal %>
+                                </td>
+                                <td>
+                                    <% order.productDatas.forEach((product)=>{ %>
+                                        <%= product.productId.productName %> x<%= product.quantity
+                                                %><br>
+                                                <% }) %>
+                                </td>
+                                <td>
+                                    <%= order.paymentMethod %>
+                                </td>
+                            </tr>
+                            
+                            <%  total+=Number(order.cartTotal) %>
+                            <% }) %>
+                    </tbody>
+                </table>
+                
+                <div>
+                    <h3>Total : <span id="salesTotal"> <%= total %></span></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script>
+    const elements = document.querySelectorAll('.cartTotal');
+    const values = Array.from(elements).map(element => element.value);
+    const salesTotal = values.reduce((acc,cur)=>acc+=cur)
+    document.getElementById("salesTotal").innerHTML=Number(salesTotal)
+</script>
+</body>
+
+
+</html>

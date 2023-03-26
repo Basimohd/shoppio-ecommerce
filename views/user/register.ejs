@@ -1,0 +1,25 @@
+<%- include('../layout/userHeader.ejs') %>
+<body style="background: #dfe9f5;">
+    <div class="logincontainer">
+  <div class="loginwrapper">
+    <h1 class="login-heading">Create New Account</h1>
+    <form method="post" id="post-form">
+        <p class="input-name">User Name</p>
+      <input class="login-input"  id="input-field" type="text" placeholder="Enter username" name="name">
+      <p class="input-name">Email</p>
+      <input class="login-input" type="email" placeholder="Enter email" name="email">
+      <p class="input-name">Password</p>
+      <input class="login-input" type="password" placeholder="Password" name="password">
+      <p class="input-name">Re-Enter Password</p>
+      <input class="login-input" type="password" placeholder="Re-Enter password" name="repassword">
+      <% 
+      if(typeof errMsg !== 'undefined'){
+      %>
+      <p class="errMsg" id="error-message" style="margin-bottom: 0px;"><%= errMsg %> </p>
+      <% } %>
+      <button type="submit" id="submit-button" class="login-btn">Sign Up</button>
+    </form>
+    
+  </div>
+</div>
+<%- include('../layout/userFooter.ejs') %>

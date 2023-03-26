@@ -1,0 +1,22 @@
+<%- include('../layout/userHeader.ejs') %>
+<body style="background: #dfe9f5;">
+    <div class="logincontainer">
+  <div class="loginwrapper">
+    <h1 class="login-heading">OTP verification</h1>
+    <p style="font-size: 14px; padding-bottom: 15px;">We will send you a one-time password<br> to this mobile number</p>
+    <form method="post">
+      <p class="input-name">Enter Mobile Number</p>
+      <input class="login-input" type="tel" placeholder="Phone Number" name="mobile" maxlength="10" required>
+      <button type="submit" class="login-btn">Send Otp</button>
+      <% 
+      if(typeof errMsg !== 'undefined'){
+      %>
+      <p class="errMsg"><%= errMsg %> </p>
+      <% } %>
+    </form>
+    <div class="loginbottom">
+      Login with <a href="/login">Password</a>
+    </div>
+  </div>
+</div>
+<%- include('../layout/userFooter.ejs') %>

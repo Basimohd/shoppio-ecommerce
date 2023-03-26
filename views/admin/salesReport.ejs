@@ -1,0 +1,287 @@
+<%- include('../layout/adminHeader.ejs') %>
+  <div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        <a class="navbar-brand brand-logo mr-5" href="index.html"><img src="/adminAssets/images/logo.png" class="mr-2"
+            alt="logo" /></a>
+        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="/adminAssets/images/logo-mini.png"
+            alt="logo" /></a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <span class="icon-menu"></span>
+        </button>
+        <ul class="navbar-nav navbar-nav-right">
+          <li class="nav-item nav-profile dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+              <img src="/adminAssets/images/faces/face28.jpg" alt="profile" />
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+              <a class="dropdown-item">
+                <i class="ti-settings text-primary"></i>
+                Settings
+              </a>
+              <a href="/admin/logout" class="dropdown-item">
+                <i class="ti-power-off text-primary"></i>
+                Logout
+              </a>
+            </div>
+          </li>
+          <li class="nav-item nav-settings d-none d-lg-flex">
+            <a class="nav-link" href="#">
+              <i class="icon-ellipsis"></i>
+            </a>
+          </li>
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+          data-toggle="offcanvas">
+          <span class="icon-menu"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_settings-panel.html -->
+      <div id="right-sidebar" class="settings-panel">
+        <i class="settings-close ti-close"></i>
+        <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="todo-tab" data-toggle="tab" href="#todo-section" role="tab"
+              aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="setting-content">
+          <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel"
+            aria-labelledby="todo-section">
+            <div class="add-items d-flex px-3 mb-0">
+              <form class="form w-100">
+                <div class="form-group d-flex">
+                  <input type="text" class="form-control todo-list-input" placeholder="Add To-do">
+                  <button type="submit" class="add btn btn-primary todo-list-add-btn" id="add-task">Add</button>
+                </div>
+              </form>
+            </div>
+            <div class="list-wrapper px-3">
+              <ul class="d-flex flex-column-reverse todo-list">
+
+              </ul>
+            </div>
+          </div>
+          <!-- To do section tab ends -->
+        </div>
+      </div>
+      <!-- partial -->
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/home">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/users">
+              <i class="icon-head menu-icon"></i>
+              <span class="menu-title">Users</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/categories">
+              <i class="icon-stack menu-icon"></i>
+              <span class="menu-title">Categories</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/products">
+              <i class="icon-box menu-icon"></i>
+              <span class="menu-title">Products</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/orders">
+              <i class="icon-paper menu-icon"></i>
+              <span class="menu-title">Orders</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/sales">
+              <i class="ti-bar-chart menu-icon"></i>
+              <span class="menu-title">Sales Report</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/coupons">
+              <i class="icon-ribbon menu-icon"></i>
+              <span class="menu-title">Coupons</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/banners">
+              <i class="icon-layout menu-icon"></i>
+              <span class="menu-title">Banner</span>
+            </a>
+          </li>
+
+        </ul>
+      </nav>
+      <!-- partial -->
+      <div class="main-panel">
+
+        <div class="content-wrapper">
+          <form method="post" action="/admin/exportPdf" id="pdfForm">
+            <div class="form-group row mx-2">
+              <div class="col-sm-3">
+                <input name="dateFrom" class="form-control" type="date" id="dateFrom">
+
+              </div>
+
+              <div class="my-auto">
+                To
+              </div>
+              <div class="col-sm-3">
+                <input name="dateTo" class="form-control" type="date" id="dateTo">
+              </div>
+              <div class="my-auto">
+                <p class="text-danger" id="errMsg"> </p>
+              </div>
+              <div class="col-sm-3 ml-auto">
+                <button type="submit" class="btn btn-primary float-right">Export PDF</button>
+              </div>
+            </div>
+          </form>
+          <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Sales Report</h4>
+
+                <div class="table-responsive">
+                  <table class="table table-hover ">
+                    <thead>
+                      <tr>
+                        <th>Customer Name</th>
+                        <th>Date</th>
+                        <th>Price</th>
+                        <th>Products</th>
+                        <th>Payment</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tableDatas">
+                      <% orderDetails.forEach((order)=>{ %>
+                        <tr>
+                          <td>
+                            <%= order.userId.name %>
+                          </td>
+                          <td>
+                            <%= order.date.toISOString().slice(0, 10) %>
+                          </td>
+                          <td>
+                            <%= order.cartTotal %>
+                          </td>
+                          <td>
+                            <% order.productDatas.forEach((product)=>{ %>
+                              <%= product.productId.productName %> x<%= product.quantity %><br><br>
+                                  <% }) %>
+                          </td>
+                          <td>
+                            <%= order.paymentMethod %>
+                          </td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-md-2 col-12 mx-md-3 text-center">
+
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- partial -->
+  </div>
+  <!-- main-panel ends -->
+  </div>
+  <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+  <script>
+    function handleDateSelection(dateTo, dateFrom) {
+
+      console.log(dateFrom + dateTo)
+      $.ajax({
+        type: "POST",
+        url: '/admin/filterSales',
+        data: {
+          dateFrom: dateFrom,
+          dateTo: dateTo
+        },
+        success: (response) => {
+          $('#tableDatas').html('');
+          if (response.orderDetails) {
+
+            const orderDetails = response.orderDetails;
+            orderDetails.forEach((order) => {
+              const date = new Date(order.date)
+              const formattedDate = date.toISOString().slice(0, 10);
+              const productDetails = order.productDatas.map((product) => {
+                return `${product.productId.productName} x${product.quantity}`;
+              }).join('<br><br>');
+
+              $('#tableDatas').append(`
+                        <tr>
+                            <td>
+                                ${order.userId.name}
+                            </td>
+                            <td>
+                               ${formattedDate}
+                            </td>
+                            <td>
+                                ${order.cartTotal}
+                            </td>
+                            <td>
+                                ${productDetails}
+                            </td>
+                            <td>
+                                  ${order.paymentMethod}
+                            </td>
+                        </tr>
+                    
+                    `)
+            })
+          }
+        },
+      })
+    }
+
+    const date1 = document.getElementById("dateTo");
+    const date2 = document.getElementById("dateFrom");
+    date1.addEventListener("change", function () {
+      handleDateSelection(date1.value, date2.value);
+    })
+
+    date2.addEventListener("change", function () {
+      handleDateSelection(date1.value, date2.value);
+    })
+
+    const pdfForm = document.getElementById('pdfForm');
+    pdfForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      if (date1.value == "" || date2.value == "") {
+        document.getElementById("errMsg").innerHTML = "Please Select the both Date"
+      } else {
+        document.getElementById("errMsg").innerHTML = ""
+        pdfForm.submit()
+      }
+    });
+  </script>
+  <%- include('../layout/adminFooter.ejs') %>

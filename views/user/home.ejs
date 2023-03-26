@@ -1,0 +1,590 @@
+<%- include('../layout/userHeader.ejs') %>
+    <div id="page" class="site page-home">
+        <aside class="site-off desktop-hide">
+            <div class="off-canvas">
+                <div class="canvas-head flexitem">
+                    <div class="logo"><a href="/"><span class="circle"></span>.Store</a></div>
+                    <a href="#" class="t-close flexcenter"><i class="ri-close-line"></i></a>
+                </div>
+                <div class="departments"></div>
+                <nav></nav>
+                <div class="thetop-nav"></div>
+            </div>
+        </aside>
+        <header>
+            <div class="header-top mobile-hide">
+                <div class="container">
+                    <div class="wrapper flexitem">
+                        <div class="left">
+                            <ul class="flexitem main-links">
+                                <li><a href="#features">Latest Products</a></li>
+                                <li><a href="/wishlist">Wishlist</a></li>
+                            </ul>
+                        </div>
+                        <div class="right">
+                            <ul class="flexitem main-links">
+                                <li><a href="/orders">Order Tracking</a></li>
+                                <li><a href="#">IND <span class="icon-small"><i
+                                                class="ri-arrow-down-s-line"></i></span></a>
+                                    <ul>
+                                        <li class="current"><a href="#">IND</a></li>
+                                        <li><a href="#">USD</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">English <span class="icon-small"><i
+                                                class="ri-arrow-down-s-line"></i></span></a>
+                                    <ul>
+                                        <li class="current"><a href="#">English</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- header-top -->
+            <div class="header-nav">
+                <div class="container">
+                    <div class="wrapper flexitem">
+                        <a href="#" class="trigger desktop-hide"><span class="i ri-menu-2-line"></span></a>
+                        <div class="left flexitem">
+                            <div class="logo"><a href="/"><span class="circle"></span>.Shopio</a></div>
+                            <nav class="mobile-hide">
+                                <ul class="flexitem second-links">
+                                    <li><a href="/home">Home</a></li>
+                                    <li><a href="/shop">Shop</a></li>
+                                    <li><a href="#">Men</a></li>
+                                    <li><a href="#">Women</a></li>
+                                    <li><a href="#">Sports</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <% if(typeof userData!='undefined' ){ %>
+                            <div class="right">
+                                <ul class="flexitem second-links">
+                                    <li class="mobile-hide"><a href="/wishlist">
+                                            <div class="icon-large">
+                                                <i class="ri-heart-line"></i>
+                                                <div class="fly-item"><span class="item-number">
+                                                        <% if(wishlist){ %>
+                                                            <%= wishlist.products.length %>
+                                                            <% }else{ %>
+                                                                0
+                                                                <% } %>
+                                                    </span></div>
+                                            </div>
+                                        </a></li>
+                                    <li class="iscart"><a href="/cart">
+
+                                            <div class="icon-large">
+                                                <i class="ri-shopping-cart-line"></i>
+                                                <% if(cartData){ %>
+                                                    <div class="fly-item"><span class="item-number">
+                                                            <%= cartData.products.length %>
+                                                        </span></div>
+                                                    <% }else{ %>
+                                                        <div class="fly-item"><span class="item-number">
+                                                               0
+                                                            </span></div>
+                                                        <% } %>
+                                            </div>
+
+
+                                        </a>
+                                    </li>
+                                    <li class="iscart"><a href="#">
+                                            <div class="icon-large">
+                                                <i class="ri-account-circle-line"></i>
+                                            </div>
+                                        </a>
+                                        <div class="mini-login">
+                                            <div class="content">
+                                                <div class="cart-head">
+                                                    <p>Hello <span style="color: #ff6b6b;">
+                                                            <%= userData.name %>
+                                                        </span></p>
+                                                    <p style="font-size: .8rem; font-weight: 400 ;">
+                                                        <%= userData.mobile %>
+                                                    </p>
+                                                    <hr style="margin-top: 10px; margin-bottom: 10px; height: 1px; ">
+                                                    <a href="/orders">Orders</a><br>
+                                                    <a href="/cart">Cart</a><br>
+                                                    <a href="/whishlist">Wishlist</a><br>
+                                                    <hr style="margin-top: 10px; margin-bottom: 10px; height: .1px;">
+                                                    <a href="/userProfile">Edit Profile</a><br>
+                                                    <a href="/address">Address</a><br>
+                                                    <a href="/wallet">Wallet</a><br>
+                                                    <a href="/logout">Logout</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% }else{ %>
+                                            <div class="right">
+                                                <ul class="flexitem second-links">
+                                                    <li class="mobile-hide"><a href="/wishlist">
+                                                            <div class="icon-large"><i class="ri-heart-line"></i></div>
+                                                        </a></li>
+                                                    <li class="iscart"><a href="/cart">
+
+                                                            <div class="icon-large">
+                                                                <i class="ri-shopping-cart-line"></i>
+                                                            </div>
+
+
+                                                        </a>
+                                                    </li>
+                                                    <li class="iscart"><a href="#">
+                                                            <div class="icon-large">
+                                                                <i class="ri-account-circle-line"></i>
+                                                            </div>
+                                                        </a>
+                                                        <div class="mini-login">
+                                                            <div class="content">
+                                                                <div class="cart-head">
+                                                                    <p>Welcome</p>
+                                                                    <p style="font-size: .8rem; font-weight: 400 ;">To
+                                                                        access
+                                                                        account and orders</p>
+                                                                    <a href="/login"><button>LOGIN/SIGN UP</button></a>
+                                                                    <hr
+                                                                        style="margin-top: 10px; margin-bottom: 10px; height: 1px; ">
+                                                                    <a href="/login">Orders</a><br>
+                                                                    <a href="/cart">Cart</a><br>
+                                                                    <a href="/cart">Wishlist</a><br>
+                                                                    <hr
+                                                                        style="margin-top: 10px; margin-bottom: 10px; height: .1px;">
+                                                                    <a href="/login">Address</a><br>
+                                                                    <a href="/login">Wallet</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <% } %>
+
+                                                    </li>
+                                                </ul>
+                                            </div>
+                            </div>
+                    </div>
+                </div>
+                <!-- header-nav -->
+
+                <div class="header-main mobile-hide">
+                    <div class="container">
+                        <div class="wrapper flexitem">
+                            <div class="left">
+                                <div class="dpt-cat">
+                                    <div class="dpt-head">
+                                        <div class="main-text">All Departments</div>
+                                        <div class="mini-text mobile-hide">Total 1059 Products</div>
+                                        <a href="#" class="dpt-trigger mobile-hide">
+                                            <i class="ri-menu-3-line ri-xl"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="right">
+                                <div class="search-box">
+                                    <form action="" class="search">
+                                        <span class="icon-large"><i class="ri-search-line"></i></span>
+                                        <input type="search" placeholder="Search for products">
+                                        <button type="submit">Search</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- header-main -->
+
+        </header>
+        <!-- Header -->
+        <main>
+            <div class="slider">
+                <div class="container">
+                    <div class="wrapper">
+                        <div class="myslider swiper">
+                            <div class="swiper-wrapper">
+                                <% bannerDetails.forEach((banner)=>{ %>
+                                <div class="swiper-slide">
+                                    <div class="item">
+                                        <div class="image object-cover">
+                                            <img src="/productImage/<%= banner.image %>" style="border-radius: 16px;" alt="">
+                                        </div>
+                                        <div class="text-content flexcoll">
+                                            <h4><%= banner.bannerType %></h4>
+                                            <h2 style="font-size:3em"><span><%= banner.mainHeading %></span><br><span>Brand New Shoes</span></h2>
+                                            <a href="<%= banner.btnLink %>" class="primary-button"><%= banner.btnText %></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% }) %>
+                            </div>
+                            <div class="swiper-pagination">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- slider -->
+
+            <div class="trending mt-5">
+                <div class="container">
+                    <div class="wrapper" style="margin-top: 55px">
+                        <div class="sectop flexitem">
+                            <h2><span class="circle"></span><span>Trending Products</span></h2>
+                        </div>
+                        <div class="column">
+                            <div class="flexwrap">
+                                <div class="row products big">
+                                    <div class="item">
+                                        <div class="offer">
+                                            <p>Offer ends at</p>
+                                            <ul class="flexcenter" id="demo">
+                                                <li id="days"></li>
+                                                <li id="hours"></li>
+                                                <li id="minutes"></li>
+                                                <li id="seconds"></li>
+                                            </ul>
+                                        </div>
+                                        <div class="media">
+                                            <div class="image">
+                                                <a href="page-offer.html">
+                                                    <img src="assets/products/apparel4.jpg" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="hoverable">
+                                                <ul>
+                                                    <li class="active"><a href="#"><i class="ri-heart-line"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="ri-eye-line"></i></a></li>
+                                                    <li><a href="#"><i class="ri-shuffle-line"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="discount circle flexcenter"><span>31%</span></div>
+                                        </div>
+                                        <div class="content">
+                                            <div class="rating">
+                                                <div class="stars"></div>
+                                                <span class="mini-text">(2,548)</span>
+                                            </div>
+                                            <h3 class="main-links"><a href="page-offer.html">Happy Sailed Womens Summer
+                                                    Boho Floral</a></h3>
+                                            <div class="price">
+                                                <span class="current">$129.99</span>
+                                                <span class="normal mini-text">$189.98</span>
+                                            </div>
+                                            <div class="stock mini-text">
+                                                <div class="qty">
+                                                    <span>Stock: <strong class="qty-available">107</strong></span>
+                                                    <span>Sold: <strong class="qty-sold">3,459</strong></span>
+                                                </div>
+                                                <div class="bar">
+                                                    <div class="available"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row products mini">
+                                    <% trendingProducts.forEach((product)=>{ %>
+                                    <div class="item">
+                                        <div class="media">
+                                            <div class="thumbnail object-cover">
+                                                <a href="#">
+                                                    <img src="/productImage/<%= product.image[0] %>" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="hoverable">
+                                                <ul>
+                                                    <li class="active"><a href="#"><i class="ri-heart-line"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="ri-eye-line"></i></a></li>
+                                                    <li><a href="#"><i class="ri-shuffle-line"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="discount circle flexcenter"><% 
+                                                const offerPercentage = ((product.MRP - product.salePrice) / product.MRP) * 100;
+                                            %>
+                                            <span><%= offerPercentage.toFixed(0) %>%</span></div>
+                                        </div>
+                                        <div class="content">
+                                            <h3 class="main-links"><a href="#"><%= product.productName %></a></h3>
+
+                                            <div class="rating">
+                                                <% let totalStarCount = product.reviews.map((review)=>review.starCount).reduce((acc,cur)=> acc+=cur,0) %>
+                                                    <% let reviewPercentage = totalStarCount/product.reviews.length; %>
+                                                        <div class="shop-stars">
+                                                            <span class="fa fa-star <% if (reviewPercentage >= 1) { %>checked<% } %>"></span>
+                                                            <span class="fa fa-star <% if (reviewPercentage >= 2) { %>checked<% } %>"></span>
+                                                            <span class="fa fa-star <% if (reviewPercentage >= 3) { %>checked<% } %>"></span>
+                                                            <span class="fa fa-star <% if (reviewPercentage >= 4) { %>checked<% } %>"></span>
+                                                            <span class="fa fa-star <% if (reviewPercentage >= 5) { %>checked<% } %>"></span>
+                                                                                        
+                                                        </div>
+                                                <span class="mini-text">(<%= product.reviews.length %>)</span>
+                                            </div>
+                                            <div class="price">
+                                                <span class="current">₹<%= product.salePrice %></span>
+                                                <span class="normal mini-text">₹<%= product.MRP %></span>
+                                            </div>
+                                            <div class="mini-text">
+                                                <p><%= product.stock %> Stock</p>
+                                                <p>Free Shipping</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <% }) %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- trending -->
+
+            <div class="features" id="features"  style="padding-top: 30px;">
+                <div class="container">
+                    <div class="wrapper">
+                        <div class="column">
+                            <div class="sectop flexitem">
+                                <h2><span class="circle"></span><span>Latest Products</span></h2>
+                                <div class="second-links">
+                                    <a href="/shop" class="view-all">View all<i class="ri-arrow-right-line"></i></a>
+                                </div>
+                            </div>
+                            <div class="products main flexwrap">
+                                <% latestProducts.forEach((product)=>{%>
+                                <div class="item">
+                                    <div class="media">
+                                        <div class="thumbnail object-cover">
+                                            <a href="/product?id=<%= product._id %>">
+                                                <img src="/productImage/<%= product.image[0]%>" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="hoverable">
+                                            <ul>
+                                                
+                                                    <% if(typeof wishlistProduct != "undefined"){ %>
+                                                        <% if(wishlistProduct != null){ %>
+                                                    <li class="active  <% if (wishlistProduct.products.some(item => item.productId.toString() == product._id.toString())) { %>actived<% }%>"><a href="#"><i class="ri-heart-line"></i></a></li>
+                                                    <% }else{ %>
+                                                        <li class="active"><a href="#"><i class="ri-heart-line"></i></a></li>
+                                                        <% } %>
+                                                    <% } %>
+                                                    
+                                                <li><a href="#"><i class="ri-eye-line"></i></a></li>
+                                                <li><a href="#"><i class="ri-shuffle-line"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="discount circle flexcenter"><% 
+                                            const offerPercentage = ((product.MRP - product.salePrice) / product.MRP) * 100;
+                                        %>
+                                        <span><%= offerPercentage.toFixed(0) %>%</span></div>
+                                    </div>
+                                    <div class="content">
+                                        <div class="rating">
+                                            <div class="rating">
+                                                        
+                                                <% let totalStarCount = product.reviews.map((review)=>review.starCount).reduce((acc,cur)=> acc+=cur,0) %>
+                                                <% let reviewPercentage = totalStarCount/product.reviews.length; %>
+                                                    <div class="shop-stars">
+                                                        <span class="fa fa-star <% if (reviewPercentage >= 1) { %>checked<% } %>"></span>
+                                                        <span class="fa fa-star <% if (reviewPercentage >= 2) { %>checked<% } %>"></span>
+                                                        <span class="fa fa-star <% if (reviewPercentage >= 3) { %>checked<% } %>"></span>
+                                                        <span class="fa fa-star <% if (reviewPercentage >= 4) { %>checked<% } %>"></span>
+                                                        <span class="fa fa-star <% if (reviewPercentage >= 5) { %>checked<% } %>"></span>
+                                                                                    
+                                                    </div>
+                                                    <span class="mini-text">(<%= product.reviews.length %>)</span>
+                                                </div>
+                                        </div>
+                                        <h3><a href="/product?id=<%= product._id %>"><%= product.productName %></a></h3>
+                                        <div class="price">
+                                            <span class="current">₹<%= product.salePrice %></span>
+                                            <span class="normal mini-text">₹<%= product.MRP %></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <%})%>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- featured products -->
+
+        </main>
+        <!-- Main -->
+
+        <footer>
+            <div class="newsletter">
+                <div class="container">
+                    <div class="wrapper">
+                        <div class="box">
+                            <div class="content">
+                                <h3>Join Our Newsletter</h3>
+                                <p>Get E-mail updates about our latest shop and <strong>special offers</strong></p>
+                            </div>
+                            <form action="" class="search">
+                                <span class="icon-large"><i class="ri-mail-line"></i></span>
+                                <input type="mail" placeholder="Your email address" required>
+                                <button type="submit">Sign Up</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- newsletter -->
+
+            <div class="widgets">
+                <div class="container">
+                    <div class="wrapper">
+                        <div class="flexwrap">
+                            <div class="row">
+                                <div class="item mini-links">
+                                    <h4>Help & Contact</h4>
+                                    <ul class="flexcol">
+                                        <li><a href="#">Your Account</a></li>
+                                        <li><a href="#">Your Orders</a></li>
+                                        <li><a href="#">Shipping Rates</a></li>
+                                        <li><a href="#">Returns</a></li>
+                                        <li><a href="#">Assistant</a></li>
+                                        <li><a href="#">Help</a></li>
+                                        <li><a href="#">Contact us</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="item mini-links">
+                                    <h4>Product Categories</h4>
+                                    <ul class="flexcol">
+                                        <li><a href="#">Beauty</a></li>
+                                        <li><a href="#">Electronic</a></li>
+                                        <li><a href="#">Women's Fashion</a></li>
+                                        <li><a href="#">Men's Fashion</a></li>
+                                        <li><a href="#">Girl's Fashion</a></li>
+                                        <li><a href="#">Boy's Fashion</a></li>
+                                        <li><a href="#">Health & Household</a></li>
+                                        <li><a href="#">Home & Kitchen</a></li>
+                                        <li><a href="#">Pet Supplies</a></li>
+                                        <li><a href="#">Sports</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="item mini-links">
+                                    <h4>Payment Info</h4>
+                                    <ul class="flexcol">
+                                        <li><a href="#">Bussiness Card</a></li>
+                                        <li><a href="#">Shop with Points</a></li>
+                                        <li><a href="#">Reload Your Balance</a></li>
+                                        <li><a href="#">Paypal</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="item mini-links">
+                                    <h4>About Us</h4>
+                                    <ul class="flexcol">
+                                        <li><a href="">Company Info</a></li>
+                                        <li><a href="">News</a></li>
+                                        <li><a href="">Investors</a></li>
+                                        <li><a href="">Careers</a></li>
+                                        <li><a href="">Policies</a></li>
+                                        <li><a href="">Customer reviews</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- widgets-->
+
+            <div class="footer-info">
+                <div class="container">
+                    <div class="wrapper">
+                        <div class="flexcol">
+                            <div class="logo">
+                                <a href=""><span class="circle"></span>.Store</a>
+                            </div>
+                            <div class="socials">
+                                <ul class="flexitem">
+                                    <li><a href="#"><i class="ri-twitter-line"></i></a></li>
+                                    <li><a href="#"><i class="ri-facebook-line"></i></a></li>
+                                    <li><a href="#"><i class="ri-instagram-line"></i></a></li>
+                                    <li><a href="#"><i class="ri-linkedin-line"></i></a></li>
+                                    <li><a href="#"><i class="ri-youtube-line"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="mini-text">Copyright 2022 © .Store. All right reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Footer -->
+
+        <div class="menu-bottom desktop-hide">
+            <div class="container">
+                <div class="wrapper">
+                    <nav>
+                        <ul class="flexitem">
+                            <li>
+                                <a href="#">
+                                    <i class="ri-bar-chart-line"></i>
+                                    <span>Trending</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="ri-user-6-line"></i>
+                                    <span>Account</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="ri-heart-line"></i>
+                                    <span>Wishlist</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#0" class="t-search">
+                                    <i class="ri-search-line"></i>
+                                    <span>Search</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#0">
+                                    <i class="ri-shopping-cart-line"></i>
+                                    <span>Cart</span>
+                                    <div class="fly-item">
+                                        <span class="item-number">0</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- menu bottom -->
+
+        <div class="search-bottom desktop-hide">
+            <div class="container">
+                <div class="wrapper">
+                    <form action="" class="search">
+                        <a href="#" class="t-close search-close flexcenter"><i class="ri-close-line"></i></a>
+                        <span class="icon-large"><i class="ri-search-line"></i></span>
+                        <input type="search" placeholder="Search" required>
+                        <button type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- search bottom -->
+
+        <div class="overlay"></div>
+    </div>
+    <%- include('../layout/userFooter.ejs') %>
