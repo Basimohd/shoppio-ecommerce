@@ -163,17 +163,23 @@
                             <td><label class="badge badge-info">Returned</label></td>
                             <%}%>
                         <td>
-                          <% if(order.status == "Cancelled" ||order.status ==  "Returned"){%>
+                          <% if(order.status == "Cancelled"){%>
                             <label class="badge badge-secondary text-white">Cancelled</label>
+                            <%}else if(order.status == "Returning" ){%>
+                              <label class="badge badge-info text-white">Return <br> Requested</label>
+                            <%}else if(order.status == "Delivered" ){%>
+                              <label class="badge badge-success text-white">Delivered</label>
+                            <%}else if(order.stats == "Returned" ){%>
+                              <label class="badge badge-info text-white">Returned</label>
                             <%}else{%>
                               <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuSizeButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <%= order.status %>
                               </button>
                               <div class="dropdown-menu text-white" aria-labelledby="dropdownMenuSizeButton3">
-                                <a onclick="orderConfirmation(event,'Placed')" id="Placed" class="dropdown-item" href="/admin/changeOrderStatus?id=<%= order._id %>&status=Placed&page=orders">Placed</a>
-                                <a onclick="orderConfirmation(event,'Shipped')" id="Shipped" class="dropdown-item" href="/admin/changeOrderStatus?id=<%= order._id %>&status=Shipped&page=orders">Shipped</a>
-                                <a onclick="orderConfirmation(event,'Out of delivery')" id="Out of delivery" class="dropdown-item " href="/admin/changeOrderStatus?id=<%= order._id %>&status=Out Of Delivery&page=orders">Out Of Delivery</a>
-                                <a onclick="orderConfirmation(event, 'Delivered')" id="Delivered" class="dropdown-item "href="/admin/changeOrderStatus?id=<%= order._id %>&status=Delivered&page=orders">Delivered</a>
+                                <a onclick="orderConfirmation(event,'Placed','<%= order._id %>Placed')" id="<%= order._id %>Placed" class="dropdown-item" href="/admin/changeOrderStatus?id=<%= order._id %>&status=Placed&page=orders">Placed</a>
+                                <a onclick="orderConfirmation(event,'Shipped','<%= order._id %>Shipped')" id="<%= order._id %>Shipped" class="dropdown-item" href="/admin/changeOrderStatus?id=<%= order._id %>&status=Shipped&page=orders">Shipped</a>
+                                <a onclick="orderConfirmation(event,'Out of delivery','<%= order._id %>Out of delivery')" id="<%= order._id %>Out of delivery" class="dropdown-item " href="/admin/changeOrderStatus?id=<%= order._id %>&status=Out Of Delivery&page=orders">Out Of Delivery</a>
+                                <a onclick="orderConfirmation(event, 'Delivered','<%= order._id %>Delivered')" id="<%= order._id %>Delivered" class="dropdown-item "href="/admin/changeOrderStatus?id=<%= order._id %>&status=Delivered&page=orders">Delivered</a>
                             </div>
                               <%}%>
                         </td>
@@ -203,11 +209,11 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.js"></script>
 
   <script>
-    function orderConfirmation(e,id){
+    function orderConfirmation(e,status,id){
       e.preventDefault();
       console.log("clicked")
       Swal.fire({
-        title: `Change order Status to ${id}?`,
+        title: `Change order Status to ${status}?`,
         text: "This change will be notified to the user",
         icon: 'warning',
         showCancelButton: true,
@@ -219,7 +225,7 @@
          
           Swal.fire(
             'Changed!',
-            `Order status is changed to ${id}`,
+            `Order status is changed to ${status}`,
             'success'
           ).then((result)=>{
             window.location.href = document.getElementById(id).href;

@@ -56,7 +56,10 @@ admin_route.post('/addCoupon',adminController.addCoupon)
 //Banner Details
 admin_route.get('/banners',adminAuth.isLogin,adminController.loadBannerDetails) 
 admin_route.get('/addBanner',adminAuth.isLogin,adminController.loadAddBanner)
+admin_route.get('/deleteBanner',adminAuth.isLogin,adminController.deleteBanner)
 admin_route.post('/addBanner',adminAuth.isLogin,upload.array('image',1),adminController.insertBanner)
+admin_route.post('/editBanner',adminAuth.isLogin,upload.array('image',1),adminController.updateBanner)
+admin_route.get('/editBanner',adminAuth.isLogin,upload.array('image',1),adminController.loadEditBanner)
 
 //Sales Report
 admin_route.get('/sales',adminAuth.isLogin,adminController.loadSalesReport)

@@ -133,9 +133,10 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group row">
+                        <input type="text" name="id" value="<%= banner._id %>" hidden>
                       <label class="col-sm-3 col-form-label">Banner Type</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="bannerType"/>
+                        <input type="text" class="form-control" value="<%= banner.bannerType %>" name="bannerType"/>
                       </div>
                     </div>
                   </div>
@@ -143,7 +144,7 @@
                     <div class="form-group row">
                       <label class="col-sm-3 col-form-label">Main Heading</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="mainHead"/>
+                        <input type="text" class="form-control" value="<%= banner.mainHeading %>" name="mainHead"/>
                       </div>
                     </div>
                   </div>
@@ -154,7 +155,7 @@
                     <div class="form-group row">
                       <label class="col-sm-3 col-form-label">Sub Heading</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="subHead" />
+                        <input type="text" class="form-control" value="<%= banner.subHeading %>" name="subHead" />
                       </div>
                     </div>
                   </div>
@@ -162,7 +163,7 @@
                     <div class="form-group row">
                       <label class="col-sm-3 col-form-label">Button Text</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="btnText" />
+                        <input type="text" class="form-control" value="<%= banner.btnText %>" name="btnText" />
                       </div>
                     </div>
                   </div>
@@ -173,7 +174,7 @@
                     <div class="form-group row">
                       <label class="col-sm-3 col-form-label">Button Link</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="btnLink" />
+                        <input type="text" class="form-control" value="<%= banner.btnLink %>" name="btnLink" />
                       </div>
                     </div>
                   </div>
@@ -183,7 +184,7 @@
                         <div class="col-sm-4">
                           <div class="form-check">
                             <label class="form-check-label">
-                              <input type="radio" class="form-check-input" name="status" id="membershipRadios1" value="Active" checked>
+                              <input type="radio" class="form-check-input" name="status" id="membershipRadios1" value="Active" <% if (banner.status == "Active") { %>checked<% }%>>
                               Active
                             </label>
                           </div>
@@ -191,7 +192,7 @@
                         <div class="col-sm-5">
                           <div class="form-check">
                             <label class="form-check-label">
-                              <input type="radio" class="form-check-input" name="status" id="membershipRadios2" value="Disabled">
+                              <input type="radio" class="form-check-input" name="status" id="membershipRadios2" value="Disabled" <% if (banner.status == "Disabled") { %>checked<% }%>>
                               Disabled
                             </label>
                           </div>
@@ -202,17 +203,12 @@
                 <div class="form-group">
                   <label>Upload Images</label>
                   <div class="input-group col-xs-12">
-                    <input type="file" name="image" class="form-control file-upload-info" placeholder="Upload Image" multiple>
+                    <input type="file" name="image" class="form-control file-upload-info" placeholder="Upload Image" value="/productImage/<%= banner.image %>" multiple>
                     <span class="input-group-append">
                       <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
                     </span>
                   </div>
                 </div>
-                <% 
-                if(typeof errMsg !== 'undefined'){
-                  %>
-                    <p  style="color:rgb(202, 0, 0)"><%= errMsg %> </p>
-                  <% } %>
                 <button type="submit" class="btn btn-primary mr-2">Submit</button>
                 <a href="productsDetails.html"><button class="btn btn-light">Back</button></a>
               </form>

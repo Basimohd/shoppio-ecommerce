@@ -219,7 +219,10 @@
                                             <a href="/cancelOrder?id=<%= order._id %>" style="color: #e70000; cursor:pointer;">Cancel</a>
                                             <span style="margin-left: 5px; margin-right: 5px; cursor: default;"> | </span>
                                             <% } %>
-                                            
+                                            <% if(order.status === "Delivered"){ %>
+                                                <a href="/returnRequest?id=<%= order._id %>" style="color: #e70000; cursor:pointer;">Return</a>
+                                                <span style="margin-left: 5px; margin-right: 5px; cursor: default;"> | </span>
+                                                <% } %>
                                             <a href="/orderTrack?id=<%= order._id %>" style="color: #794afa; cursor:pointer; ">Track</a>
                                         </div>
                                     </div>

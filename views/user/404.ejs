@@ -1,0 +1,460 @@
+<%- include('../layout/userHeader.ejs') %>
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Fjalla+One');
+
+.errHead{
+  display: block;
+  text-align: center;
+  margin-top: 200px;
+  margin-bottom: 200px;
+}
+.four1{
+animation: swing ease-in-out 1.5s infinite alternate;
+    display: inline-block;
+}
+.zero{
+  animation: swing2 ease-in-out 1.5s infinite alternate;
+  display: inline-block;
+}
+.four2{
+animation: swing3 ease-in-out 1.5s infinite alternate;
+    display: inline-block;
+}
+
+@keyframes swing {
+    0% { transform: rotate(3deg); }
+    100% { transform: rotate(-3deg); }
+}
+
+@keyframes swing2 {
+    0% { transform: rotate(-3deg); }
+    100% { transform: rotate(3deg); }
+}
+@keyframes swing3 {
+    0% { transform: rotate(-3deg); }
+    100% { transform: rotate(8deg); }
+}
+h1{
+  font-family: 'Fjalla One';
+  text-align: center; 
+  color: #666;
+}
+</style>
+    <div id="page" class="site page-home">
+        <aside class="site-off desktop-hide">
+            <div class="off-canvas">
+                <div class="canvas-head flexitem">
+                    <div class="logo"><a href="/"><span class="circle"></span>.Store</a></div>
+                    <a href="#" class="t-close flexcenter"><i class="ri-close-line"></i></a>
+                </div>
+                <div class="departments"></div>
+                <nav></nav>
+                <div class="thetop-nav"></div>
+            </div>
+        </aside>
+        <header>
+            <div class="header-top mobile-hide">
+                <div class="container">
+                    <div class="wrapper flexitem">
+                        <div class="left">
+                            <ul class="flexitem main-links">
+                                <li><a href="#features">Latest Products</a></li>
+                                <li><a href="/wishlist">Wishlist</a></li>
+                            </ul>
+                        </div>
+                        <div class="right">
+                            <ul class="flexitem main-links">
+                                <li><a href="/orders">Order Tracking</a></li>
+                                <li><a href="#">IND <span class="icon-small"><i
+                                                class="ri-arrow-down-s-line"></i></span></a>
+                                    <ul>
+                                        <li class="current"><a href="#">IND</a></li>
+                                        <li><a href="#">USD</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">English <span class="icon-small"><i
+                                                class="ri-arrow-down-s-line"></i></span></a>
+                                    <ul>
+                                        <li class="current"><a href="#">English</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- header-top -->
+            <div class="header-nav">
+                <div class="container">
+                    <div class="wrapper flexitem">
+                        <a href="#" class="trigger desktop-hide"><span class="i ri-menu-2-line"></span></a>
+                        <div class="left flexitem">
+                            <div class="logo"><a href="/"><span class="circle"></span>.Shopio</a></div>
+                            <nav class="mobile-hide">
+                                <ul class="flexitem second-links">
+                                    <li><a href="/home">Home</a></li>
+                                    <li><a href="/shop">Shop</a></li>
+                                    <li><a href="#">Men</a></li>
+                                    <li><a href="#">Women</a></li>
+                                    <li><a href="#">Sports</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <% if(typeof userData!='undefined' ){ %>
+                            <div class="right">
+                                <ul class="flexitem second-links">
+                                    <li class="mobile-hide"><a href="/wishlist">
+                                            <div class="icon-large">
+                                                <i class="ri-heart-line"></i>
+                                                <div class="fly-item"><span class="item-number">
+                                                        <% if(wishlist){ %>
+                                                            <%= wishlist.products.length %>
+                                                            <% }else{ %>
+                                                                0
+                                                                <% } %>
+                                                    </span></div>
+                                            </div>
+                                        </a></li>
+                                    <li class="iscart"><a href="/cart">
+
+                                            <div class="icon-large">
+                                                <i class="ri-shopping-cart-line"></i>
+                                                <% if(cartData){ %>
+                                                    <div class="fly-item"><span class="item-number">
+                                                            <%= cartData.products.length %>
+                                                        </span></div>
+                                                    <% }else{ %>
+                                                        <div class="fly-item"><span class="item-number">
+                                                               0
+                                                            </span></div>
+                                                        <% } %>
+                                            </div>
+
+
+                                        </a>
+                                    </li>
+                                    <li class="iscart"><a href="#">
+                                            <div class="icon-large">
+                                                <i class="ri-account-circle-line"></i>
+                                            </div>
+                                        </a>
+                                        <div class="mini-login">
+                                            <div class="content">
+                                                <div class="cart-head">
+                                                    <p>Hello <span style="color: #ff6b6b;">
+                                                            <%= userData.name %>
+                                                        </span></p>
+                                                    <p style="font-size: .8rem; font-weight: 400 ;">
+                                                        <%= userData.mobile %>
+                                                    </p>
+                                                    <hr style="margin-top: 10px; margin-bottom: 10px; height: 1px; ">
+                                                    <a href="/orders">Orders</a><br>
+                                                    <a href="/cart">Cart</a><br>
+                                                    <a href="/whishlist">Wishlist</a><br>
+                                                    <hr style="margin-top: 10px; margin-bottom: 10px; height: .1px;">
+                                                    <a href="/userProfile">Edit Profile</a><br>
+                                                    <a href="/address">Address</a><br>
+                                                    <a href="/wallet">Wallet</a><br>
+                                                    <a href="/logout">Logout</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% }else{ %>
+                                            <div class="right">
+                                                <ul class="flexitem second-links">
+                                                    <li class="mobile-hide"><a href="/wishlist">
+                                                            <div class="icon-large"><i class="ri-heart-line"></i></div>
+                                                        </a></li>
+                                                    <li class="iscart"><a href="/cart">
+
+                                                            <div class="icon-large">
+                                                                <i class="ri-shopping-cart-line"></i>
+                                                            </div>
+
+
+                                                        </a>
+                                                    </li>
+                                                    <li class="iscart"><a href="#">
+                                                            <div class="icon-large">
+                                                                <i class="ri-account-circle-line"></i>
+                                                            </div>
+                                                        </a>
+                                                        <div class="mini-login">
+                                                            <div class="content">
+                                                                <div class="cart-head">
+                                                                    <p>Welcome</p>
+                                                                    <p style="font-size: .8rem; font-weight: 400 ;">To
+                                                                        access
+                                                                        account and orders</p>
+                                                                    <a href="/login"><button>LOGIN/SIGN UP</button></a>
+                                                                    <hr
+                                                                        style="margin-top: 10px; margin-bottom: 10px; height: 1px; ">
+                                                                    <a href="/login">Orders</a><br>
+                                                                    <a href="/cart">Cart</a><br>
+                                                                    <a href="/cart">Wishlist</a><br>
+                                                                    <hr
+                                                                        style="margin-top: 10px; margin-bottom: 10px; height: .1px;">
+                                                                    <a href="/login">Address</a><br>
+                                                                    <a href="/login">Wallet</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <% } %>
+
+                                                    </li>
+                                                </ul>
+                                            </div>
+                            </div>
+                    </div>
+                </div>
+                <!-- header-nav -->
+
+                <div class="header-main mobile-hide">
+                    <div class="container">
+                        <div class="wrapper flexitem">
+                            <div class="left">
+                                <div class="dpt-cat">
+                                    <div class="dpt-head">
+                                        <div class="main-text">All Departments</div>
+                                        <div class="mini-text mobile-hide">Total 1059 Products</div>
+                                        <a href="#" class="dpt-trigger mobile-hide">
+                                            <i class="ri-menu-3-line ri-xl"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="right">
+                                <div class="search-box">
+                                    <form action="" class="search">
+                                        <span class="icon-large"><i class="ri-search-line"></i></span>
+                                        <input type="search" placeholder="Search for products">
+                                        <button type="submit">Search</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- header-main -->
+
+        </header>
+        <!-- Header -->
+        <main>
+            <div class="errHead">
+                <div class="four1">
+                  <?xml version="1.0" encoding="UTF-8"?>
+              <svg width="133px" height="234px" viewBox="0 0 133 234" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                  <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                      <g id="404" transform="translate(0.000000, -2.000000)" fill="#F85656">
+                          <g id="4-1" transform="translate(0.000000, 2.000000)">
+                              <polygon id="Path" points="72.5466868 198.372928 0 198.372928 0 166.947514 48.1896202 0 83.5942392 0 33.4376957 166.947514 72.5466868 166.947514 72.5466868 100.495856 105.984382 100.495856 105.984382 166.947514 132.046116 166.947514 132.046116 198.372928 105.984382 198.372928 105.984382 233.071823 72.5466868 233.071823"></polygon>
+                          </g>
+                      </g>
+                  </g>
+              </svg>
+                </div>
+                <div class="zero">
+                  <?xml version="1.0" encoding="UTF-8"?>
+              <svg width="148px" height="237px" viewBox="0 0 148 237" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                  <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                      <g id="404" transform="translate(-148.000000, 0.000000)">
+                          <g id="0" transform="translate(148.000000, 0.000000)">
+                              <g id="face"  transform="translate(38.000000, 86.000000)">
+                                  <polygon id="X-Copy-3" fill="#323232" transform="translate(35.500000, 18.000000) rotate(-270.000000) translate(-35.500000, -18.000000) " points="30.5085911 17.7751756 18 -14 29.1053837 -14 35.4799542 6.45901639 35.8808706 6.45901639 42.255441 -14 53 -14 40.4513173 17.8126464 53 50 42.2955326 50 35.8006873 29.4285714 35.1191294 29.4285714 28.3436426 50 18 50"></polygon>
+                                  <path d="M24.0351542,54 C24.0118227,54.3463381 24,54.7095981 24,55.0905484 C24,66.0862349 33.8497355,75 46,75 C58.1502645,75 68,66.0862349 68,55.0905484 C68,54.7095981 67.9881773,54.3463381 67.9648458,54 L24.0351542,54 Z" id="Combined-Shape" fill="#F75757"></path>
+                                  <rect id="Rectangle" fill="#323232" x="0" y="44" width="68" height="10"></rect>
+                              </g>
+                              <path d="M0.961656046,50.0842541 C0.961656046,42.2278613 2.96423494,35.2445057 6.96945281,29.1339779 C10.9746707,23.0234501 16.3415821,17.7859334 23.0703481,13.4212707 C29.7991142,9.05660801 37.5691203,5.72860262 46.3805996,3.4371547 C55.1920789,1.14570677 64.4039418,0 74.0164647,0 C83.6289876,0 92.8408505,1.14570677 101.65233,3.4371547 C110.463809,5.72860262 118.233815,9.05660801 124.962581,13.4212707 C131.691347,17.7859334 137.058259,23.0234501 141.063477,29.1339779 C145.068694,35.2445057 147.071273,42.2278613 147.071273,50.0842541 L147.071273,186.915746 C147.071273,194.772139 145.068694,201.755494 141.063477,207.866022 C137.058259,213.97655 131.691347,219.214067 124.962581,223.578729 C118.233815,227.943392 110.463809,231.271397 101.65233,233.562845 C92.8408505,235.854293 83.6289876,237 74.0164647,237 C64.4039418,237 55.1920789,235.854293 46.3805996,233.562845 C37.5691203,231.271397 29.7991142,227.943392 23.0703481,223.578729 C16.3415821,219.214067 10.9746707,213.97655 6.96945281,207.866022 C2.96423494,201.755494 0.961656046,194.772139 0.961656046,186.915746 L0.961656046,50.0842541 Z M29.9573833,186.473826 C29.9573833,191.274955 39.7025876,201.314403 47.9147519,204.478783 C56.1269162,207.643164 61.046071,209.521702 73.9509006,209.521702 C86.8557302,209.521702 96.0430912,206.378605 104.255255,203.214225 C112.46742,200.049844 117.944418,191.274955 117.944418,186.473826 L117.944418,49.6423343 C117.944418,44.8412053 109.271767,36.8600273 101.059602,33.6956468 C92.847438,30.5312663 86.8557302,28.2586018 73.9509006,28.2586018 C61.046071,28.2586018 54.1320606,30.5312663 45.9198963,33.6956468 C37.707732,36.8600273 29.9573833,44.8412053 29.9573833,49.6423343 L29.9573833,186.473826 Z" id="404-copy-2" fill="#F85656"></path>
+                          </g>
+                      </g>
+                  </g>
+              </svg>
+                </div>
+                <div class="four2">
+                  <?xml version="1.0" encoding="UTF-8"?>
+              <svg width="133px" height="234px" viewBox="0 0 133 234" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                  <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                      <g id="404" transform="translate(0.000000, -2.000000)" fill="#F85656">
+                          <g id="4-1" transform="translate(0.000000, 2.000000)">
+                              <polygon id="Path" points="72.5466868 198.372928 0 198.372928 0 166.947514 48.1896202 0 83.5942392 0 33.4376957 166.947514 72.5466868 166.947514 72.5466868 100.495856 105.984382 100.495856 105.984382 166.947514 132.046116 166.947514 132.046116 198.372928 105.984382 198.372928 105.984382 233.071823 72.5466868 233.071823"></polygon>
+                          </g>
+                      </g>
+                  </g>
+              </svg>
+                </div>
+                <h1>PAGE NOT FOUND</h1>
+              </div>
+        </main>
+        <!-- Main -->
+
+        <footer>
+            <div class="newsletter">
+                <div class="container">
+                    <div class="wrapper">
+                        <div class="box">
+                            <div class="content">
+                                <h3>Join Our Newsletter</h3>
+                                <p>Get E-mail updates about our latest shop and <strong>special offers</strong></p>
+                            </div>
+                            <form action="" class="search">
+                                <span class="icon-large"><i class="ri-mail-line"></i></span>
+                                <input type="mail" placeholder="Your email address" required>
+                                <button type="submit">Sign Up</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- newsletter -->
+
+            <div class="widgets">
+                <div class="container">
+                    <div class="wrapper">
+                        <div class="flexwrap">
+                            <div class="row">
+                                <div class="item mini-links">
+                                    <h4>Help & Contact</h4>
+                                    <ul class="flexcol">
+                                        <li><a href="#">Your Account</a></li>
+                                        <li><a href="#">Your Orders</a></li>
+                                        <li><a href="#">Shipping Rates</a></li>
+                                        <li><a href="#">Returns</a></li>
+                                        <li><a href="#">Assistant</a></li>
+                                        <li><a href="#">Help</a></li>
+                                        <li><a href="#">Contact us</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="item mini-links">
+                                    <h4>Product Categories</h4>
+                                    <ul class="flexcol">
+                                        <li><a href="#">Beauty</a></li>
+                                        <li><a href="#">Electronic</a></li>
+                                        <li><a href="#">Women's Fashion</a></li>
+                                        <li><a href="#">Men's Fashion</a></li>
+                                        <li><a href="#">Girl's Fashion</a></li>
+                                        <li><a href="#">Boy's Fashion</a></li>
+                                        <li><a href="#">Health & Household</a></li>
+                                        <li><a href="#">Home & Kitchen</a></li>
+                                        <li><a href="#">Pet Supplies</a></li>
+                                        <li><a href="#">Sports</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="item mini-links">
+                                    <h4>Payment Info</h4>
+                                    <ul class="flexcol">
+                                        <li><a href="#">Bussiness Card</a></li>
+                                        <li><a href="#">Shop with Points</a></li>
+                                        <li><a href="#">Reload Your Balance</a></li>
+                                        <li><a href="#">Paypal</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="item mini-links">
+                                    <h4>About Us</h4>
+                                    <ul class="flexcol">
+                                        <li><a href="">Company Info</a></li>
+                                        <li><a href="">News</a></li>
+                                        <li><a href="">Investors</a></li>
+                                        <li><a href="">Careers</a></li>
+                                        <li><a href="">Policies</a></li>
+                                        <li><a href="">Customer reviews</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- widgets-->
+
+            <div class="footer-info">
+                <div class="container">
+                    <div class="wrapper">
+                        <div class="flexcol">
+                            <div class="logo">
+                                <a href=""><span class="circle"></span>.Store</a>
+                            </div>
+                            <div class="socials">
+                                <ul class="flexitem">
+                                    <li><a href="#"><i class="ri-twitter-line"></i></a></li>
+                                    <li><a href="#"><i class="ri-facebook-line"></i></a></li>
+                                    <li><a href="#"><i class="ri-instagram-line"></i></a></li>
+                                    <li><a href="#"><i class="ri-linkedin-line"></i></a></li>
+                                    <li><a href="#"><i class="ri-youtube-line"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="mini-text">Copyright 2022 © .Store. All right reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Footer -->
+
+        <div class="menu-bottom desktop-hide">
+            <div class="container">
+                <div class="wrapper">
+                    <nav>
+                        <ul class="flexitem">
+                            <li>
+                                <a href="#">
+                                    <i class="ri-bar-chart-line"></i>
+                                    <span>Trending</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="ri-user-6-line"></i>
+                                    <span>Account</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="ri-heart-line"></i>
+                                    <span>Wishlist</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#0" class="t-search">
+                                    <i class="ri-search-line"></i>
+                                    <span>Search</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#0">
+                                    <i class="ri-shopping-cart-line"></i>
+                                    <span>Cart</span>
+                                    <div class="fly-item">
+                                        <span class="item-number">0</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- menu bottom -->
+
+        <div class="search-bottom desktop-hide">
+            <div class="container">
+                <div class="wrapper">
+                    <form action="" class="search">
+                        <a href="#" class="t-close search-close flexcenter"><i class="ri-close-line"></i></a>
+                        <span class="icon-large"><i class="ri-search-line"></i></span>
+                        <input type="search" placeholder="Search" required>
+                        <button type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- search bottom -->
+
+        <div class="overlay"></div>
+    </div>
+    <%- include('../layout/userFooter.ejs') %>

@@ -1,6 +1,10 @@
 require("dotenv").config();
 const mongoose=require("mongoose");
-mongoose.set("strictQuery", true);
-mongoose.connect(process.env.MONGODB_CONNECTION);
+const connectDB = (url) => {
+    mongoose.set("strictQuery", true);
+    mongoose.connect(url)
+    .then(()=> console.log("MongoDB connected"))
+    .catch((err)=> console.log("err"))
+}
 
-module.exports={mongoose};
+module.exports={connectDB};

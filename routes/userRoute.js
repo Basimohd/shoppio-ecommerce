@@ -5,6 +5,7 @@ const userController=require("../controllers/userController")
 user_route.set('views', './views/user')
 
 const auth = require('../middleware/userAuth')
+const errorHandler = require('../middleware/errorHandler');
 
 //User Login(OTP inc)
 user_route.get('/home',userController.loadHome)
@@ -67,7 +68,8 @@ user_route.get('/orderConfirm',auth.isLogin,userController.orderConfirm)
 user_route.get('/orders',auth.isLogin,userController.loadOrders) 
 user_route.get('/orderTrack',auth.isLogin,userController.loadOrderTrack) 
 user_route.get('/cancelOrder',auth.isLogin,userController.cancelOrder) 
+user_route.get('/returnRequest',auth.isLogin,userController.requestReturn) 
 
-
+user_route.use(errorHandler.errorHandler);
 
 module.exports=user_route;

@@ -1,11 +1,12 @@
-const mongoose=require('./config/connect')
-const express=require("express");
-const app=express();
-const session=require('express-session')
-const errorHandler = require('./middleware/errorHandler');
+const mongoDb = require('./config/connect')
+const connectDB = mongoDb.connectDB;
+
+const express = require("express");
+const app = express();
+const session = require('express-session')
 
 require("dotenv").config();
-app.use(session({secret:process.env.SECRET_KEY}))
+app.use(session({ secret: process.env.SECRET_KEY }))
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -16,16 +17,22 @@ app.use((req, res, next) => {
   next()
 })
 
-const adminRoute=require('./routes/adminRoute');
-app.use('/admin',adminRoute)
+const adminRoute = require('./routes/adminRoute');
+app.use('/admin', adminRoute)
 
-const userRoute=require('./routes/userRoute');
-app.use('/',userRoute);
-
-app.use(errorHandler.errorHandler);
+const userRoute = require('./routes/userRoute');
+app.use('/', userRoute);
 
 app.use(express.static('public'))
 
-app.listen(3003,()=>{
-    console.log("Server is Running...")
-})
+const startServer = async () => {
+  try {
+    connectDB(process.env.MONGODB_ATLAS_CONNECTION)
+    app.listen(3003, () => {
+      console.log("Server is Running...")
+    })
+  } catch (error) {
+    console.log(error);
+  }
+}
+startServer();

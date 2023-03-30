@@ -11,9 +11,9 @@ const Wishlist = require('../models/wishlistModel');
 const Banner = require('../models/bannerModel');
 
 const { updateOne } = require('../models/userModel')
-const accountSid = "ACb76001f112cf226ccf9eb43ec6d1961b";
-const authToken = "b2fa8c37b335bcef6ff441b4056cd270";
-const verifySid = "VAb31f5892c531cb8233218b41438a826c";
+const accountSid = process.env.ACCOUNT_SID;
+const authToken = process.env.AUTH_TOKEN;
+const verifySid = process.env.VERIFY_SID;
 const client = require("twilio")(accountSid, authToken);
 const Swal = require('sweetalert2');
 
@@ -21,8 +21,8 @@ const Razorpay = require('razorpay');
 const { response } = require("../routes/userRoute");
 
 const instance = new Razorpay({
-    key_id: 'rzp_test_XumGzokz47HwT5',
-    key_secret: 'lr9jSMWROkOlet6vcLmPP250',
+    key_id: process.env.KEY_ID,
+    key_secret: process.env.KEY_SECRET,
 });
 
 //Home Page
@@ -459,7 +459,6 @@ const loadCatalog = async (req, res, next) => {
         const categoryData = await Category.aggregate([
             { $lookup: { from: Product.collection.name, localField: '_id', foreignField: 'category', as: 'products' } },
             { $project: { _id: 1, categoryName: 1, count: { $size: '$products' } } }]);
-
         const men = await Product.countDocuments({ $and: [{ gender: "Men" }, { isDeleted: false }] });
         const women = await Product.countDocuments({ $and: [{ gender: "Women" }, { isDeleted: false }] });
         const genderCount = {
@@ -953,6 +952,18 @@ const cancelOrder = async (req, res, next) => {
         next(error)
     }
 }
+const requestReturn = async (req, res, next) => {
+    try {
+        await Order.findOneAndUpdate({ _id: req.query.id }, {
+            $set: {
+                status: "Returning"
+            }
+        })
+        res.redirect('/orders')
+    } catch (error) {
+        next(error)
+    }
+}
 const filterProduct = async (req, res, next) => {
     try {
         const filters = req.body;
@@ -1081,5 +1092,6 @@ module.exports = {
     loadOrderTrack,
     filterProduct,
     cancelOrder,
-    saveReview
+    saveReview,
+    requestReturn
 }

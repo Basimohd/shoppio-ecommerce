@@ -177,20 +177,25 @@
                           <tr>
                             <td class="font-weight-bold">Order Status</td>
                             <td class="text-right">
-                              <% if(orderData.status == "Cancelled" ||orderData.status ==  "Returned"){%>
+                              <% if(orderData.status == "Cancelled"){%>
                                 <label class="badge badge-secondary text-white">Cancelled</label>
+                                <%}else if(orderData.status == "Returning" ){%>
+                                  <label class="badge badge-info text-white">Return Requested</label>
+                                <%}else if(orderData.status == "Delivered" ){%>
+                                  <label class="badge badge-success text-white">Delivered</label>
+                                <%}else if(orderData.stats == "Returned" ){%>
+                                  <label class="badge badge-info text-white">Returned</label>
                                 <%}else{%>
                                   <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuSizeButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              
-                              <%= orderData.status %>
-                            </button>
-                            <div class="dropdown-menu text-white" aria-labelledby="dropdownMenuSizeButton3">
-                              <a onclick="orderConfirmation(event,'Placed')" id="Placed" class="dropdown-item" href="/admin/changeOrderStatus?id=<%= orderData._id %>&status=Placed&page=orderDetails">Placed</a>
-                              <a onclick="orderConfirmation(event,'Shipped')" id="Shipped" class="dropdown-item" href="/admin/changeOrderStatus?id=<%= orderData._id %>&status=Shipped&page=orderDetails">Shipped</a>
-                              <a onclick="orderConfirmation(event,'Out of delivery')" id="Out of delivery" class="dropdown-item " href="/admin/changeOrderStatus?id=<%= orderData._id %>&status=Out Of Delivery&page=orderDetails">Out Of Delivery</a>
-                              <a onclick="orderConfirmation(event, 'Delivered')" id="Delivered" class="dropdown-item "href="/admin/changeOrderStatus?id=<%= orderData._id %>&status=Delivered&page=orderDetails">Delivered</a>
-                          </div>
-                          <%}%></td>
+                                    <%= orderData.status %>
+                                  </button>
+                                  <div class="dropdown-menu text-white" aria-labelledby="dropdownMenuSizeButton3">
+                                    <a onclick="orderConfirmation(event,'Placed','<%= orderData._id %>Placed')" id="<%= orderData._id %>Placed" class="dropdown-item" href="/admin/changeOrderStatus?id=<%= orderData._id %>&status=Placed&page=orders">Placed</a>
+                                    <a onclick="orderConfirmation(event,'Shipped','<%= orderData._id %>Shipped')" id="<%= orderData._id %>Shipped" class="dropdown-item" href="/admin/changeOrderStatus?id=<%= orderData._id %>&status=Shipped&page=orders">Shipped</a>
+                                    <a onclick="orderConfirmation(event,'Out of delivery','<%= orderData._id %>Out of delivery')" id="<%= orderData._id %>Out of delivery" class="dropdown-item " href="/admin/changeOrderStatus?id=<%= orderData._id %>&status=Out Of Delivery&page=orders">Out Of Delivery</a>
+                                    <a onclick="orderConfirmation(event, 'Delivered','<%= orderData._id %>Delivered')" id="<%= orderData._id %>Delivered" class="dropdown-item "href="/admin/changeOrderStatus?id=<%= orderData._id %>&status=Delivered&page=orders">Delivered</a>
+                                </div>
+                                  <%}%></td>
                           </tr>
                           <tr>
                             <td class="font-weight-bold">Payment Method</td>
@@ -198,6 +203,18 @@
                           </tr>
                       </tbody>
                     </table>
+                  </div>
+                </div>
+                
+              </div>
+              <div class="card mt-4">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                          <p class="font-weight-bold">Return Requested : </p>
+                          <div>
+                            <button class="btn btn-sm btn-success mr-2">Accept</button>
+                          <button class="btn btn-sm btn-danger">Reject</button>
+                          </div>
                   </div>
                 </div>
               </div>
@@ -247,7 +264,9 @@
               <p><span class="font-weight-bold">District,State: </span><%= address.district %>,<%= address.state %></p>
             </div>
           </div>
+          
     </div>
+    
             </div>
           </div> 
         <!-- partial -->
