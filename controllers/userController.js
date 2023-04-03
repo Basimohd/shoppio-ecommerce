@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt")
 const crypto = require("crypto")
+const nodemailer = require('nodemailer');
 
 const User = require('../models/userModel')
 const Category = require('../models/categoryModel')
@@ -15,7 +16,6 @@ const accountSid = process.env.ACCOUNT_SID;
 const authToken = process.env.AUTH_TOKEN;
 const verifySid = process.env.VERIFY_SID;
 const client = require("twilio")(accountSid, authToken);
-const Swal = require('sweetalert2');
 
 const Razorpay = require('razorpay');
 const { response } = require("../routes/userRoute");
@@ -28,7 +28,6 @@ const instance = new Razorpay({
 //Home Page
 const loadHome = async (req, res, next) => {
     try {
-
         const bannerDetails = await Banner.find({ status: "Active" })
         const latestProducts = await Product.find({ isDeleted: false }).sort({ createdAt: -1 }).limit(8);
         const trendingProducts = await Product.aggregate([
@@ -42,13 +41,13 @@ const loadHome = async (req, res, next) => {
             },
             { $project: { _id: 1, productName: 1, MRP: 1, salePrice: 1, stock: 1, image: 1, reviews: 1, averageRating: 1 } },
             { $sort: { averageRating: -1 } },
-            { $limit: 8 },
+            { $limit: 10 },
         ]);
         if (req.session.userId) {
+            const userData = await User.findOne({ _id: req.session.userId })
             const wishlistProduct = await Wishlist.findOne({ userId: req.session.userId });
             const cartData = await Cart.findOne({ userId: req.session.userId })
             const wishlist = await Wishlist.findOne({ userId: req.session.userId })
-            const userData = await User.findOne({ _id: req.session.userId })
             res.render('home', { userData, cartData, wishlist, bannerDetails, latestProducts, wishlistProduct, trendingProducts })
         } else {
             res.render('home', { bannerDetails, latestProducts, trendingProducts })
@@ -79,13 +78,13 @@ const loadgetOtp = async (req, res, next) => {
         if (req.session.mobile) {
             const mobileNo = req.session.mobile;
             client.verify.v2
-                .services("VAb31f5892c531cb8233218b41438a826c")
+                .services(verifySid)
                 .verifications.create({ to: "+91" + mobileNo, channel: "sms" })
                 .then((verification) => res.redirect('/verifyOtp'))
         } else if (req.session.regMobile) {
             const mobileNo = req.session.regMobile;
             client.verify.v2
-                .services("VAb31f5892c531cb8233218b41438a826c")
+                .services(verifySid)
                 .verifications.create({ to: "+91" + mobileNo, channel: "sms" })
                 .then((verification) => res.redirect('/register/verifyOtp'))
         } else {
@@ -122,11 +121,10 @@ const regGetMobNo = async (req, res, next) => {
         } else {
             req.session.regMobile = mobileNo;
             client.verify.v2
-                .services("VAb31f5892c531cb8233218b41438a826c")
+                .services(verifySid)
                 .verifications.create({ to: "+91" + mobileNo, channel: "sms" })
                 .then((verification) => res.redirect('/register/verifyOtp'))
         }
-
     } catch (error) {
         next(error);
     }
@@ -140,7 +138,7 @@ const regVerifyOtp = async (req, res, next) => {
         } else {
             const mobileNo = req.session.regMobile;
             client.verify.v2
-                .services("VAb31f5892c531cb8233218b41438a826c")
+                .services(verifySid)
                 .verificationChecks.create({ to: "+91" + mobileNo, code: otp })
                 .then((verification_check) => {
                     if (verification_check.status == "approved") {
@@ -223,7 +221,7 @@ const getOtp = async (req, res, next) => {
             if (userData.status == true) {
                 req.session.mobile = mobile;
                 client.verify.v2
-                    .services("VAb31f5892c531cb8233218b41438a826c")
+                    .services(verifySid)
                     .verifications.create({ to: "+91" + mobile, channel: "sms" })
                     .then((verification) => res.redirect('/verifyOtp'))
             } else {
@@ -246,7 +244,7 @@ const verifyOtp = async (req, res, next) => {
             req.session.loggedId = userData._id;
             const mobileNo = req.session.mobile;
             client.verify.v2
-                .services("VAb31f5892c531cb8233218b41438a826c")
+                .services(verifySid)
                 .verificationChecks.create({ to: "+91" + mobileNo, code: otp })
                 .then((verification_check) => {
                     if (verification_check.status == "approved") {
@@ -611,11 +609,11 @@ const loadCart = async (req, res, next) => {
         if (userData) {
             const userCart = await Cart.findOne({ userId: userData._id }).populate('products.productId')
             if (userCart) {
-                    let subTotal = 0;
-                    userCart.products.forEach((product)=> {
-                      subTotal += product.productId.salePrice * product.quantity;
-                    });
-                    await Cart.updateOne({_id: userCart._id}, {$set: {subTotal: subTotal}});
+                let subTotal = 0;
+                userCart.products.forEach((product) => {
+                    subTotal += product.productId.salePrice * product.quantity;
+                });
+                await Cart.updateOne({ _id: userCart._id }, { $set: { subTotal: subTotal } });
                 const productsArray = userCart.products;
                 const products = productsArray.map((product) => ({
                     id: product._id,
@@ -811,6 +809,8 @@ const insertOrderDetails = async (req, res, next) => {
                 receipt: orderSave._id.toString()
             }).then((order) => {
                 res.json({ order: order, user: userData });
+            }).catch((err) => {
+                console.log(err);
             })
 
         } else if (orderSave.paymentMethod == "COD") {
@@ -1050,6 +1050,33 @@ const saveReview = async (req, res) => {
         console.log(error)
     }
 }
+
+const handleSubscribeForm = async (req, res, next) => {
+    try {
+        const { email } = req.body;
+        const transporter = nodemailer.createTransport({
+            host: 'smtp.gmail.com',
+            port: 465,
+            secure: true,
+            auth: {
+              user: 'basimohammedkt@gmail.com',
+              pass: 'knefsvqfqrrjcqpu',
+            },
+        });
+        
+        const mailOptions = {
+            from: 'basimohammedkt@gmail.com',
+            to: email,
+            subject: 'Thank you for subscribing!',
+            html: '<p>Thank you for subscribing to our newsletter!</p>',
+        };
+        await transporter.sendMail(mailOptions);
+        res.json({success: true})
+    } catch (err) {
+        next(err);
+    }
+};
+
 module.exports = {
     loadLogin,
     loadRegister,
@@ -1093,5 +1120,6 @@ module.exports = {
     filterProduct,
     cancelOrder,
     saveReview,
-    requestReturn
+    requestReturn,
+    handleSubscribeForm
 }

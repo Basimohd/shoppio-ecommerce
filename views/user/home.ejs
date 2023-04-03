@@ -31,6 +31,8 @@
                                         <li><a href="#">USD</a></li>
                                     </ul>
                                 </li>
+                                <div id="google-translate"></div>
+                                  
                                 <li><a href="#">English <span class="icon-small"><i
                                                 class="ri-arrow-down-s-line"></i></span></a>
                                     <ul>
@@ -234,44 +236,63 @@
                             <h2><span class="circle"></span><span>Trending Products</span></h2>
                         </div>
                         <div class="column">
+
                             <div class="flexwrap">
+                                <% trendingProducts.forEach((product,index)=>{ %>
+                                    <% if(index==0){ %>
                                 <div class="row products big">
                                     <div class="item">
                                         <div class="offer">
                                             <p>Offer ends at</p>
                                             <ul class="flexcenter" id="demo">
-                                                <li id="days"></li>
-                                                <li id="hours"></li>
-                                                <li id="minutes"></li>
-                                                <li id="seconds"></li>
+                                                <li style="color: red;" id="dsays">Currently No Offer Availabe</li>
                                             </ul>
                                         </div>
                                         <div class="media">
                                             <div class="image">
-                                                <a href="page-offer.html">
-                                                    <img src="assets/products/apparel4.jpg" alt="">
+                                                <a href="/product?id=<%= product._id %>">
+                                                    <img src="/productImage/<%= product.image[0] %>" alt="">
                                                 </a>
                                             </div>
                                             <div class="hoverable">
                                                 <ul>
-                                                    <li class="active"><a href="#"><i class="ri-heart-line"></i></a>
-                                                    </li>
-                                                    <li><a href="#"><i class="ri-eye-line"></i></a></li>
-                                                    <li><a href="#"><i class="ri-shuffle-line"></i></a></li>
+                                                    <% if(typeof wishlistProduct != "undefined"){ %>
+                                                        <% if(wishlistProduct != null){ %>
+                                                    <li class="active  <% if (wishlistProduct.products.some(item => item.productId.toString() == product._id.toString())) { %>actived<% }%>"><a href="#"><i class="ri-heart-line"></i></a></li>
+                                                    <% }else{ %>
+                                                        <li class="active"><a href="#"><i class="ri-heart-line"></i></a></li>
+                                                        <% } %>
+                                                    <% } %>
+                                                    <li><a data-fslightbox="product-<%= product._id %>" data-fslightbox-single="true" href="/productImage/<%= product.image[0] %>"><i class="ri-eye-line"></i></a></li>
+                                                    <li><a id="<%= product._id %>"><i class="ri-shuffle-line"></i></a></li>
                                                 </ul>
+                                                <% for (let i = 1; i < product.image.length; i++) { %>
+                                                    <a data-fslightbox="product-<%= product._id %>" href="/productImage/<%= product.image[i] %>"></a>
+                                                  <% } %>
                                             </div>
-                                            <div class="discount circle flexcenter"><span>31%</span></div>
+                                            <div class="discount circle flexcenter"><% 
+                                                const offerPercentage = ((product.MRP - product.salePrice) / product.MRP) * 100;
+                                            %>
+                                            <span><%= offerPercentage.toFixed(0) %>%</span></div>
                                         </div>
                                         <div class="content">
                                             <div class="rating">
-                                                <div class="stars"></div>
-                                                <span class="mini-text">(2,548)</span>
+                                                <% let totalStarCount = product.reviews.map((review)=>review.starCount).reduce((acc,cur)=> acc+=cur,0) %>
+                                                    <% let reviewPercentage = totalStarCount/product.reviews.length; %>
+                                                        <div class="shop-stars">
+                                                            <span class="fa fa-star <% if (reviewPercentage >= 1) { %>checked<% } %>"></span>
+                                                            <span class="fa fa-star <% if (reviewPercentage >= 2) { %>checked<% } %>"></span>
+                                                            <span class="fa fa-star <% if (reviewPercentage >= 3) { %>checked<% } %>"></span>
+                                                            <span class="fa fa-star <% if (reviewPercentage >= 4) { %>checked<% } %>"></span>
+                                                            <span class="fa fa-star <% if (reviewPercentage >= 5) { %>checked<% } %>"></span>
+                                                                                        
+                                                        </div>
+                                                <span class="mini-text">(<%= product.reviews.length %>)</span>
                                             </div>
-                                            <h3 class="main-links"><a href="page-offer.html">Happy Sailed Womens Summer
-                                                    Boho Floral</a></h3>
+                                            <h3 class="main-links"><a href="/product?id=<%= product._id %>"><%= product.productName %></a></h3>
                                             <div class="price">
-                                                <span class="current">$129.99</span>
-                                                <span class="normal mini-text">$189.98</span>
+                                                <span class="current">₹<%= product.salePrice %></span>
+                                                <span class="normal mini-text">₹<%= product.MRP %></span>
                                             </div>
                                             <div class="stock mini-text">
                                                 <div class="qty">
@@ -285,22 +306,32 @@
                                         </div>
                                     </div>
                                 </div>
+                                <% }}) %>
                                 <div class="row products mini">
-                                    <% trendingProducts.forEach((product)=>{ %>
+                                    <% trendingProducts.forEach((product,index)=>{ %>
+                                        <% if(index>1 && index<=5){ %>
                                     <div class="item">
                                         <div class="media">
                                             <div class="thumbnail object-cover">
-                                                <a href="#">
+                                                <a href="/product?id=<%= product._id %>">
                                                     <img src="/productImage/<%= product.image[0] %>" alt="">
                                                 </a>
                                             </div>
                                             <div class="hoverable">
                                                 <ul>
-                                                    <li class="active"><a href="#"><i class="ri-heart-line"></i></a>
-                                                    </li>
-                                                    <li><a href="#"><i class="ri-eye-line"></i></a></li>
-                                                    <li><a href="#"><i class="ri-shuffle-line"></i></a></li>
+                                                    <% if(typeof wishlistProduct != "undefined"){ %>
+                                                        <% if(wishlistProduct != null){ %>
+                                                    <li class="active  <% if (wishlistProduct.products.some(item => item.productId.toString() == product._id.toString())) { %>actived<% }%>"><a href="#"><i class="ri-heart-line"></i></a></li>
+                                                    <% }else{ %>
+                                                        <li class="active"><a href="#"><i class="ri-heart-line"></i></a></li>
+                                                        <% } %>
+                                                    <% } %>
+                                                    <li><a data-fslightbox="product-<%= product._id %>" data-fslightbox-single="true" href="/productImage/<%= product.image[0] %>"><i class="ri-eye-line"></i></a></li>
+                                                    <li><a id="<%= product._id %>"><i class="ri-shuffle-line"></i></a></li>
                                                 </ul>
+                                                <% for (let i = 1; i < product.image.length; i++) { %>
+                                                    <a data-fslightbox="product-<%= product._id %>" href="/productImage/<%= product.image[i] %>"></a>
+                                                  <% } %>
                                             </div>
                                             <div class="discount circle flexcenter"><% 
                                                 const offerPercentage = ((product.MRP - product.salePrice) / product.MRP) * 100;
@@ -308,7 +339,7 @@
                                             <span><%= offerPercentage.toFixed(0) %>%</span></div>
                                         </div>
                                         <div class="content">
-                                            <h3 class="main-links"><a href="#"><%= product.productName %></a></h3>
+                                            <h3 class="main-links"><a href="/product?id=<%= product._id %>"><%= product.productName %></a></h3>
 
                                             <div class="rating">
                                                 <% let totalStarCount = product.reviews.map((review)=>review.starCount).reduce((acc,cur)=> acc+=cur,0) %>
@@ -333,8 +364,70 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <% }) %>
+                                    <% }}) %>
                                 </div>
+                                <div class="row products mini">
+                                    <% trendingProducts.forEach((product,index)=>{ %>
+                                        <% if(index>5){ %>
+                                    <div class="item">
+                                        <div class="media">
+                                            <div class="thumbnail object-cover">
+                                                <a href="/product?id=<%= product._id %>">
+                                                    <img src="/productImage/<%= product.image[0] %>" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="hoverable">
+                                                <ul>
+                                                    <% if(typeof wishlistProduct != "undefined"){ %>
+                                                        <% if(wishlistProduct != null){ %>
+                                                    <li class="active  <% if (wishlistProduct.products.some(item => item.productId.toString() == product._id.toString())) { %>actived<% }%>"><a href="#"><i class="ri-heart-line"></i></a></li>
+                                                    <% }else{ %>
+                                                        <li class="active"><a href="#"><i class="ri-heart-line"></i></a></li>
+                                                        <% } %>
+                                                    <% } %>
+                                                    <li><a data-fslightbox="product-<%= product._id %>" data-fslightbox-single="true" href="/productImage/<%= product.image[0] %>"><i class="ri-eye-line"></i></a>
+                                                        
+                                                          </li>
+                                                    <li><a id="<%= product._id %>"><i class="ri-shuffle-line"></i></a></li>
+                                                </ul>
+                                                <% for (let i = 1; i < product.image.length; i++) { %>
+                                                    <a data-fslightbox="product-<%= product._id %>" href="/productImage/<%= product.image[i] %>"></a>
+                                                  <% } %>
+                                            </div>
+                                            <div class="discount circle flexcenter"><% 
+                                                const offerPercentage = ((product.MRP - product.salePrice) / product.MRP) * 100;
+                                            %>
+                                            <span><%= offerPercentage.toFixed(0) %>%</span></div>
+                                        </div>
+                                        <div class="content">
+                                            <h3 class="main-links"><a href="/product?id=<%= product._id %>"><%= product.productName %></a></h3>
+
+                                            <div class="rating">
+                                                <% let totalStarCount = product.reviews.map((review)=>review.starCount).reduce((acc,cur)=> acc+=cur,0) %>
+                                                    <% let reviewPercentage = totalStarCount/product.reviews.length; %>
+                                                        <div class="shop-stars">
+                                                            <span class="fa fa-star <% if (reviewPercentage >= 1) { %>checked<% } %>"></span>
+                                                            <span class="fa fa-star <% if (reviewPercentage >= 2) { %>checked<% } %>"></span>
+                                                            <span class="fa fa-star <% if (reviewPercentage >= 3) { %>checked<% } %>"></span>
+                                                            <span class="fa fa-star <% if (reviewPercentage >= 4) { %>checked<% } %>"></span>
+                                                            <span class="fa fa-star <% if (reviewPercentage >= 5) { %>checked<% } %>"></span>
+                                                                                        
+                                                        </div>
+                                                <span class="mini-text">(<%= product.reviews.length %>)</span>
+                                            </div>
+                                            <div class="price">
+                                                <span class="current">₹<%= product.salePrice %></span>
+                                                <span class="normal mini-text">₹<%= product.MRP %></span>
+                                            </div>
+                                            <div class="mini-text">
+                                                <p><%= product.stock %> Stock</p>
+                                                <p>Free Shipping</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <% }}) %>
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -372,9 +465,12 @@
                                                         <% } %>
                                                     <% } %>
                                                     
-                                                <li><a href="#"><i class="ri-eye-line"></i></a></li>
-                                                <li><a href="#"><i class="ri-shuffle-line"></i></a></li>
+                                                <li><a data-fslightbox="product-<%= product._id %>" data-fslightbox-single="true" href="/productImage/<%= product.image[0] %>"><i class="ri-eye-line"></i></a></li>
+                                                <li><a id="<%= product._id %>"><i class="ri-shuffle-line"></i></a></li>
                                             </ul>
+                                            <% for (let i = 1; i < product.image.length; i++) { %>
+                                                <a data-fslightbox="product-<%= product._id %>" href="/productImage/<%= product.image[i] %>"></a>
+                                              <% } %>
                                         </div>
                                         <div class="discount circle flexcenter"><% 
                                             const offerPercentage = ((product.MRP - product.salePrice) / product.MRP) * 100;
@@ -426,10 +522,10 @@
                                 <h3>Join Our Newsletter</h3>
                                 <p>Get E-mail updates about our latest shop and <strong>special offers</strong></p>
                             </div>
-                            <form action="" class="search">
+                            <form id="subscribeForm" class="search">
                                 <span class="icon-large"><i class="ri-mail-line"></i></span>
-                                <input type="mail" placeholder="Your email address" required>
-                                <button type="submit">Sign Up</button>
+                                <input type="mail" placeholder="Your email address" name="email" id="subscribeEmail" required>
+                                <button type="submit">Subscribe</button>
                             </form>
                         </div>
                     </div>
@@ -447,10 +543,8 @@
                                     <ul class="flexcol">
                                         <li><a href="#">Your Account</a></li>
                                         <li><a href="#">Your Orders</a></li>
-                                        <li><a href="#">Shipping Rates</a></li>
-                                        <li><a href="#">Returns</a></li>
-                                        <li><a href="#">Assistant</a></li>
-                                        <li><a href="#">Help</a></li>
+                                        <li><a href="#">Your Wishlist</a></li>
+                                        <li><a href="#">Cart</a></li>
                                         <li><a href="#">Contact us</a></li>
                                     </ul>
                                 </div>
@@ -459,16 +553,7 @@
                                 <div class="item mini-links">
                                     <h4>Product Categories</h4>
                                     <ul class="flexcol">
-                                        <li><a href="#">Beauty</a></li>
-                                        <li><a href="#">Electronic</a></li>
-                                        <li><a href="#">Women's Fashion</a></li>
-                                        <li><a href="#">Men's Fashion</a></li>
-                                        <li><a href="#">Girl's Fashion</a></li>
-                                        <li><a href="#">Boy's Fashion</a></li>
-                                        <li><a href="#">Health & Household</a></li>
-                                        <li><a href="#">Home & Kitchen</a></li>
-                                        <li><a href="#">Pet Supplies</a></li>
-                                        <li><a href="#">Sports</a></li>
+                                       
                                     </ul>
                                 </div>
                             </div>
@@ -476,10 +561,9 @@
                                 <div class="item mini-links">
                                     <h4>Payment Info</h4>
                                     <ul class="flexcol">
-                                        <li><a href="#">Bussiness Card</a></li>
-                                        <li><a href="#">Shop with Points</a></li>
-                                        <li><a href="#">Reload Your Balance</a></li>
-                                        <li><a href="#">Paypal</a></li>
+                                        <li><a href="#">Wallet</a></li>
+                                        <li><a href="#">RazorPay</a></li>
+                                        <li><a href="#">Shop with your Wallet</a></li>
                                     </ul>
                                 </div>
                             </div>

@@ -17,6 +17,7 @@ user_route.get('/getOtp',auth.isLogout,userController.loadgetOtp);
 user_route.get('/verifyOtp',auth.isLogout,userController.loadverifyOtp);
 user_route.post('/getOtp',userController.getOtp)
 user_route.post('/verifyOtp',userController.verifyOtp)
+user_route.post('/newsLetter',userController.handleSubscribeForm)
 
 //User Register(OTP inc)
 user_route.get('/register/getOtp',auth.isLogout,userController.loadgetOtp);

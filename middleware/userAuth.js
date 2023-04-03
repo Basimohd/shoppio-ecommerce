@@ -1,3 +1,4 @@
+
 const isLogin=async(req,res,next)=>{
     try {
         if(req.session.userId ){
@@ -23,7 +24,7 @@ const isLogout=async(req,res,next)=>{
         console.log(error.message);
     }
 }
+
 module.exports={
     isLogin,
-    isLogout
-}
+    isLogout}

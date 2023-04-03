@@ -22,7 +22,6 @@ const productReview=mongoose.Schema({
         type:Date,
         default:Date.now()
     }
-
 })
 const productSchema=mongoose.Schema({
     SKU:{
@@ -72,7 +71,11 @@ const productSchema=mongoose.Schema({
         type:Boolean,
         default:false
     },
-    reviews:[productReview]
+    reviews:[productReview],
+    specialOffer: {
+        discountPercentage: { type: Number },
+        expiryDate: { type: Date }
+      }
 
 })
 

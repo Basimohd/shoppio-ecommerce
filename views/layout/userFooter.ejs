@@ -1,87 +1,85 @@
-
-    
 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fslightbox/3.3.1/index.js"></script>
 <script src="/userAssets/js/script.js"></script>
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 <!-- Display the countdown timer in an element -->
 <!-- <p id="demo"></p> -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.js"></script>
 
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    
-    // Set the date we're counting down to
-    var countDownDate = new Date("Dec 13, 2023 15:13:00").getTime();
+    $("#subscribeForm").submit((e) => {
+        e.preventDefault();
+        const email = document.getElementById("subscribeEmail").value
+        $.ajax({
+            type: "POST",
+            url: '/newsLetter',
+            data: {
+                email: email
+            },
+            success: (response) => {
+                if (response.success) {
+                    document.getElementById("subscribeEmail").value = "";
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 2200,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Subscribed'
+                    })
+                } else {
 
-    // Update the count down every 1 second
-    var x = setInterval(function () {
-
-        // Get today's date and time
-        var now = new Date().getTime();
-
-        // Find the distance between now and the count down date
-        var distance = countDownDate - now;
-
-        // Time calculations for days, hours, minutes and seconds
-        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        // Display the result in the element with id="demo"
-        document.getElementById("days").innerHTML = days + "d";
-        document.getElementById("hours").innerHTML = hours + "h";
-        document.getElementById("minutes").innerHTML = minutes + "m";
-        document.getElementById("seconds").innerHTML = seconds + "s";
-
-        // If the count down is finished, write some text
-        if (distance < 0) {
-            clearInterval(x);
-            document.getElementById("demo").innerHTML = "EXPIRED";
-        }
-    }, 1000);
-
-
-
-    
-    let resendLink = document.getElementById('resend-link');
-    let timerElement = document.getElementById('timer');
-    let timer = 30; // Set the timer to 60 seconds
-
-    function startTimer() {
-        timer--;
-        if (timer >= 0) {
-            timerElement.innerHTML = `(${timer}s)`;
-            setTimeout(startTimer, 1000); // Call the function again after 1 second
-        } else {
-            resendLink.style.color = 'red'
-            resendLink.style.pointerEvents = 'auto'
-            timerElement.style.display = 'none'; // Hide the timer
-            timer = 60; // Reset the timer to 60 seconds
-        }
+                }
+            },
+        })
     }
-
-    window.onload = () => {
-        resendLink.style.pointerEvents = 'none'; // Hide the resend link
-        resendLink.style.color = '#696969'
-        startTimer();
-
-    };
-
-    // Call the function to start the timer when the resend link is clicked
-    resendLink.addEventListener('click', () => {
-        resendLink.style.pointerEvents = 'none';
-        resendLink.style.color = '#696969'
-        timerElement.style.display = 'inline-block'; // Show the timer
-        startTimer();
-        // code to resend the OTP
-
+    )
+    document.addEventListener('DOMContentLoaded', () => {
+        const shuffleIcons = document.querySelectorAll('a .ri-shuffle-line');
+        shuffleIcons.forEach((icon) => {
+            icon.addEventListener('click', (event) => {
+                const id = event.target.parentNode.getAttribute('id');
+                const url = `shoppio.site/product?id=${id}`
+                navigator.clipboard.writeText(url).then(() => {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 2200,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Copied to Clipboard'
+                    })
+                }).catch((error) => {
+                    console.error('Error copying URL to clipboard:', error);
+                });
+            });
+        });
     });
-   
-  
-    
 
-    
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+          pageLanguage: 'en',
+          includedLanguages: 'es,fr,de', // add the languages you want to support
+          layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL
+        }, 'google-translate');
+      }
+      
 </script>
 </body>
 

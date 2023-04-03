@@ -61,8 +61,18 @@ const loadDashoard = async (req, res, next) => {
         const thirtyDaysAgo = moment().subtract(30, 'days');
         const sixtyDaysAgo = moment().subtract(60, 'days');
         const userCount = await User.countDocuments();
-        const userRecent = await User.countDocuments({ createdAt: { $gte: thirtyDaysAgo } });
-        const incPercUser = (((userRecent - userCount) / userCount) * 100);
+
+
+        const currentDate = moment();
+        const lastMonthEndDate = moment().subtract(1, 'month').endOf('month');
+        const lastMonthStartDate = moment().subtract(1, 'month').startOf('month');
+        const currentMonthStartDate = moment().startOf('month');
+        
+        const lastMonthUsers = await User.countDocuments({ createdAt: { $gte: lastMonthStartDate, $lte: lastMonthEndDate } })
+        const currentMonthUsers = await User.countDocuments({ createdAt: { $gte: currentMonthStartDate, $lte: currentDate } })
+
+        const userHike = ((currentMonthUsers - lastMonthUsers) / lastMonthUsers)*100;
+        
 
         const productCount = await Product.countDocuments({ isDeleted: false });
         const productRecent = await Product.countDocuments({ date: { $gte: thirtyDaysAgo }, isDeleted: false });
@@ -84,7 +94,7 @@ const loadDashoard = async (req, res, next) => {
         const categoryRecent = await Category.countDocuments({ createdAt: { $gte: thirtyDaysAgo } });
         const incPercCategory = ((categoryRecent - categoryCount) / 100);
 
-        res.render('dashboard', { userCount, incPercUser, productCount, incPercOrder, incPercProduct, categoryCount, orderCount, incPercCategory, revenue, incPercCategory })
+        res.render('dashboard', { userCount, productCount, incPercOrder, incPercProduct, categoryCount, orderCount, incPercCategory, revenue, incPercCategory,userHike })
     } catch (error) {
         next(error)
     }
@@ -354,11 +364,11 @@ const addProduct = async (req, res, next) => {
             const categoryData = await Category.find({})
             res.render('addProduct', { categoryData, SKU, errMsg: "Input is empty or contains only white space" })
         } else {
-            console.log(req.files);
             const imageUpload = [];
             for (let i = 0; i < req.files.length; i++) {
                 imageUpload[i] = req.files[i].filename;
             }
+            
             const products = new Product({
                 SKU: SKU,
                 productName: productName,
@@ -472,8 +482,8 @@ const loadOrderMoreDetails = async (req, res, next) => {
 const changeOrderStatus = async (req, res, next) => {
     try {
         const { id, status, page } = req.query;
-        const orderData = await Order.findOne({_id: id})
-        if(status == "Delivered" && orderData.paymentMethod == "COD"){
+        const orderData = await Order.findOne({ _id: id })
+        if (status == "Delivered" && orderData.paymentMethod == "COD") {
             await Order.updateOne({ _id: id }, {
                 $set: {
                     status: status,
@@ -481,7 +491,7 @@ const changeOrderStatus = async (req, res, next) => {
                     paymentStatus: "Payed"
                 }
             })
-        }else{
+        } else {
             await Order.updateOne({ _id: id }, {
                 $set: {
                     status: status,
