@@ -317,7 +317,7 @@ h4 {
  * --------------- */
 
 .header-nav {
-	padding: 0.5em 0;
+	padding: 1em 0;
 	margin-bottom: 1.5em;
 	border-bottom: 1px solid var(--border-color);
 }
@@ -2940,6 +2940,7 @@ hr {
 
 	.content {
 		flex-basis: 80%;
+		margin: 21px 0 0 0;
 	}
 
 	.container-acc {

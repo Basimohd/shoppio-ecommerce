@@ -28,49 +28,50 @@ user_route.get('/register',auth.isLogout,userController.loadRegister);
 user_route.post('/register',userController.insertUser);
 
 //account details
-user_route.get('/address',auth.isLogin,userController.addressLoad);
-user_route.get('/userProfile',auth.isLogin,userController.profileLoad);
-user_route.get('/addAddress',auth.isLogin,userController.loadAddAddress);
-user_route.get('/editAddress',auth.isLogin,userController.editAddress);
-user_route.get('/editProfile',auth.isLogin,userController.editProfileLoad);
-user_route.get('/changePass',auth.isLogin,userController.changePassLoad);
-user_route.post('/changePass',auth.isLogin,userController.changePass);
-user_route.get('/deleteAddress',auth.isLogin,userController.deleteAddress);
-user_route.post('/addAddress',userController.insertOrEditAddress);
-user_route.post('/editAddress',userController.insertOrEditAddress);
-user_route.post('/editProfile',userController.insertEditedProfile);
+user_route.get('/address',auth.isBlocked,auth.isLogin,userController.addressLoad);
+user_route.get('/userProfile',auth.isBlocked,auth.isLogin,userController.profileLoad);
+user_route.get('/addAddress',auth.isBlocked,auth.isLogin,userController.loadAddAddress);
+user_route.get('/editAddress',auth.isBlocked,auth.isLogin,userController.editAddress);
+user_route.get('/editProfile',auth.isBlocked,auth.isLogin,userController.editProfileLoad);
+user_route.get('/changePass',auth.isBlocked,auth.isLogin,userController.changePassLoad);
+user_route.post('/changePass',auth.isBlocked,auth.isLogin,userController.changePass);
+user_route.get('/deleteAddress',auth.isBlocked,auth.isLogin,userController.deleteAddress);
+user_route.post('/addAddress',auth.isBlocked,userController.insertOrEditAddress);
+user_route.post('/editAddress',auth.isBlocked,userController.insertOrEditAddress);
+user_route.post('/editProfile',auth.isBlocked,userController.insertEditedProfile);
 
 //User Products
 user_route.get('/shop',userController.loadCatalog)
 user_route.get('/product',userController.loadProduct)
 user_route.post('/filterProduct',userController.filterProduct)
-user_route.post('/product',userController.saveReview)
+user_route.post('/shop',userController.saveReview)
 
 //Whishlist
 user_route.get('/wishlist',userController.loadWishlist)
-user_route.get('/addWishlist',auth.isLogin,userController.insertWishlist)
-user_route.get('/deleteWishlist',userController.deleteWishlist)
-user_route.get('/addCartWishlist',userController.insertCartWishlist)
+user_route.get('/addWishlist',auth.isBlocked,auth.isLogin,userController.insertWishlist)
+user_route.get('/deleteWishlist',auth.isBlocked,userController.deleteWishlist)
+user_route.get('/addCartWishlist',auth.isBlocked,userController.insertCartWishlist)
 
 //Cart
-user_route.get('/cart',userController.loadCart)
+user_route.get('/cart',auth.isBlocked,userController.loadCart)
 user_route.post('/changeQuantity',userController.changeQuantity)
-user_route.get('/addCart',userController.insertCart)
-user_route.get('/deleteCart',userController.deleteCart)
-user_route.post('/applyCoupon',userController.applyCoupon)
+user_route.get('/addCart',auth.isBlocked,auth.isLogin,userController.insertCart)
+user_route.get('/deleteCart',auth.isBlocked,userController.deleteCart)
+user_route.post('/applyCoupon',auth.isBlocked,userController.applyCoupon)
 
 //Checkout
-user_route.get('/checkout',auth.isLogin,userController.checkout)
-user_route.post('/checkout',auth.isLogin,userController.insertOrderDetails)
-user_route.post('/verifyPayment',auth.isLogin,userController.verifyPayment)
-user_route.get('/orderConfirm',auth.isLogin,userController.orderConfirm)
+user_route.get('/checkout',auth.isBlocked,auth.isLogin,userController.checkout)
+user_route.post('/checkout',auth.isBlocked,auth.isLogin,userController.insertOrderDetails)
+user_route.post('/verifyPayment',auth.isBlocked,auth.isLogin,userController.verifyPayment)
+user_route.get('/orderConfirm',auth.isBlocked,auth.isLogin,userController.orderConfirm)
 
 //orders
-user_route.get('/orders',auth.isLogin,userController.loadOrders) 
-user_route.get('/orderTrack',auth.isLogin,userController.loadOrderTrack) 
-user_route.get('/cancelOrder',auth.isLogin,userController.cancelOrder) 
-user_route.get('/returnRequest',auth.isLogin,userController.requestReturn) 
+user_route.get('/orders',auth.isBlocked,auth.isLogin,userController.loadOrders) 
+user_route.get('/orderTrack',auth.isBlocked,auth.isLogin,userController.loadOrderTrack) 
+user_route.get('/cancelOrder',auth.isBlocked,auth.isLogin,userController.cancelOrder) 
+user_route.post('/returnRequest',auth.isBlocked,auth.isLogin,userController.requestReturn) 
 
 user_route.use(errorHandler.errorHandler);
+
 
 module.exports=user_route;

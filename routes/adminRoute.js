@@ -46,6 +46,7 @@ admin_route.get('/deleteImg',adminAuth.isLogin,adminController.imageDelete)
 admin_route.get('/orders',adminAuth.isLogin,adminController.loadOrderDetails)
 admin_route.get('/orderDetail',adminAuth.isLogin,adminController.loadOrderMoreDetails) 
 admin_route.get('/changeOrderStatus',adminAuth.isLogin,adminController.changeOrderStatus) 
+admin_route.get('/acceptReturn',adminAuth.isLogin,adminController.acceptReturn) 
 
 //Coupon Details
 admin_route.get('/coupons',adminAuth.isLogin,adminController.loadCouponDetails) 

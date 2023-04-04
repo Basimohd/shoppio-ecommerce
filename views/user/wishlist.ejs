@@ -3,7 +3,7 @@
     <aside class="site-off desktop-hide">
         <div class="off-canvas">
             <div class="canvas-head flexitem">
-                <div class="logo"><a href="/"><span class="circle"></span>.Shopio</a></div>
+                <div class="logo"><a href="/"><span class="circle"></span>.Store</a></div>
                 <a href="#" class="t-close flexcenter"><i class="ri-close-line"></i></a>
             </div>
             <div class="departments"></div>
@@ -17,14 +17,13 @@
                 <div class="wrapper flexitem">
                     <div class="left">
                         <ul class="flexitem main-links">
-                            <li><a href="#">Featured Products</a></li>
-                            <li><a href="#">Wishlist</a></li>
+                            <li><a href="/home#features">Latest Products</a></li>
+                            <li><a href="/wishlist">Wishlist</a></li>
                         </ul>
                     </div>
                     <div class="right">
                         <ul class="flexitem main-links">
-                            <li><a href="/login">Sign In</a></li>
-                            <li><a href="#">Order Tracking</a></li>
+                            <li><a href="/orders">Order Tracking</a></li>
                             <li><a href="#">IND <span class="icon-small"><i
                                             class="ri-arrow-down-s-line"></i></span></a>
                                 <ul>
@@ -32,6 +31,8 @@
                                     <li><a href="#">USD</a></li>
                                 </ul>
                             </li>
+                            
+                              
                             <li><a href="#">English <span class="icon-small"><i
                                             class="ri-arrow-down-s-line"></i></span></a>
                                 <ul>
@@ -54,76 +55,154 @@
                             <ul class="flexitem second-links">
                                 <li><a href="/home">Home</a></li>
                                 <li><a href="/shop">Shop</a></li>
-                                <li><a href="#">Men</a></li>
-                                <li><a href="#">Women</a></li>
-                                <li><a href="#">Sports</a></li>
+                                <li><a href="/shop?g=Men">Men</a></li>
+                                <li><a href="/shop?g=Women">Women</a></li>
+                                <li>
+                                    <a>Sports
+                                        <div class="fly-item"><span>Soon</span></div>
+                                    </a>
+                                </li>
                             </ul>
                         </nav>
                     </div>
-                    <div class="right">
-                        <ul class="flexitem second-links">
-                            <li class="mobile-hide"><a href="#">
-                                    <div class="icon-large"><i class="ri-heart-line"></i></div>
-                                </a></li>
-                            <li class="iscart"><a href="#">
-                                    <div class="icon-large">
-                                        <i class="ri-shopping-cart-line"></i>
-                                    </div>
+                    <% if(typeof userData!='undefined' ){ %>
+                        <div class="right">
+                            <ul class="flexitem second-links">
+                                <li class="mobile-hide"><a href="/wishlist">
+                                        <div class="icon-large">
+                                            <i class="ri-heart-line"></i>
+                                            <div class="fly-item"><span class="item-number">
+                                                    <% if(wishlist){ %>
+                                                        <%= wishlist.products.length %>
+                                                        <% }else{ %>
+                                                            0
+                                                            <% } %>
+                                                </span></div>
+                                        </div>
+                                    </a></li>
+                                <li class="iscart mobile-hide"><a href="/cart">
 
-                                    
-                                </a>
-                            </li>
-                            <li class="iscart"><a href="#">
-                                <div class="icon-large">
-                                    <i class="ri-account-circle-line"></i>
-                                </div>
+                                        <div class="icon-large">
+                                            <i class="ri-shopping-cart-line"></i>
+                                            <% if(cartData){ %>
+                                                <div class="fly-item"><span class="item-number">
+                                                        <%= cartData.products.length %>
+                                                    </span></div>
+                                                <% }else{ %>
+                                                    <div class="fly-item"><span class="item-number">
+                                                           0
+                                                        </span></div>
+                                                    <% } %>
+                                        </div>
 
-                                
-                            </a>
-                            <div class="mini-login">
-                                <div class="content">
-                                    <div class="cart-head">
-                                        <a href="/login">Login/Sign Up</a>
+
+                                    </a>
+                                </li>
+                                <li class="iscart"><a href="#">
+                                        <div class="icon-large">
+                                            <i class="ri-account-circle-line"></i>
+                                        </div>
+                                    </a>
+                                    <div class="mini-login">
+                                        <div class="content">
+                                            <div class="cart-head">
+                                                <p>Hello <span style="color: #ff6b6b;">
+                                                        <%= userData.name %>
+                                                    </span></p>
+                                                <p style="font-size: .8rem; font-weight: 400 ;">
+                                                    <%= userData.mobile %>
+                                                </p>
+                                                <hr style="margin-top: 10px; margin-bottom: 10px; height: 1px; ">
+                                                <a href="/orders">Orders</a><br>
+                                                <a href="/cart">Cart</a><br>
+                                                <a href="/whishlist">Wishlist</a><br>
+                                                <hr style="margin-top: 10px; margin-bottom: 10px; height: .1px;">
+                                                <a href="/userProfile">Edit Profile</a><br>
+                                                <a href="/address">Address</a><br>
+                                                <a href="/wallet">Wallet</a><br>
+                                                <a href="/logout">Logout</a>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </li>
-                        </ul>
-                    </div>
+                                    <% }else{ %>
+                                        <div class="right">
+                                            <ul class="flexitem second-links">
+                                                <li class="mobile-hide"><a href="/wishlist">
+                                                        <div class="icon-large"><i class="ri-heart-line"></i></div>
+                                                    </a></li>
+                                                <li class="iscart mobile-hide"><a href="/cart">
+
+                                                        <div class="icon-large">
+                                                            <i class="ri-shopping-cart-line"></i>
+                                                        </div>
+
+
+                                                    </a>
+                                                </li>
+                                                <li class="iscart"><a href="#">
+                                                        <div class="icon-large">
+                                                            <i class="ri-account-circle-line"></i>
+                                                        </div>
+                                                    </a>
+                                                    <div class="mini-login">
+                                                        <div class="content">
+                                                            <div class="cart-head">
+                                                                <p>Welcome</p>
+                                                                <p style="font-size: .8rem; font-weight: 400 ;">To
+                                                                    access
+                                                                    account and orders</p>
+                                                                <a href="/login"><button>LOGIN/SIGN UP</button></a>
+                                                                <hr
+                                                                    style="margin-top: 10px; margin-bottom: 10px; height: 1px; ">
+                                                                <a href="/login">Orders</a><br>
+                                                                <a href="/cart">Cart</a><br>
+                                                                <a href="/cart">Wishlist</a><br>
+                                                                <hr
+                                                                    style="margin-top: 10px; margin-bottom: 10px; height: .1px;">
+                                                                <a href="/login">Address</a><br>
+                                                                <a href="/login">Wallet</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <% } %>
+
+                                                </li>
+                                            </ul>
+                                        </div>
+                        </div>
                 </div>
             </div>
-        </div>
-        <!-- header-nav -->
+            <!-- header-nav -->
 
-        <div class="header-main mobile-hide">
-            <div class="container">
-                <div class="wrapper flexitem">
-                    <div class="left">
-                        <div class="dpt-cat">
-                            <div class="dpt-head">
-                                <div class="main-text">All Departments</div>
-                                <div class="mini-text mobile-hide">Total 1059 Products</div>
-                                <a href="#" class="dpt-trigger mobile-hide">
-                                    <i class="ri-menu-3-line ri-xl"></i>
-                                </a>
+            <div class="header-main mobile-hide">
+                <div class="container">
+                    <div class="wrapper flexitem">
+                        <div class="left">
+                            <div class="dpt-cat">
+                                <div class="dpt-head">
+                                    <div class="main-text">All Departments</div>
+                                    <div class="mini-text mobile-hide">Total 1059 Products</div>
+                                    <a href="#" class="dpt-trigger mobile-hide">
+                                        <i class="ri-menu-3-line ri-xl"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="search-box">
+                                <form action="/shop" class="search" method="get" id="searchProduct">
+                                    <span class="icon-large"><i class="ri-search-line"></i></span>
+                                    <input type="search" placeholder="Search for products" name="search" id="searchText">
+                                    <button type="submit">Search</button>
+                                </form>
                             </div>
                         </div>
                     </div>
-                    <div class="right">
-                        <div class="search-box">
-                            <form action="" class="search">
-                                <span class="icon-large"><i class="ri-search-line"></i></span>
-                                <input type="search" placeholder="Search for products">
-                                <button type="submit">Search</button>
-                            </form>
-                        </div>
-                    </div>
                 </div>
             </div>
-        </div>
-        <!-- header-main -->
+            <!-- header-main -->
 
-    </header>       
+    </header>  
     <!-- Header -->
     <main>
         <% if(typeof userData != "undefined"){ %>
@@ -178,7 +257,7 @@
                                             </div>
                                         </div>
                                         <div class="content" style="margin-top: 5px;">
-                                            <h3><a href="/product?id=<%= product.productId._id %>">Walking Shoe Sneaker Womens</a></h3>
+                                            <h3><a href="/product?id=<%= product.productId._id %>"><%= product.productId.productName %></a></h3>
                                             <div class="price" style="margin-top: -10px;">
                                                 <span class="current">₹<%= product.productId.salePrice %></span>
                                                 <span class="normal mini-text">₹<%= product.productId.MRP %></span>
@@ -186,7 +265,11 @@
                                             
                                         </div>
                                         <div class="wbtn">
-                                            <a href="/addCartWishlist?id=<%= product.productId._id %>"  style="cursor: pointer;" class="primary-button">Move to Cart</a>
+                                            <% if(product.productId.stock==0){ %>
+                                                <a  style="margin-top: 10px; background-color: rgb(149, 0, 0);" class="primary-button">Out of Stock</a>
+                                                <% }else{ %>
+                                                    <a href="/addCartWishlist?id=<%= product.productId._id %>"  style="cursor: pointer; margin-top: 10px;" class="primary-button">Move to Cart</a>
+                                                    <% } %>
                                         </div>
                                     </div>
                                     <% }) %>
@@ -220,10 +303,10 @@
                             <h3>Join Our Newsletter</h3>
                             <p>Get E-mail updates about our latest shop and <strong>special offers</strong></p>
                         </div>
-                        <form action="" class="search">
+                        <form id="subscribeForm" class="search">
                             <span class="icon-large"><i class="ri-mail-line"></i></span>
-                            <input type="mail" placeholder="Your email address" required>
-                            <button type="submit">Sign Up</button>
+                            <input type="mail" placeholder="Your email address" name="email" id="subscribeEmail" required>
+                            <button type="submit">Subscribe</button>
                         </form>
                     </div>
                 </div>
@@ -239,12 +322,10 @@
                             <div class="item mini-links">
                                 <h4>Help & Contact</h4>
                                 <ul class="flexcol">
-                                    <li><a href="#">Your Account</a></li>
-                                    <li><a href="#">Your Orders</a></li>
-                                    <li><a href="#">Shipping Rates</a></li>
-                                    <li><a href="#">Returns</a></li>
-                                    <li><a href="#">Assistant</a></li>
-                                    <li><a href="#">Help</a></li>
+                                    <li><a href="/userProfile">Your Account</a></li>
+                                    <li><a href="/orders">Your Orders</a></li>
+                                    <li><a href="/wishlist">Your Wishlist</a></li>
+                                    <li><a href="/cart">Cart</a></li>
                                     <li><a href="#">Contact us</a></li>
                                 </ul>
                             </div>
@@ -253,16 +334,12 @@
                             <div class="item mini-links">
                                 <h4>Product Categories</h4>
                                 <ul class="flexcol">
-                                    <li><a href="#">Beauty</a></li>
-                                    <li><a href="#">Electronic</a></li>
-                                    <li><a href="#">Women's Fashion</a></li>
-                                    <li><a href="#">Men's Fashion</a></li>
-                                    <li><a href="#">Girl's Fashion</a></li>
-                                    <li><a href="#">Boy's Fashion</a></li>
-                                    <li><a href="#">Health & Household</a></li>
-                                    <li><a href="#">Home & Kitchen</a></li>
-                                    <li><a href="#">Pet Supplies</a></li>
-                                    <li><a href="#">Sports</a></li>
+                                    <li><a href="/shop?g=Men">Men</a></li>
+                                    <li><a href="/shop?g=Women">Women</a></li>
+                                    <li><a href="/shop">Shirt</a></li>
+                                    <li><a href="/shop">Pants</a></li>
+                                    <li><a href="/shop">Footwear</a></li>
+                                    <li><a href="/shop">Accessories</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -270,10 +347,9 @@
                             <div class="item mini-links">
                                 <h4>Payment Info</h4>
                                 <ul class="flexcol">
-                                    <li><a href="#">Bussiness Card</a></li>
-                                    <li><a href="#">Shop with Points</a></li>
-                                    <li><a href="#">Reload Your Balance</a></li>
-                                    <li><a href="#">Paypal</a></li>
+                                    <li><a href="/userProfile">Wallet</a></li>
+                                    <li><a href="https://razorpay.com/support/">RazorPay</a></li>
+                                    <li><a href="/Shop">Shop with your Wallet</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -281,12 +357,8 @@
                             <div class="item mini-links">
                                 <h4>About Us</h4>
                                 <ul class="flexcol">
-                                    <li><a href="">Company Info</a></li>
-                                    <li><a href="">News</a></li>
-                                    <li><a href="">Investors</a></li>
-                                    <li><a href="">Careers</a></li>
-                                    <li><a href="">Policies</a></li>
-                                    <li><a href="">Customer reviews</a></li>
+                                    <li><a href="/home">Company Info</a></li>
+                                    <li><a href="/shop">Customer reviews</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -301,7 +373,7 @@
                 <div class="wrapper">
                     <div class="flexcol">
                         <div class="logo">
-                            <a href=""><span class="circle"></span>.Store</a>
+                            <a href=""><span class="circle"></span>.Shopio</a>
                         </div>
                         <div class="socials">
                             <ul class="flexitem">
@@ -313,7 +385,7 @@
                             </ul>
                         </div>
                     </div>
-                    <p class="mini-text">Copyright 2022 © .Store. All right reserved.</p>
+                    <p class="mini-text">Copyright 2022 © .Store. All right reserved. <br> Developed By <a style="color: rgb(168, 74, 255);" href="#">Basim</a></p>
                 </div>
             </div>
         </div>
@@ -325,22 +397,31 @@
             <div class="wrapper">
                 <nav>
                     <ul class="flexitem">
+                        <% if(typeof userData!='undefined' ){ %>
                         <li>
-                            <a href="#">
-                                <i class="ri-bar-chart-line"></i>
-                                <span>Trending</span>
+                            <a href="/shop">
+                                <i class="ri-shopping-bag-line"></i>
+                                <span>Shop</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/userProfile">
                                 <i class="ri-user-6-line"></i>
                                 <span>Account</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/wishlist">
                                 <i class="ri-heart-line"></i>
                                 <span>Wishlist</span>
+                                <div class="fly-item">
+                                    <span class="item-number">
+                                        <% if(wishlist){ %>
+                                        <%= wishlist.products.length %>
+                                        <% }else{ %>
+                                            0
+                                            <% } %></span>
+                                </div>
                             </a>
                         </li>
                         <li>
@@ -350,14 +431,52 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#0" class="cart-trigger">
+                            <a href="/cart">
                                 <i class="ri-shopping-cart-line"></i>
                                 <span>Cart</span>
-                                <div class="fly-item">
-                                    <span class="item-number">0</span>
-                                </div>
+                                <% if(cartData){ %>
+                                    <div class="fly-item"><span class="item-number">
+                                            <%= cartData.products.length %>
+                                        </span></div>
+                                    <% }else{ %>
+                                        <div class="fly-item"><span class="item-number">
+                                               0
+                                            </span></div>
+                                        <% } %>
                             </a>
                         </li>
+                        <% }else{ %>
+                            <li>
+                                <a href="/shop">
+                                    <i class="ri-shopping-bag-line"></i>
+                                    <span>Shop</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/userProfile">
+                                    <i class="ri-user-6-line"></i>
+                                    <span>Account</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/wishlist">
+                                    <i class="ri-heart-line"></i>
+                                    <span>Wishlist</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#0" class="t-search">
+                                    <i class="ri-search-line"></i>
+                                    <span>Search</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/cart">
+                                    <i class="ri-shopping-cart-line"></i>
+                                    <span>Cart</span>
+                                </a>
+                            </li>
+                            <% } %>
                     </ul>
                 </nav>
             </div>
@@ -368,10 +487,9 @@
     <div class="search-bottom desktop-hide">
         <div class="container">
             <div class="wrapper">
-                <form action="" class="search">
-                    <a href="#" class="t-close search-close flexcenter"><i class="ri-close-line"></i></a>
+                <form action="/shop" class="search" method="get" id="searchProduct">
                     <span class="icon-large"><i class="ri-search-line"></i></span>
-                    <input type="search" placeholder="Search" required>
+                    <input type="search" placeholder="Search for products" name="search" >
                     <button type="submit">Search</button>
                 </form>
             </div>

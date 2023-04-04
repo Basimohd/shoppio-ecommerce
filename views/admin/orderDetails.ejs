@@ -169,17 +169,27 @@
                               <label class="badge badge-info text-white">Return <br> Requested</label>
                             <%}else if(order.status == "Delivered" ){%>
                               <label class="badge badge-success text-white">Delivered</label>
-                            <%}else if(order.stats == "Returned" ){%>
+                            <%}else if(order.status == "Returned" ){%>
                               <label class="badge badge-info text-white">Returned</label>
                             <%}else{%>
                               <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuSizeButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <%= order.status %>
                               </button>
                               <div class="dropdown-menu text-white" aria-labelledby="dropdownMenuSizeButton3">
-                                <a onclick="orderConfirmation(event,'Placed','<%= order._id %>Placed')" id="<%= order._id %>Placed" class="dropdown-item" href="/admin/changeOrderStatus?id=<%= order._id %>&status=Placed&page=orders">Placed</a>
-                                <a onclick="orderConfirmation(event,'Shipped','<%= order._id %>Shipped')" id="<%= order._id %>Shipped" class="dropdown-item" href="/admin/changeOrderStatus?id=<%= order._id %>&status=Shipped&page=orders">Shipped</a>
-                                <a onclick="orderConfirmation(event,'Out of delivery','<%= order._id %>Out of delivery')" id="<%= order._id %>Out of delivery" class="dropdown-item " href="/admin/changeOrderStatus?id=<%= order._id %>&status=Out Of Delivery&page=orders">Out Of Delivery</a>
-                                <a onclick="orderConfirmation(event, 'Delivered','<%= order._id %>Delivered')" id="<%= order._id %>Delivered" class="dropdown-item "href="/admin/changeOrderStatus?id=<%= order._id %>&status=Delivered&page=orders">Delivered</a>
+                                <% if(order.status == "Placed"){ %>
+                                  <a onclick="orderConfirmation(event,'Shipped','<%= order._id %>Shipped')" id="<%= order._id %>Shipped" class="dropdown-item" href="/admin/changeOrderStatus?id=<%= order._id %>&status=Shipped&page=orders">Shipped</a>
+                                  <a onclick="orderConfirmation(event,'Out of delivery','<%= order._id %>Out of delivery')" id="<%= order._id %>Out of delivery" class="dropdown-item " href="/admin/changeOrderStatus?id=<%= order._id %>&status=Out Of Delivery&page=orders">Out Of Delivery</a>
+                                  <a onclick="orderConfirmation(event, 'Delivered','<%= order._id %>Delivered')" id="<%= order._id %>Delivered" class="dropdown-item "href="/admin/changeOrderStatus?id=<%= order._id %>&status=Delivered&page=orders">Delivered</a>
+                                  <% }else if(order.status == "Shipped"){ %>
+                                    <a onclick="orderConfirmation(event,'Out of delivery','<%= order._id %>Out of delivery')" id="<%= order._id %>Out of delivery" class="dropdown-item " href="/admin/changeOrderStatus?id=<%= order._id %>&status=Out Of Delivery&page=orders">Out Of Delivery</a>
+                                    <a onclick="orderConfirmation(event, 'Delivered','<%= order._id %>Delivered')" id="<%= order._id %>Delivered" class="dropdown-item "href="/admin/changeOrderStatus?id=<%= order._id %>&status=Delivered&page=orders">Delivered</a>
+                                    
+                                    <% }else if(order.status == "Out Of Delivery"){ %>
+                                      <a onclick="orderConfirmation(event, 'Delivered','<%= order._id %>Delivered')" id="<%= order._id %>Delivered" class="dropdown-item "href="/admin/changeOrderStatus?id=<%= order._id %>&status=Delivered&page=orders">Delivered</a>
+                                    
+                                    <% }%>
+
+                                
                             </div>
                               <%}%>
                         </td>

@@ -510,6 +510,27 @@ const changeOrderStatus = async (req, res, next) => {
         next(error)
     }
 }
+const acceptReturn = async (req, res, next) => {
+    try {
+        const id = req.query.id;
+        const orderData = await Order.findOneAndUpdate({_id:id},{
+            $set:{
+                status:"Returned",
+                paymentStatus:"Returned"
+            }
+        })
+        console.log("my"+orderData+"ok")
+        await User.updateOne({_id:orderData.userId},{
+            $inc:{
+                walletBalance:orderData.cartTotal
+            }
+        })
+            res.redirect(`/admin/orderDetail?id=${id}`)
+
+    } catch (error){
+        next(error)
+    }
+}
 //Coupon Details and its Operations
 const loadCouponDetails = async (req, res, next) => {
     try {
@@ -767,5 +788,6 @@ module.exports = {
     loadEditCoupon,
     loadEditBanner,
     updateBanner,
-    deleteBanner
+    deleteBanner,
+    acceptReturn
 }

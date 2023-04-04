@@ -18,7 +18,7 @@
     "express-session": "^1.17.3",
     "express-validator": "^6.15.0",
     "fs": "^0.0.1-security",
-    "html-pdf": "^3.0.1",
+    "html-pdf": "^1.5.0",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.41",
     "mongodb": "^5.0.1",
@@ -29,7 +29,7 @@
     "path": "^0.12.7",
     "razorpay": "^2.8.6",
     "sweetalert": "^2.1.2",
-    "sweetalert2": "^11.7.3",
-    "twilio": "^4.7.2"
+    "sweetalert2": "^11.4.8",
+    "twilio": "^4.9.0"
   }
 }

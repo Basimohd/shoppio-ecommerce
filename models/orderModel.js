@@ -55,6 +55,9 @@ const orderSchema=mongoose.Schema({
     },statusUpdated:{
         type:Date,
         default:Date.now
+    },returnReason:{
+        type:String,
+        default:""
     }
 })
 
