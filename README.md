@@ -16,14 +16,11 @@ This is a fully functional eCommerce website built using Node.js, Express, and M
 - RazorPay API
 - Bootstrap
 
-## Getting Started
+### Getting Started
 - To run the application on your local machine, follow these steps:
 - Clone the repository
 - Install dependencies using npm install
 - Set up the MongoDB database
 - Configure the Razorpay and Twilio API keys
 - Run the application using npm start
-
-Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
