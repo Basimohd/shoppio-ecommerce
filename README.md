@@ -8,7 +8,7 @@ This is a fully functional eCommerce website built using Node.js, Express, and M
 - Integration with Razorpay payment gateway for online payments <br>
 - Responsive design using Bootstrap <br>
 
-##Tech Stack
+### Tech Stack
 - Node.js
 - Express
 - MongoDB
