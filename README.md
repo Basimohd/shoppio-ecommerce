@@ -11,7 +11,7 @@
 
   <h2 align="center">Shoppio eCommerce Website</h2>
 
-Shoppio is a fully functional eCommerce website built using Node.js, Express, and MongoDB. The website allows users to <br> browse products, add them to their cart, checkout, make payment and add their review.
+Shoppio is a fully functional eCommerce website built using Node.js, Express, and MongoDB. The website allows users to  browse products, add them to their cart, checkout, make payment and add their review.
 
   <a href="https://shoppio.site"><strong>➥ Live Demo</strong></a>
 
