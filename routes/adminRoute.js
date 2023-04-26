@@ -16,7 +16,7 @@ admin_route.post('/login',adminController.verifyLogin)
 
 //Dashboard
 admin_route.get('/home',adminAuth.isLogin,adminController.loadDashoard)
-admin_route.get('/graphDetails',adminController.graphDetails)
+admin_route.get('/graphDetails',adminController.graphDetails);
 
 
 //User Details
