@@ -1,7 +1,7 @@
 const express = require("express");
 const admin_route=express();
 const adminController=require("../controllers/adminController")
-const session=require('express-session')
+const session=require('express-session');
 const multerConfig=require('../config/multer')
 const upload=multerConfig.upload;
 
