@@ -5,7 +5,7 @@ const pdf = require("html-pdf");
 const ejs = require("ejs");
 const moment = require("moment");
 
-const Admin = require('../models/adminModel')
+const Admin = require('../models/adminModel');
 const User = require('../models/userModel')
 const Category = require('../models/categoryModel')
 const Product = require('../models/productModel')
