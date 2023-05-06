@@ -1,9 +1,9 @@
-const bcrypt = require("bcrypt")
-const fs = require("fs")
-const path = require("path")
-const pdf = require("html-pdf")
-const ejs = require("ejs")
-const moment = require("moment")
+const bcrypt = require("bcrypt");
+const fs = require("fs");
+const path = require("path");
+const pdf = require("html-pdf");
+const ejs = require("ejs");
+const moment = require("moment");
 
 const Admin = require('../models/adminModel')
 const User = require('../models/userModel')
